@@ -1,17 +1,21 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:lists/home/svg.dart';
+import 'package:lists/db/db.dart';
+import 'package:lists/helpers/styles/styles.dart';
+import 'package:lists/helpers/dialogs.dart';
+import 'package:lists/routes/home/svg.dart';
+import 'package:lists/routes/lists/lists.dart';
 import 'package:nekolib_ui/core.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
+
+  static const String route = '/';
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  bool _checkedTheme = false;
-
   @override
   void initState() {
     super.initState();
@@ -19,11 +23,6 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    if (!_checkedTheme) {
-      _checkedTheme = true;
-      NcThemes.setTheme(MediaQuery.of(context).platformBrightness == Brightness.dark ? darkTheme : lightTheme);
-    }
-
     return Container(
       color: secondaryColor,
       child: Stack(
@@ -46,13 +45,11 @@ class _HomeState extends State<Home> {
                 NcSpacing.medium(),
                 FilledButton(
                   child: NcBodyText(
-                    "Create a new list",
+                    "Create your first list",
                     buttonText: true,
                   ),
-                  style: ButtonStyle(
-                    backgroundColor: ButtonState.all(accentColor),
-                  ),
-                  onPressed: null,
+                  style: filledButtonStyle(),
+                  onPressed: () => showCreateNewListDialog(context),
                 ),
               ],
             ),

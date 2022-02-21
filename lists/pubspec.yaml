@@ -27,16 +27,19 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  crypto: ^3.0.1
   cupertino_icons: ^1.0.2
   fluent_ui: ^3.9.0
   fluentui_system_icons: ^1.1.160
   flutter:
     sdk: flutter
+  flutter_vector_icons: ^1.0.0
   nekolib_ui:
     git:
       url: https://github.com/necodeIT/nekolib.git
       ref: flutter
       path: ui
+  path_provider: ^2.0.9
 
 dev_dependencies:
   flutter_lints: ^1.0.0
