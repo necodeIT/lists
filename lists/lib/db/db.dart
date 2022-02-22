@@ -9,6 +9,8 @@ class DB {
   static final Map<String, Collection> _collectionsMap = {};
   static final List<Collection> _collections = [];
 
+  static List<Collection> get collections => List.unmodifiable(_collections);
+
   static Future<Directory> get appDir async {
     var dir = await getApplicationDocumentsDirectory();
     var path = '${dir.path}/${Updater.appName}';
@@ -35,19 +37,20 @@ class DB {
 
   static Future load() async {
     var collectionsFile = await DB.collectionsFile;
-    _collections.addAll(jsonDecode(await collectionsFile.readAsString()));
+    List collections = jsonDecode(await collectionsFile.readAsString());
+    for (var collection in collections) {
+      _collections.add(Collection.fromJson(collection));
+    }
 
     update(silent: true);
   }
 
-  static List<Collection> get collections => List.unmodifiable(_collections);
-
-  static bool createNewCollection(String name, String password) {
+  static bool createNewCollection(String name, String password, String imgPath) {
     if (_collectionsMap.containsKey(name)) return false;
 
     password = password.isNotEmpty ? Collection.hashPassword(password) : password;
 
-    _collections.add(Collection(name, password, {}));
+    _collections.add(Collection(name, password, imgPath, {}));
 
     update();
 

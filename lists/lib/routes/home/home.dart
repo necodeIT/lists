@@ -5,16 +5,16 @@ import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/routes/home/svg.dart';
 import 'package:nekolib_ui/core.dart';
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class HomeRoute extends StatefulWidget {
+  const HomeRoute({Key? key}) : super(key: key);
 
-  static const String route = '/';
+  static const String routeName = '/';
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomeRoute> createState() => _HomeRouteState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeRouteState extends State<HomeRoute> {
   @override
   void initState() {
     super.initState();

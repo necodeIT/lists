@@ -4,9 +4,9 @@ import 'package:lists/helpers/app_loader.dart';
 import 'package:lists/helpers/system_theme.dart';
 import 'package:lists/helpers/styles/styles.dart';
 import 'package:lists/routes/home/home.dart';
+import 'package:lists/routes/list/list.dart';
 import 'package:lists/routes/lists/lists.dart';
 import 'package:nekolib_ui/core.dart';
-import 'package:system_theme/system_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,8 +22,8 @@ void main() async {
 }
 
 Future loadAll() async {
-  // await DB.load();
-  await Future.delayed(Duration(seconds: 10));
+  await DB.load();
+  await Future.delayed(Duration(seconds: 2));
 }
 
 class App extends StatelessWidget {
@@ -32,16 +32,38 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FluentApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        tooltipTheme: TooltipThemeData(
+          decoration: BoxDecoration(
+            color: primaryColor,
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(
+              color: secondaryColor,
+            ),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 8,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+        ),
         brightness: brightness,
         scaffoldBackgroundColor: secondaryColor,
         accentColor: accentColors.value,
+        scrollbarTheme: ScrollbarThemeData(
+          scrollbarColor: tertiaryColor,
+          scrollbarPressingColor: accentColor,
+        ),
       ),
       title: 'Lists',
-      initialRoute: DB.collections.isNotEmpty ? Lists.route : Home.route,
+      initialRoute: DB.collections.isNotEmpty ? ListsRoute.routeName : HomeRoute.routeName,
       routes: {
-        Home.route: (context) => Home(),
-        Lists.route: (context) => Lists(),
+        HomeRoute.routeName: (context) => HomeRoute(),
+        ListsRoute.routeName: (context) => ListsRoute(),
+        ListRoute.routeName: (context) => ListRoute(),
       },
     );
   }

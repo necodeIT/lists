@@ -9,16 +9,19 @@ showCreateNewListDialog(BuildContext context) {
   showDialog(
     context: context,
     builder: (context) => CreateNewListDialog(
-      onCreate: (name, password) => _createNewList(context, name, password),
+      onCreate: (name, password, imgPath) => _createNewList(context, name, password, imgPath),
     ),
   );
 }
 
-_createNewList(BuildContext context, String name, String password) {
-  if (DB.createNewCollection(name, password)) {
-    Navigator.of(context).pop();
-    Navigator.of(context).pushNamed(Lists.route);
+_createNewList(BuildContext context, String name, String password, String imgPath) {
+  if (!DB.createNewCollection(name, password, imgPath)) {
+    showAlertDialog(context, "Error", "List with this name already exists!");
+    return;
   }
 
-  showDialog(context: context, builder: (context) => AlertDialog(title: "Error", message: "List with this name already exists!"));
+  Navigator.of(context).pop();
+  Navigator.of(context).pushNamed(ListsRoute.routeName);
 }
+
+showAlertDialog(BuildContext context, String title, String message) => showDialog(context: context, builder: (context) => AlertDialog(title: title, message: message));

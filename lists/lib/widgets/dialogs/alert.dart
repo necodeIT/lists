@@ -17,7 +17,7 @@ class AlertDialog extends StatelessWidget {
         FilledButton(
           style: filledButtonStyle(),
           child: NcTitleText(
-            'OK',
+            'Dismiss',
             buttonText: true,
           ),
           onPressed: Navigator.of(context).pop,

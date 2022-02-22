@@ -4,13 +4,20 @@ import 'package:crypto/crypto.dart';
 import 'package:lists/db/db.dart';
 
 class Collection {
-  final Map<String, String> _entries;
-  String name;
-  String _password;
+  late final Map<String, String> _entries;
+  late String _name;
+  late String _password;
+  late String _imgPath;
 
-  Collection(this.name, String password, Map<String, String> entries)
-      : _entries = Map.from(entries),
-        _password = password;
+  String get name => _name;
+  String get imgPath => _imgPath;
+
+  Collection(String name, String password, String imgPath, Map<String, String> entries) {
+    _entries = Map.from(entries);
+    _password = password;
+    _imgPath = imgPath;
+    _name = name;
+  }
 
   Map<String, String> get entries => Map.unmodifiable(_entries);
 
@@ -25,8 +32,12 @@ class Collection {
 
   List<String> get keys => _entries.keys.toList();
 
-  Collection fromJson(Map<String, dynamic> json) {
-    return Collection(json['name'], json['password'], json['entries']);
+  Collection.fromJson(Map<String, dynamic> json) {
+    // return Collection(json['name'], json['password'], json['entries']);
+    _name = json['name'];
+    _password = json['password'];
+    _entries = Map.from(json['entries']);
+    _imgPath = json['imgPath'] ?? '';
   }
 
   Map<String, dynamic> toJson() {
@@ -34,10 +45,12 @@ class Collection {
       'name': name,
       'password': _password,
       'entries': _entries,
+      'imgPath': _imgPath,
     };
   }
 
   bool get requiresPassword => _password.isNotEmpty;
+  bool get hasIcon => _imgPath.isNotEmpty;
 
   bool checkPassword(String password) => _password == hashPassword(password);
 
@@ -60,7 +73,16 @@ class Collection {
   bool changeName(String password, String newName) {
     if (!checkPassword(password)) return false;
 
-    name = newName;
+    _name = newName;
+    _notifiyDB();
+
+    return true;
+  }
+
+  bool changeImgPath(String password, String newImgPath) {
+    if (!checkPassword(password)) return false;
+
+    _imgPath = newImgPath;
     _notifiyDB();
 
     return true;

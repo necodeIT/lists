@@ -1,39 +1,52 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart' show Icons;
-import 'package:lists/db/db.dart';
+import 'package:flutter/widgets.dart';
+import 'package:lists/db/collection.dart';
 import 'package:lists/helpers/dialogs.dart';
-import 'package:lists/routes/lists/list.dart';
+import 'package:lists/routes/lists/lists.dart';
 import 'package:nekolib_ui/core.dart';
 
-class ListsRoute extends StatefulWidget {
-  const ListsRoute({Key? key}) : super(key: key);
+class ListRoute extends StatefulWidget {
+  const ListRoute({Key? key}) : super(key: key);
 
-  static const String routeName = '/lists';
+  static const String routeName = '/list';
 
   @override
-  State<ListsRoute> createState() => _ListsRouteState();
+  State<ListRoute> createState() => _CollectionRouteState();
 }
 
-class _ListsRouteState extends State<ListsRoute> {
+class _CollectionRouteState extends State<ListRoute> {
   @override
   Widget build(BuildContext context) {
+    var collection = ModalRoute.of(context)!.settings.arguments as Collection;
+
     return Container(
-      padding: EdgeInsets.all(NcSpacing.smallSpacing),
       color: secondaryColor,
+      padding: EdgeInsets.all(NcSpacing.smallSpacing),
       child: Column(
         children: [
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
+              Tooltip(
+                message: "Go back to overview",
+                child: IconButton(
+                  icon: Icon(
+                    FluentIcons.back,
+                    color: textColor,
+                  ),
+                  onPressed: () => Navigator.of(context).pushNamed(ListsRoute.routeName),
+                ),
+              ),
+              NcSpacing.xs(),
               Expanded(
                 child: TextBox(
-                  placeholder: "Search lists...",
+                  placeholder: "Search in ${collection.name}...",
                   suffix: Icon(FluentIcons.search),
                 ),
               ),
               NcSpacing.small(),
               Tooltip(
-                message: "Create new list",
+                message: "Add new entry",
                 child: IconButton(
                   icon: Icon(
                     FluentIcons.add,
@@ -55,17 +68,6 @@ class _ListsRouteState extends State<ListsRoute> {
             ],
           ),
           NcSpacing.medium(),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Wrap(
-                runSpacing: NcSpacing.smallSpacing,
-                spacing: NcSpacing.smallSpacing,
-                children: [
-                  for (var list in DB.collections) CollectionTile(collection: list),
-                ],
-              ),
-            ),
-          ),
         ],
       ),
     );
