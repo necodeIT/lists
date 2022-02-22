@@ -92,24 +92,7 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
               checked: _enablePassword,
               content: NcCaptionText("Password"),
               onChanged: _updateEnablePassword,
-              style: CheckboxThemeData(
-                checkedDecoration: ButtonState.all(
-                  BoxDecoration(
-                    color: accentColor,
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                ),
-                uncheckedDecoration: ButtonState.all(
-                  BoxDecoration(
-                    color: Colors.transparent,
-                    border: Border.all(
-                      color: tertiaryColor,
-                      width: 1.4,
-                    ),
-                    borderRadius: BorderRadius.circular(4),
-                  ),
-                ),
-              ),
+              style: checkboxStyle(),
             ),
           ),
           if (_enablePassword) NcSpacing.large(),

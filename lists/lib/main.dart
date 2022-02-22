@@ -5,6 +5,7 @@ import 'package:lists/routes/lists/lists.dart';
 import 'package:nekolib_ui/core.dart';
 
 void main() {
+  NcThemes.setTheme(darkTheme);
   runThemedApp((context) => App());
 }
 
@@ -14,6 +15,9 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FluentApp(
+      theme: ThemeData(
+        brightness: brightness,
+      ),
       title: 'Lists',
       initialRoute: DB.collections.isNotEmpty ? Lists.route : Home.route,
       routes: {
