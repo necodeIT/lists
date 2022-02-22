@@ -1,5 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:lists/db/db.dart';
+import 'package:lists/helpers/styles/styles.dart';
 import 'package:lists/routes/home/home.dart';
 import 'package:lists/routes/lists/lists.dart';
 import 'package:nekolib_ui/core.dart';
@@ -17,6 +18,8 @@ class App extends StatelessWidget {
     return FluentApp(
       theme: ThemeData(
         brightness: brightness,
+        scaffoldBackgroundColor: secondaryColor,
+        accentColor: accentColors.value,
       ),
       title: 'Lists',
       initialRoute: DB.collections.isNotEmpty ? Lists.route : Home.route,

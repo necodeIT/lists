@@ -92,7 +92,6 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
               checked: _enablePassword,
               content: NcCaptionText("Password"),
               onChanged: _updateEnablePassword,
-              style: checkboxStyle(),
             ),
           ),
           if (_enablePassword) NcSpacing.large(),

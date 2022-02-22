@@ -5,4 +5,4 @@ import 'package:nekolib_ui/core.dart';
 
 part 'buttons.dart';
 part 'dialogs.dart';
-part 'checkbox.dart';
+part 'accent_colors.dart';

@@ -3,7 +3,6 @@ import 'package:lists/db/db.dart';
 import 'package:lists/helpers/styles/styles.dart';
 import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/routes/home/svg.dart';
-import 'package:lists/routes/lists/lists.dart';
 import 'package:nekolib_ui/core.dart';
 
 class Home extends StatefulWidget {

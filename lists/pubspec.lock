@@ -123,6 +123,11 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  flutter_web_plugins:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   intl:
     dependency: transitive
     description:
@@ -130,6 +135,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.17.0"
+  js:
+    dependency: transitive
+    description:
+      name: js
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.3"
   lints:
     dependency: transitive
     description:
@@ -163,7 +175,7 @@ packages:
     description:
       path: ui
       ref: flutter
-      resolved-ref: "447c1cda96242450bfca871331bc0544975a1f97"
+      resolved-ref: d036dec62e1769377bccf71ab06f6d2d4a73d10c
       url: "https://github.com/necodeIT/nekolib.git"
     source: git
     version: "0.0.1"
@@ -319,6 +331,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0"
+  system_theme:
+    dependency: "direct main"
+    description:
+      name: system_theme
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
+  system_theme_web:
+    dependency: transitive
+    description:
+      name: system_theme_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.2"
   term_glyph:
     dependency: transitive
     description:
