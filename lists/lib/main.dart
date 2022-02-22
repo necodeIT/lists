@@ -1,3 +1,4 @@
+import 'package:context_menus/context_menus.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:lists/db/db.dart';
 import 'package:lists/helpers/app_loader.dart';
@@ -12,6 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   SystemThemeObserver.start();
+  // NcThemes.setTheme(sakuraTheme);
 
   runApp(
     FutureBuilder(
@@ -34,7 +36,13 @@ class App extends StatelessWidget {
     return FluentApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        iconTheme: IconThemeData(
+          color: textColor,
+        ),
         tooltipTheme: TooltipThemeData(
+          textStyle: TextStyle(
+            color: textColor,
+          ),
           decoration: BoxDecoration(
             color: primaryColor,
             borderRadius: BorderRadius.circular(5),
@@ -61,9 +69,9 @@ class App extends StatelessWidget {
       title: 'Lists',
       initialRoute: DB.collections.isNotEmpty ? ListsRoute.routeName : HomeRoute.routeName,
       routes: {
-        HomeRoute.routeName: (context) => HomeRoute(),
-        ListsRoute.routeName: (context) => ListsRoute(),
-        ListRoute.routeName: (context) => ListRoute(),
+        HomeRoute.routeName: (context) => ContextMenuOverlay(child: HomeRoute()),
+        ListsRoute.routeName: (context) => ContextMenuOverlay(child: ListsRoute()),
+        ListRoute.routeName: (context) => ContextMenuOverlay(child: ListRoute()),
       },
     );
   }

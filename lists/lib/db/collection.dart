@@ -89,4 +89,13 @@ class Collection {
   }
 
   void _notifiyDB() => DB.update();
+
+  bool addEntry(String key, String value) {
+    if (_entries.containsKey(key)) return false;
+
+    _entries[key] = value;
+    _notifiyDB();
+
+    return true;
+  }
 }

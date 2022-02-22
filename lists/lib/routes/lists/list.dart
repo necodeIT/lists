@@ -46,7 +46,7 @@ class _CollectionTileState extends State<CollectionTile> {
                     FluentIcons.lamp,
                     size: CollectionTile.iconSize,
                   ),
-            NcSpacing.xs(),
+            NcSpacing.small(),
             NcCaptionText(
               widget.collection.name,
               fontSize: 15,
@@ -63,7 +63,7 @@ class _CollectionTileState extends State<CollectionTile> {
                   ),
                 if (widget.collection.requiresPassword) NcSpacing.xs(),
                 NcBodyText(
-                  widget.collection.requiresPassword ? "Requires password" : "No password",
+                  widget.collection.requiresPassword ? "Password required" : "No password",
                   color: tertiaryColor,
                 ),
               ],

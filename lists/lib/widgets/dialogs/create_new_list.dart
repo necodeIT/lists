@@ -123,12 +123,16 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
           TextBox(
             placeholder: 'Enter list name',
             autofocus: true,
+            style: textStyle(),
+            placeholderStyle: placeholderStyle(),
             onChanged: _updateName,
           ),
           NcSpacing.large(),
           TextBox(
             placeholder: 'Icon (optional)',
             controller: _imagePathController,
+            style: textStyle(),
+            placeholderStyle: placeholderStyle(),
             suffix: IconButton(
               icon: Icon(
                 Icons.folder,
@@ -143,6 +147,8 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
               placeholder: 'Enter password',
               obscureText: !_showPassword,
               onChanged: _updatePassword,
+              style: textStyle(),
+              placeholderStyle: placeholderStyle(),
               suffix: TextButton(
                 child: Icon(
                   _showPassword ? Ionicons.eye_off : Ionicons.eye,
@@ -156,6 +162,8 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
             TextBox(
               placeholder: 'Repeat password',
               obscureText: !_showRepeatPassword,
+              style: textStyle(),
+              placeholderStyle: placeholderStyle(),
               onChanged: _updateRepeatPassword,
               suffix: IconButton(
                 icon: Icon(
