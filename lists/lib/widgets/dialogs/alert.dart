@@ -23,6 +23,7 @@ class AlertDialog extends StatelessWidget {
           onPressed: Navigator.of(context).pop,
         ),
       ],
+      style: contentDialogStyle(),
     );
   }
 }
