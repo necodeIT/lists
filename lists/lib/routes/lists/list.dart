@@ -1,10 +1,12 @@
 import 'dart:io';
 
+import 'package:context_menus/context_menus.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:lists/db/collection.dart';
 import 'package:lists/routes/list/list.dart';
+import 'package:lists/widgets/tooltip_icon_button.dart';
 import 'package:nekolib_ui/core.dart';
 
 class CollectionTile extends StatefulWidget {
@@ -12,7 +14,7 @@ class CollectionTile extends StatefulWidget {
 
   final Collection collection;
 
-  static const double iconSize = 60;
+  static const double iconSize = 80;
 
   @override
   State<CollectionTile> createState() => _CollectionTileState();
@@ -21,55 +23,87 @@ class CollectionTile extends StatefulWidget {
 class _CollectionTileState extends State<CollectionTile> {
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => Navigator.pushNamed(context, ListRoute.routeName, arguments: widget.collection),
-      child: Container(
-        height: 170,
-        width: 220,
-        decoration: BoxDecoration(
-          color: primaryColor,
-          border: Border.all(color: tertiaryColor),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
+    return ContextMenuRegion(
+      contextMenu: FlyoutContent(
+        padding: EdgeInsets.all(4),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            widget.collection.hasIcon
-                ? SizedBox(
-                    width: CollectionTile.iconSize,
-                    height: CollectionTile.iconSize,
-                    child: Image.file(
-                      File(widget.collection.imgPath),
-                    ),
-                  )
-                : Icon(
-                    FluentIcons.lamp,
-                    size: CollectionTile.iconSize,
-                  ),
-            NcSpacing.small(),
-            NcCaptionText(
-              widget.collection.name,
-              fontSize: 15,
+            TooltipIconButton(
+              tooltip: "Edit ${widget.collection.name}",
+              onPressed: () {},
+              icon: FluentIcons.edit,
             ),
-            NcSpacing.medium(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                if (widget.collection.requiresPassword)
-                  Icon(
-                    Icons.vpn_key,
-                    color: tertiaryColor,
-                    size: 15,
-                  ),
-                if (widget.collection.requiresPassword) NcSpacing.xs(),
-                NcBodyText(
-                  widget.collection.requiresPassword ? "Password required" : "No password",
-                  color: tertiaryColor,
-                ),
-              ],
+            TooltipIconButton(
+              tooltip: "Delete ${widget.collection.name}",
+              onPressed: () {},
+              icon: FluentIcons.delete,
             ),
-            NcSpacing.medium(),
           ],
+        ),
+      ),
+      child: GestureDetector(
+        onTap: () => Navigator.pushNamed(context, ListRoute.routeName, arguments: widget.collection),
+        child: Container(
+          height: 260,
+          width: 200,
+          padding: EdgeInsets.all(15),
+          margin: EdgeInsets.only(bottom: 8),
+          decoration: BoxDecoration(
+            color: primaryColor,
+            borderRadius: BorderRadius.circular(8.0),
+            boxShadow: kElevationToShadow[2],
+          ),
+          child: Column(
+            children: [
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: CollectionTile.iconSize,
+                      height: CollectionTile.iconSize,
+                      child: widget.collection.hasIcon
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(4.0),
+                              child: Image.file(
+                                File(widget.collection.imgPath),
+                              ),
+                            )
+                          : Icon(
+                              FluentIcons.lamp,
+                              size: CollectionTile.iconSize,
+                            ),
+                    ),
+                    NcSpacing.xl(),
+                    SizedBox(
+                      width: double.infinity,
+                      child: NcCaptionText(
+                        widget.collection.name,
+                        fontSize: 15,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              NcSpacing.large(),
+              Row(
+                children: [
+                  if (widget.collection.requiresPassword)
+                    Tooltip(
+                      message: 'This list requires a password',
+                      child: Icon(
+                        Icons.vpn_key,
+                        color: textColor,
+                        size: 15,
+                      ),
+                    ),
+                  if (widget.collection.requiresPassword) NcSpacing.small(),
+                  NcBodyText('${widget.collection.entries.length} item${widget.collection.entries.length != 1 ? "s" : ""}'),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

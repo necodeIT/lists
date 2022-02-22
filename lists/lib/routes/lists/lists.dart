@@ -56,10 +56,9 @@ class _ListsRouteState extends State<ListsRoute> {
             child: SizedBox(
               width: double.infinity,
               child: SingleChildScrollView(
-                padding: EdgeInsets.zero,
                 child: Wrap(
-                  runSpacing: NcSpacing.smallSpacing,
                   spacing: NcSpacing.smallSpacing,
+                  runSpacing: NcSpacing.smallSpacing,
                   children: [
                     for (var list in DB.collections)
                       if (list.name.contains(_query)) CollectionTile(collection: list),

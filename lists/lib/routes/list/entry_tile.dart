@@ -3,6 +3,7 @@ import 'package:clipboard/clipboard.dart';
 import 'package:context_menus/context_menus.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:lists/helpers/styles/styles.dart';
+import 'package:lists/widgets/tooltip_icon_button.dart';
 import 'package:nekolib_ui/core.dart';
 
 class EntryTile extends StatefulWidget {
@@ -51,7 +52,8 @@ class _EntryTileState extends State<EntryTile> {
           padding: EdgeInsets.all(8),
           decoration: BoxDecoration(
             color: primaryColor,
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(4.0),
+            boxShadow: kElevationToShadow[2],
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -82,6 +84,12 @@ class _EntryTileState extends State<EntryTile> {
                     textAlign: TextAlign.center,
                     fontSize: 15,
                   ),
+                ),
+              if (_showContent)
+                TooltipIconButton(
+                  tooltip: "Copy",
+                  icon: FluentIcons.copy,
+                  onPressed: _copyToClipboard,
                 ),
               if (!_showContent)
                 AnimatedTextKit(

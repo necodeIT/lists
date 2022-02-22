@@ -1,6 +1,7 @@
 import 'package:context_menus/context_menus.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:lists/db/db.dart';
+import 'package:lists/db/updater.dart';
 import 'package:lists/helpers/app_loader.dart';
 import 'package:lists/helpers/system_theme.dart';
 import 'package:lists/helpers/styles/styles.dart';
@@ -13,7 +14,6 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   SystemThemeObserver.start();
-  // NcThemes.setTheme(sakuraTheme);
 
   runApp(
     FutureBuilder(
