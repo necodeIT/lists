@@ -85,15 +85,6 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
             autofocus: true,
             onChanged: _updateName,
           ),
-          NcSpacing.large(),
-          Align(
-            alignment: Alignment.centerRight,
-            child: Checkbox(
-              checked: _enablePassword,
-              content: NcCaptionText("Password"),
-              onChanged: _updateEnablePassword,
-            ),
-          ),
           if (_enablePassword) NcSpacing.large(),
           if (_enablePassword)
             TextBox(
@@ -122,6 +113,15 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
                 onPressed: _toggleShowRepeatPassword,
               ),
             ),
+          NcSpacing.large(),
+          Align(
+            alignment: Alignment.centerRight,
+            child: Checkbox(
+              checked: _enablePassword,
+              content: NcCaptionText("Password"),
+              onChanged: _updateEnablePassword,
+            ),
+          ),
         ],
       ),
       actions: [
