@@ -48,9 +48,9 @@ class _EntryTileState extends State<EntryTile> {
           margin: EdgeInsets.only(bottom: 8),
           padding: EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: _showContent ? primaryColor : successColor.withOpacity(.5),
+            color: _showContent ? primaryColor : adaptiveAccentColor.withOpacity(.5),
             border: Border.all(
-              color: successColor,
+              color: adaptiveAccentColor,
               style: _showContent ? BorderStyle.none : BorderStyle.solid,
             ),
             borderRadius: BorderRadius.circular(4.0),
@@ -93,7 +93,7 @@ class _EntryTileState extends State<EntryTile> {
                       duration: FluentTheme.of(context).mediumAnimationDuration,
                       textStyle: NcBaseText.style(
                         fontWeight: FontWeight.w600,
-                        color: successColor,
+                        color: adaptiveAccentColor,
                         fontSize: 15,
                       ),
                     ),

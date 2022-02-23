@@ -70,7 +70,10 @@ class _CollectionTileState extends State<CollectionTile> {
                             ? Image.memory(
                                 widget.collection.icon,
                               )
-                            : Image.asset(img_default_list_icon),
+                            : Image.asset(
+                                img_default_list_icon,
+                                color: textColor,
+                              ),
                       ),
                     ),
                     NcSpacing.xl(),
