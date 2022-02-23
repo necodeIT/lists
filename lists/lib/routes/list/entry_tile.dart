@@ -28,7 +28,7 @@ class _EntryTileState extends State<EntryTile> {
 
     FlutterClipboard.copy(widget.entry.value);
 
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(FluentTheme.of(context).mediumAnimationDuration);
 
     setState(() {
       _showContent = true;
@@ -51,9 +51,13 @@ class _EntryTileState extends State<EntryTile> {
           margin: EdgeInsets.only(bottom: 8),
           padding: EdgeInsets.all(8),
           decoration: BoxDecoration(
-            color: primaryColor,
+            color: _showContent ? primaryColor : successColor.withOpacity(.5),
+            border: Border.all(
+              color: successColor,
+              style: _showContent ? BorderStyle.none : BorderStyle.solid,
+            ),
             borderRadius: BorderRadius.circular(4.0),
-            boxShadow: kElevationToShadow[2],
+            boxShadow: _showContent ? kElevationToShadow[1] : null,
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -93,12 +97,14 @@ class _EntryTileState extends State<EntryTile> {
                 ),
               if (!_showContent)
                 AnimatedTextKit(
+                  isRepeatingAnimation: false,
                   animatedTexts: [
                     RotateAnimatedText(
                       'Copied!',
-                      duration: Duration(milliseconds: 1000),
+                      duration: FluentTheme.of(context).mediumAnimationDuration,
                       textStyle: NcBaseText.style(
                         fontWeight: FontWeight.w600,
+                        color: successColor,
                         fontSize: 15,
                       ),
                     ),

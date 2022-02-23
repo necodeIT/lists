@@ -146,10 +146,17 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: f675dce91d7b7c15a4e30f844e90e0c3f99457d2
+      resolved-ref: d8bad94347b2f51db4128ca86f23aadb4450c9d8
       url: "https://github.com/necodeIT/fluent_ui.git"
     source: git
     version: "3.9.0"
+  fluentui_icons:
+    dependency: "direct main"
+    description:
+      name: fluentui_icons
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   fluentui_system_icons:
     dependency: "direct main"
     description:

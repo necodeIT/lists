@@ -28,32 +28,39 @@ class _ListsRouteState extends State<ListsRoute> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(NcSpacing.smallSpacing),
       color: secondaryColor,
       child: Column(
         children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Searchbar(
-                placeholder: "Search lists...",
-                onQuery: _updateQuery,
-              ),
-              NcSpacing.small(),
-              TooltipIconButton(
-                tooltip: "Create new list",
-                icon: FluentIcons.add,
-                onPressed: () => showCreateNewListDialog(context),
-              ),
-              TooltipIconButton(
-                tooltip: "Open settigns",
-                icon: FluentIcons.settings,
-              ),
-            ],
+          Container(
+            padding: EdgeInsets.all(NcSpacing.smallSpacing),
+            decoration: BoxDecoration(
+              color: primaryColor,
+              boxShadow: kElevationToShadow[1],
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Searchbar(
+                  placeholder: "Search lists...",
+                  onQuery: _updateQuery,
+                ),
+                NcSpacing.small(),
+                TooltipIconButton(
+                  tooltip: "Create new list",
+                  icon: FluentIcons.add,
+                  onPressed: () => showCreateNewListDialog(context),
+                ),
+                TooltipIconButton(
+                  tooltip: "Open settigns",
+                  icon: FluentIcons.settings,
+                ),
+              ],
+            ),
           ),
-          NcSpacing.medium(),
+          NcSpacing.small(),
           Expanded(
-            child: SizedBox(
+            child: Container(
+              padding: EdgeInsets.all(NcSpacing.smallSpacing),
               width: double.infinity,
               child: SingleChildScrollView(
                 child: Wrap(

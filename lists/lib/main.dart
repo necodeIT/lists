@@ -36,6 +36,7 @@ class App extends StatelessWidget {
     return FluentApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        dialogTheme: contentDialogStyle(),
         iconTheme: IconThemeData(
           color: textColor,
         ),

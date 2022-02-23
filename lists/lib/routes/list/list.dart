@@ -32,63 +32,48 @@ class _CollectionRouteState extends State<ListRoute> {
 
     return Container(
       color: secondaryColor,
-      child: Row(
+      child: Column(
         children: [
           Container(
-            padding: const EdgeInsets.all(8),
-            width: 200,
-            color: primaryColor,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            padding: EdgeInsets.all(NcSpacing.smallSpacing),
+            decoration: BoxDecoration(
+              color: primaryColor,
+              boxShadow: kElevationToShadow[1],
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
               children: [
                 TooltipIconButton(
-                  tooltip: 'Add new list',
+                  tooltip: "Go back to overview",
+                  icon: FluentIcons.up,
+                  onPressed: () => Navigator.of(context).pushNamed(ListsRoute.routeName),
+                ),
+                NcSpacing.xs(),
+                Searchbar(
+                  placeholder: "Search in ${collection.name}...",
+                  onQuery: _updateQuery,
+                ),
+                NcSpacing.small(),
+                TooltipIconButton(
+                  tooltip: "Add new entry",
                   icon: FluentIcons.add,
-                  onPressed: () => showCreateNewListDialog(context),
+                  onPressed: () => showCreateNewEntryDialog(context, collection),
+                ),
+                TooltipIconButton(
+                  tooltip: "Open settigns",
+                  icon: FluentIcons.settings,
                 ),
               ],
             ),
           ),
+          NcSpacing.medium(),
           Expanded(
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(8),
-              child: Column(
+            child: Padding(
+              padding: EdgeInsets.all(NcSpacing.smallSpacing),
+              child: ListView(
                 children: [
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      TooltipIconButton(
-                        tooltip: "Go back to overview",
-                        icon: FluentIcons.back,
-                        onPressed: () => Navigator.of(context).pushNamed(ListsRoute.routeName),
-                      ),
-                      NcSpacing.xs(),
-                      Searchbar(
-                        placeholder: "Search in ${collection.name}...",
-                        onQuery: _updateQuery,
-                      ),
-                      NcSpacing.small(),
-                      TooltipIconButton(
-                        tooltip: "Add new entry",
-                        icon: FluentIcons.add,
-                        onPressed: () => showCreateNewEntryDialog(context, collection),
-                      ),
-                      TooltipIconButton(
-                        tooltip: "Open settigns",
-                        icon: FluentIcons.settings,
-                      ),
-                    ],
-                  ),
-                  NcSpacing.medium(),
-                  Expanded(
-                    child: ListView(
-                      children: [
-                        for (var entry in collection.entries)
-                          if (entry.key.contains(_query)) EntryTile(entry: entry)
-                      ],
-                    ),
-                  ),
+                  for (var entry in collection.entries)
+                    if (entry.key.contains(_query)) EntryTile(entry: entry)
                 ],
               ),
             ),

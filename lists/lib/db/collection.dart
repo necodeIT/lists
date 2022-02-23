@@ -37,7 +37,6 @@ class Collection {
   }
 
   Collection.fromJson(Map<String, dynamic> json) {
-    var icon = json['icon'].cast<int>();
     _name = json['name'];
     _password = json['password'];
     _entries = Map.from(json['entries']);
@@ -53,7 +52,7 @@ class Collection {
     };
   }
 
-  bool get requiresPassword => _password != emptyHash;
+  bool get isPasswordProtected => _password != emptyHash;
   bool get hasIcon => _icon.isNotEmpty;
 
   bool checkPassword(String password) => _password == hashPassword(password);
@@ -101,5 +100,20 @@ class Collection {
     _notifiyDB();
 
     return true;
+  }
+
+  void removeEntry(String key) {
+    if (!_entries.containsKey(key)) return;
+
+    _entries.remove(key);
+    _notifiyDB();
+  }
+
+  bool updateEntry(String oldKey, String newKey, String newValue) {
+    if (!_entries.containsKey(oldKey)) return false;
+
+    removeEntry(oldKey);
+
+    return addEntry(newKey, newValue);
   }
 }

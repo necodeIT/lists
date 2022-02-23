@@ -9,6 +9,7 @@ import 'package:lists/routes/lists/lists.dart';
 import 'package:lists/widgets/dialogs/alert.dart';
 import 'package:lists/widgets/dialogs/create_new_list.dart';
 import 'package:lists/widgets/dialogs/new_entry.dart';
+import 'package:lists/widgets/dialogs/password_dialog.dart';
 import 'package:nekolib_ui/core.dart';
 
 showCreateNewListDialog(BuildContext context) {
@@ -46,6 +47,28 @@ showCreateNewEntryDialog(BuildContext context, Collection collection) {
 _addEntry(BuildContext context, String key, String value, Collection collection) {
   if (!collection.addEntry(key, value)) {
     showAlertDialog(context, "Error", "Entry with this key already exists!");
+    return;
+  }
+
+  Navigator.of(context).pop();
+  Navigator.of(context).pushNamed(ListRoute.routeName, arguments: collection);
+}
+
+showPasswordDialog(BuildContext context, Collection collection) {
+  if (!collection.isPasswordProtected) return _checkPassword(context, collection, "");
+
+  showDialog(
+    context: context,
+    builder: (context) => PasswordDialog(
+      collection: collection,
+      onConfirm: (password) => _checkPassword(context, collection, password),
+    ),
+  );
+}
+
+_checkPassword(BuildContext context, Collection collection, String password) {
+  if (!collection.checkPassword(password)) {
+    showAlertDialog(context, "Access denied", "Wrong password!");
     return;
   }
 

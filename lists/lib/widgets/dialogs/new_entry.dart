@@ -58,6 +58,7 @@ class _CreateNewEntryDialogState extends State<CreateNewEntryDialog> {
           child: NcTitleText(
             "Add entry",
             textAlign: TextAlign.center,
+            buttonText: true,
           ),
           onPressed: () {
             if (!_validateInput()) return;

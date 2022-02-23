@@ -3,8 +3,9 @@ import 'dart:io';
 import 'package:context_menus/context_menus.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart' show Icons;
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:lists/assets/assets.dart';
 import 'package:lists/db/collection.dart';
+import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/routes/list/list.dart';
 import 'package:lists/widgets/tooltip_icon_button.dart';
 import 'package:nekolib_ui/core.dart';
@@ -43,7 +44,7 @@ class _CollectionTileState extends State<CollectionTile> {
         ),
       ),
       child: GestureDetector(
-        onTap: () => Navigator.pushNamed(context, ListRoute.routeName, arguments: widget.collection),
+        onTap: () => showPasswordDialog(context, widget.collection),
         child: Container(
           height: 260,
           width: 200,
@@ -63,17 +64,14 @@ class _CollectionTileState extends State<CollectionTile> {
                     SizedBox(
                       width: CollectionTile.iconSize,
                       height: CollectionTile.iconSize,
-                      child: widget.collection.hasIcon
-                          ? ClipRRect(
-                              borderRadius: BorderRadius.circular(4.0),
-                              child: Image.memory(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(4.0),
+                        child: widget.collection.hasIcon
+                            ? Image.memory(
                                 widget.collection.icon,
-                              ),
-                            )
-                          : Icon(
-                              FluentIcons.lamp,
-                              size: CollectionTile.iconSize,
-                            ),
+                              )
+                            : Image.asset(img_default_list_icon),
+                      ),
                     ),
                     NcSpacing.xl(),
                     SizedBox(
@@ -89,16 +87,16 @@ class _CollectionTileState extends State<CollectionTile> {
               NcSpacing.large(),
               Row(
                 children: [
-                  if (widget.collection.requiresPassword)
+                  if (widget.collection.isPasswordProtected)
                     Tooltip(
-                      message: 'This list requires a password',
+                      message: 'This list is password protected',
                       child: Icon(
                         Icons.vpn_key,
                         color: textColor,
                         size: 15,
                       ),
                     ),
-                  if (widget.collection.requiresPassword) NcSpacing.small(),
+                  if (widget.collection.isPasswordProtected) NcSpacing.small(),
                   NcBodyText('${widget.collection.length} item${widget.collection.length != 1 ? "s" : ""}'),
                 ],
               ),

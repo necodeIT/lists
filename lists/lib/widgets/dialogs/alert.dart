@@ -12,7 +12,7 @@ class AlertDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return ContentDialog(
       title: NcTitleText(title),
-      content: NcBodyText(message),
+      content: NcCaptionText(message),
       actions: [
         FilledButton(
           style: filledButtonStyle(),
