@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:lists/db/collection.dart';
 import 'package:lists/db/db.dart';
@@ -18,7 +20,7 @@ showCreateNewListDialog(BuildContext context) {
 }
 
 _createNewList(BuildContext context, String name, String password, String imgPath) {
-  if (!DB.createNewCollection(name, password, imgPath)) {
+  if (!DB.createNewCollection(name, password, File(imgPath).readAsBytesSync())) {
     showAlertDialog(context, "Error", "List with this name already exists!");
     return;
   }

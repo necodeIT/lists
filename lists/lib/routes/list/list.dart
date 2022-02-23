@@ -84,7 +84,7 @@ class _CollectionRouteState extends State<ListRoute> {
                   Expanded(
                     child: ListView(
                       children: [
-                        for (var entry in collection.entries.entries)
+                        for (var entry in collection.entries)
                           if (entry.key.contains(_query)) EntryTile(entry: entry)
                       ],
                     ),

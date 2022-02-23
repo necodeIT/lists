@@ -66,8 +66,8 @@ class _CollectionTileState extends State<CollectionTile> {
                       child: widget.collection.hasIcon
                           ? ClipRRect(
                               borderRadius: BorderRadius.circular(4.0),
-                              child: Image.file(
-                                File(widget.collection.imgPath),
+                              child: Image.memory(
+                                widget.collection.icon,
                               ),
                             )
                           : Icon(
@@ -99,7 +99,7 @@ class _CollectionTileState extends State<CollectionTile> {
                       ),
                     ),
                   if (widget.collection.requiresPassword) NcSpacing.small(),
-                  NcBodyText('${widget.collection.entries.length} item${widget.collection.entries.length != 1 ? "s" : ""}'),
+                  NcBodyText('${widget.collection.length} item${widget.collection.length != 1 ? "s" : ""}'),
                 ],
               ),
             ],

@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:lists/db/collection.dart';
 import 'package:lists/db/updater.dart';
@@ -36,21 +37,27 @@ class DB {
   }
 
   static Future load() async {
-    var collectionsFile = await DB.collectionsFile;
-    List collections = jsonDecode(await collectionsFile.readAsString());
-    for (var collection in collections) {
-      _collections.add(Collection.fromJson(collection));
+    var f = await collectionsFile;
+
+    if (!await f.exists()) return;
+    try {
+      List collections = jsonDecode(await f.readAsString());
+
+      for (var collection in collections) {
+        _collections.add(Collection.fromJson(collection));
+      }
+    } catch (e) {
+      // TODO: log error
+      return;
     }
 
     update(silent: true);
   }
 
-  static bool createNewCollection(String name, String password, String imgPath) {
+  static bool createNewCollection(String name, String password, Uint8List icon) {
     if (_collectionsMap.containsKey(name)) return false;
 
-    password = password.isNotEmpty ? Collection.hashPassword(password) : password;
-
-    _collections.add(Collection(name, password, imgPath, {}));
+    _collections.add(Collection(name, Collection.hashPassword(password), icon, {}));
 
     update();
 
