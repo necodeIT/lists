@@ -10,10 +10,11 @@ import 'package:lists/routes/home/home.dart';
 import 'package:lists/routes/list/list.dart';
 import 'package:lists/routes/lists/lists.dart';
 import 'package:nekolib_ui/core.dart';
+import 'package:system_theme/system_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  // await SystemTheme.accentInstance.load();
   await Settings.load();
 
   SystemThemeObserver.start();
