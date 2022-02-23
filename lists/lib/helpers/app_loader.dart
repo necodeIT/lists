@@ -6,7 +6,7 @@ Widget appLoader() => FluentApp(
       theme: ThemeData(
         brightness: brightness,
         scaffoldBackgroundColor: secondaryColor,
-        accentColor: accentColors.value,
+        accentColor: adaptiveAccentColor,
       ),
       home: Container(
         width: double.infinity,

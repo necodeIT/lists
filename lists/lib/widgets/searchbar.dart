@@ -11,8 +11,8 @@ class Searchbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: TextBox(
-        style: textStyle(),
-        placeholderStyle: placeholderStyle(),
+        style: textBoxTextStyle(),
+        placeholderStyle: textBoxPlaceholderStyle(),
         placeholder: placeholder,
         suffix: Icon(FluentIcons.search),
         onChanged: onQuery,

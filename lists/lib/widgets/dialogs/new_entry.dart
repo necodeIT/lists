@@ -39,22 +39,24 @@ class _CreateNewEntryDialogState extends State<CreateNewEntryDialog> {
       content: Column(
         children: [
           TextBox(
+            autofocus: true,
             placeholder: "Key",
-            style: textStyle(),
-            placeholderStyle: placeholderStyle(),
+            style: textBoxTextStyle(),
+            placeholderStyle: textBoxPlaceholderStyle(),
             controller: _keyController,
           ),
           NcSpacing.large(),
           TextBox(
             placeholder: "Value",
-            style: textStyle(),
-            placeholderStyle: placeholderStyle(),
+            style: textBoxTextStyle(),
+            placeholderStyle: textBoxPlaceholderStyle(),
             controller: _valueController,
           ),
         ],
       ),
       actions: [
         FilledButton(
+          style: filledButtonStyle(),
           child: NcTitleText(
             "Add entry",
             textAlign: TextAlign.center,

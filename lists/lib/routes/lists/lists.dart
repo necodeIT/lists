@@ -53,6 +53,7 @@ class _ListsRouteState extends State<ListsRoute> {
                 TooltipIconButton(
                   tooltip: "Open settigns",
                   icon: FluentIcons.settings,
+                  onPressed: () => showSettingsDialog(context),
                 ),
               ],
             ),

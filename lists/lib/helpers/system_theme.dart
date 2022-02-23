@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:fluent_ui/fluent_ui.dart';
+import 'package:lists/db/settings.dart';
 import 'package:nekolib_ui/core.dart';
 import 'package:rxdart/subjects.dart';
 import 'package:system_theme/system_theme.dart';
@@ -7,13 +9,22 @@ import 'package:system_theme/system_theme.dart';
 class SystemThemeObserver {
   static bool _lastValue = false;
   static bool _started = false;
+  static AccentColor adaptiveAccentColor = Colors.blue;
 
   static Future adaptSystemTheme({bool force = false}) async {
+    if (!Settings.useSystemTheme) return;
     var darkMode = await SystemTheme.darkMode;
 
-    if (force || darkMode != _lastValue) {
+    if (Settings.adaptAccent) await SystemTheme.accentInstance.load();
+
+    var accent = SystemTheme.accentInstance.accent.toAccentColor();
+
+    if (force || (darkMode != _lastValue || accent != adaptiveAccentColor && Settings.adaptAccent)) {
       _lastValue = darkMode;
-      NcThemes.setTheme(darkMode ? darkTheme : lightTheme);
+
+      adaptiveAccentColor = accent;
+
+      NcThemes.setTheme(darkMode ? darkTheme : lightTheme, force: true);
     }
   }
 

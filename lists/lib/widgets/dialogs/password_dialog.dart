@@ -31,12 +31,14 @@ class _PasswordDialogState extends State<PasswordDialog> {
       title: NcTitleText("Enter password for ${widget.collection.name}"),
       content: TextBox(
         placeholder: "Enter password",
+        autofocus: true,
+        onSubmitted: (_) => widget.onConfirm(_controller.text),
         obscureText: !_showPw,
         controller: _controller,
         suffix: TooltipIconButton(
           tooltip: _showPw ? "Hide password" : "Show password",
           icon: _showPw ? Ionicons.eye_off : Ionicons.eye,
-          color: accentColor,
+          color: adaptiveAccentColor,
           onPressed: _toggleShowPw,
         ),
       ),

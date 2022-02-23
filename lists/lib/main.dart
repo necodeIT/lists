@@ -1,6 +1,7 @@
 import 'package:context_menus/context_menus.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:lists/db/db.dart';
+import 'package:lists/db/settings.dart';
 import 'package:lists/db/updater.dart';
 import 'package:lists/helpers/app_loader.dart';
 import 'package:lists/helpers/system_theme.dart';
@@ -12,6 +13,8 @@ import 'package:nekolib_ui/core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Settings.load();
 
   SystemThemeObserver.start();
 
@@ -25,7 +28,8 @@ void main() async {
 
 Future loadAll() async {
   await DB.load();
-  await Future.delayed(Duration(seconds: 2));
+
+  // await Future.delayed(Duration(seconds: 2));
 }
 
 class App extends StatelessWidget {
@@ -59,10 +63,10 @@ class App extends StatelessWidget {
         ),
         brightness: brightness,
         scaffoldBackgroundColor: secondaryColor,
-        accentColor: accentColors.value,
+        accentColor: adaptiveAccentColor,
         scrollbarTheme: ScrollbarThemeData(
           scrollbarColor: tertiaryColor,
-          scrollbarPressingColor: accentColor,
+          scrollbarPressingColor: adaptiveAccentColor,
         ),
       ),
       title: 'Lists',

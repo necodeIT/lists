@@ -123,20 +123,20 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
           TextBox(
             placeholder: 'Enter list name',
             autofocus: true,
-            style: textStyle(),
-            placeholderStyle: placeholderStyle(),
+            style: textBoxTextStyle(),
+            placeholderStyle: textBoxPlaceholderStyle(),
             onChanged: _updateName,
           ),
           NcSpacing.large(),
           TextBox(
             placeholder: 'Icon (optional)',
             controller: _imagePathController,
-            style: textStyle(),
-            placeholderStyle: placeholderStyle(),
+            style: textBoxTextStyle(),
+            placeholderStyle: textBoxPlaceholderStyle(),
             suffix: IconButton(
               icon: Icon(
                 Icons.folder,
-                color: accentColor,
+                color: adaptiveAccentColor,
               ),
               onPressed: _borwseImage,
             ),
@@ -147,12 +147,12 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
               placeholder: 'Enter password',
               obscureText: !_showPassword,
               onChanged: _updatePassword,
-              style: textStyle(),
-              placeholderStyle: placeholderStyle(),
+              style: textBoxTextStyle(),
+              placeholderStyle: textBoxPlaceholderStyle(),
               suffix: TextButton(
                 child: Icon(
                   _showPassword ? Ionicons.eye_off : Ionicons.eye,
-                  color: accentColor,
+                  color: adaptiveAccentColor,
                 ),
                 onPressed: _toggleShowPassword,
               ),
@@ -162,13 +162,13 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
             TextBox(
               placeholder: 'Repeat password',
               obscureText: !_showRepeatPassword,
-              style: textStyle(),
-              placeholderStyle: placeholderStyle(),
+              style: textBoxTextStyle(),
+              placeholderStyle: textBoxPlaceholderStyle(),
               onChanged: _updateRepeatPassword,
               suffix: IconButton(
                 icon: Icon(
                   _showRepeatPassword ? Ionicons.eye_off : Ionicons.eye,
-                  color: accentColor,
+                  color: adaptiveAccentColor,
                 ),
                 onPressed: _toggleShowRepeatPassword,
               ),

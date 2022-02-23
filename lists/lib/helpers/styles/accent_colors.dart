@@ -1,6 +1,8 @@
 part of list_styles;
 
-ThemeableProperty accentColors = ThemeableProperty<AccentColor>(
+AccentColor get adaptiveAccentColor => Settings.adaptAccent ? SystemThemeObserver.adaptiveAccentColor : _accentColors.value;
+
+ThemeableProperty _accentColors = ThemeableProperty<AccentColor>(
   {
     sakuraTheme: AccentColor(
       "normal",

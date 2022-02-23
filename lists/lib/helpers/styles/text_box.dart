@@ -1,4 +1,4 @@
 part of list_styles;
 
-placeholderStyle() => TextStyle(color: textColor);
-textStyle() => TextStyle(color: textColor);
+textBoxPlaceholderStyle() => TextStyle(color: textColor);
+textBoxTextStyle() => TextStyle(color: textColor);

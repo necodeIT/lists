@@ -62,6 +62,7 @@ class _CollectionRouteState extends State<ListRoute> {
                 TooltipIconButton(
                   tooltip: "Open settigns",
                   icon: FluentIcons.settings,
+                  onPressed: () => showSettingsDialog(context),
                 ),
               ],
             ),

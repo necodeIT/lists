@@ -4,6 +4,7 @@ import 'package:context_menus/context_menus.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:lists/helpers/styles/styles.dart';
 import 'package:lists/widgets/tooltip_icon_button.dart';
+import 'package:lists/widgets/vertical_divider.dart';
 import 'package:nekolib_ui/core.dart';
 
 class EntryTile extends StatefulWidget {
@@ -34,10 +35,6 @@ class _EntryTileState extends State<EntryTile> {
       _showContent = true;
     });
   }
-
-  // _showContextMenu(TapDownDetails details) {
-  //   flyoutController.open = true;
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -71,15 +68,7 @@ class _EntryTileState extends State<EntryTile> {
                   ),
                 ),
               if (_showContent) NcSpacing.xs(),
-              if (_showContent)
-                Container(
-                  height: 15,
-                  width: 3,
-                  decoration: BoxDecoration(
-                    color: textColor,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
+              if (_showContent) FluentVertivalDvider(),
               if (_showContent) NcSpacing.xs(),
               if (_showContent)
                 Expanded(
