@@ -50,14 +50,12 @@ class App extends StatelessWidget {
             border: Border.all(
               color: secondaryColor,
             ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                blurRadius: 8,
-                offset: Offset(0, 4),
-              ),
-            ],
+            boxShadow: kElevationToShadow[1],
           ),
+        ),
+        buttonTheme: ButtonThemeData(
+          defaultButtonStyle: buttonStyle(),
+          filledButtonStyle: filledButtonStyle(),
         ),
         brightness: brightness,
         scaffoldBackgroundColor: secondaryColor,
