@@ -40,6 +40,7 @@ class DB {
     var f = await collectionsFile;
 
     if (!await f.exists()) return;
+
     try {
       List collections = jsonDecode(await f.readAsString());
 
@@ -48,6 +49,7 @@ class DB {
       }
     } catch (e) {
       // TODO: log error
+      print(e);
       return;
     }
 

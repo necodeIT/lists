@@ -37,11 +37,11 @@ class Collection {
   }
 
   Collection.fromJson(Map<String, dynamic> json) {
-    // return Collection(json['name'], json['password'], json['entries']);
+    var icon = json['icon'].cast<int>();
     _name = json['name'];
     _password = json['password'];
     _entries = Map.from(json['entries']);
-    _icon = json['icon'] ?? [];
+    _icon = Uint8List.fromList(json['icon']?.cast<int>() ?? []);
   }
 
   Map<String, dynamic> toJson() {
