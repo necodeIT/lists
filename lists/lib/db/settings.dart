@@ -22,11 +22,13 @@ class Settings {
   static void setAdaptAccent(bool value) {
     if (value == _adaptAccent) return;
 
-    _adaptAccent = value;
+    _adaptAccent = false;
 
-    NcThemes.setTheme(NcThemes.current, force: true);
+    // TODO: _adaptAccent = value;
 
-    save();
+    // TODO: NcThemes.setTheme(NcThemes.current, force: true);
+
+    // TODO: save();
   }
 
   static void setTheme(String theme) {

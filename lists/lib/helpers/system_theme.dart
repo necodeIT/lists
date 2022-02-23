@@ -7,20 +7,22 @@ import 'package:system_theme/system_theme.dart';
 class SystemThemeObserver {
   static bool _lastValue = false;
   static bool _started = false;
-  static AccentColor accentColor = Colors.blue;
+  static AccentColor _accentColor = Colors.blue;
+
+  static AccentColor get accentColor => _accentColor;
 
   static Future adaptSystemTheme({bool force = false}) async {
     if (!Settings.useSystemTheme) return;
     var darkMode = await SystemTheme.darkMode;
 
-    if (Settings.adaptAccent) await SystemTheme.accentInstance.load();
+    // TODO: if (Settings.adaptAccent) await SystemTheme.accentInstance.load();
 
-    var accent = SystemTheme.accentInstance.accent.toAccentColor();
-
-    if (force || (darkMode != _lastValue || accent != accentColor && Settings.adaptAccent)) {
+    // TODO: var accent = SystemTheme.accentInstance.accent.toAccentColor();
+    var accent = _accentColor;
+    if (force || (darkMode != _lastValue || accent != _accentColor && Settings.adaptAccent)) {
       _lastValue = darkMode;
 
-      accentColor = accent;
+      _accentColor = accent;
 
       NcThemes.setTheme(darkMode ? darkTheme : lightTheme, force: true);
     }
