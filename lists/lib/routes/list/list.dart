@@ -19,7 +19,7 @@ class ListRoute extends StatefulWidget {
 
 class _CollectionRouteState extends State<ListRoute> {
   String _query = '';
-
+  late Collection _collection;
   _updateQuery(String value) {
     setState(() {
       _query = value;
@@ -27,8 +27,19 @@ class _CollectionRouteState extends State<ListRoute> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _collection.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var collection = ModalRoute.of(context)!.settings.arguments as Collection;
+    _collection = ModalRoute.of(context)!.settings.arguments as Collection;
 
     return Container(
       color: secondaryColor,
@@ -50,14 +61,14 @@ class _CollectionRouteState extends State<ListRoute> {
                 ),
                 NcSpacing.xs(),
                 Searchbar(
-                  placeholder: "Search in ${collection.name}...",
+                  placeholder: "Search in ${_collection.name}...",
                   onQuery: _updateQuery,
                 ),
                 NcSpacing.small(),
                 TooltipIconButton(
                   tooltip: "Add new entry",
                   icon: FluentIcons.add,
-                  onPressed: () => showCreateNewEntryDialog(context, collection),
+                  onPressed: () => showCreateNewEntryDialog(context, _collection),
                 ),
                 TooltipIconButton(
                   tooltip: "Open settigns",
@@ -73,7 +84,7 @@ class _CollectionRouteState extends State<ListRoute> {
               padding: EdgeInsets.all(NcSpacing.smallSpacing),
               child: ListView(
                 children: [
-                  for (var entry in collection.entries)
+                  for (var entry in _collection.entries)
                     if (entry.key.contains(_query)) EntryTile(entry: entry)
                 ],
               ),

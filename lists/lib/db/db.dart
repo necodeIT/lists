@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:lists/db/collection.dart';
 import 'package:lists/db/updater.dart';
+import 'package:lists/helpers/crypto.dart';
 import 'package:path_provider/path_provider.dart';
 
 class DB {
@@ -20,6 +21,13 @@ class DB {
     return appDir;
   }
 
+  static Future<File> getCollectionFile(Collection collection) async {
+    var dir = await appDir;
+    var name = sha256Hash(collection.name);
+
+    return File('${dir.path}/$name.json');
+  }
+
   static Future<File> get settingsFile async {
     var dir = await appDir;
     return File('${dir.path}/settings.json');
@@ -34,6 +42,8 @@ class DB {
     var collectionsFile = await DB.collectionsFile;
 
     await collectionsFile.writeAsString(jsonEncode(_collections));
+
+    for (var col in _collections) await col.save();
   }
 
   static Future load() async {
@@ -59,7 +69,7 @@ class DB {
   static bool createNewCollection(String name, String password, Uint8List icon) {
     if (_collectionsMap.containsKey(name)) return false;
 
-    _collections.add(Collection(name, Collection.hashPassword(password), icon, {}));
+    _collections.add(Collection(name, sha256Hash(password), icon));
 
     update();
 

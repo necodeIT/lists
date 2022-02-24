@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:lists/db/collection.dart';
 import 'package:lists/db/db.dart';
 import 'package:lists/routes/list/list.dart';
@@ -22,8 +23,20 @@ showCreateNewListDialog(BuildContext context) {
   );
 }
 
-_createNewList(BuildContext context, String name, String password, String imgPath) {
-  var img = imgPath.isNotEmpty ? File(imgPath).readAsBytesSync() : Uint8List(0);
+_createNewList(BuildContext context, String name, String password, String imgPath) async {
+  var img = Uint8List(0);
+  var f = File(imgPath);
+  if (f.existsSync()) {
+    var res = await FlutterImageCompress.compressWithFile(
+      f.absolute.path,
+      minHeight: 30,
+      minWidth: 30,
+      quality: 94,
+    );
+
+    img = res!;
+  }
+
   if (!DB.createNewCollection(name, password, img)) {
     showAlertDialog(context, "Error", "List with this name already exists!");
     return;
@@ -67,12 +80,12 @@ showPasswordDialog(BuildContext context, Collection collection) {
   );
 }
 
-_checkPassword(BuildContext context, Collection collection, String password) {
+_checkPassword(BuildContext context, Collection collection, String password) async {
   if (!collection.checkPassword(password)) {
     showAlertDialog(context, "Access denied", "Wrong password!");
     return;
   }
-
+  await collection.load(password);
   Navigator.of(context).pop();
   Navigator.of(context).pushNamed(ListRoute.routeName, arguments: collection);
 }
