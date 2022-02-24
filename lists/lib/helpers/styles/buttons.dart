@@ -23,8 +23,12 @@ ButtonStyle buttonStyle() => ButtonStyle(
       elevation: ButtonState.all(1.5),
     );
 
-dropDownButtonMenuStyle() => BoxDecoration(
+BoxDecoration dropDownButtonMenuStyle() => BoxDecoration(
       borderRadius: BorderRadius.circular(8),
       color: primaryColor,
       border: Border.all(color: secondaryColor, width: 1.5),
     );
+
+Color expanderContentBackground() => secondaryColor.withOpacity(.7);
+Color expanderInfoBoxContainerBackroundColor() => tertiaryColor.withOpacity(.4);
+ButtonState<Color> expanderHeaderBackground() => ButtonState.all(secondaryColor);
