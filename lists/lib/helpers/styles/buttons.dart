@@ -22,3 +22,9 @@ ButtonStyle buttonStyle() => ButtonStyle(
       ),
       elevation: ButtonState.all(1.5),
     );
+
+dropDownButtonMenuStyle() => BoxDecoration(
+      borderRadius: BorderRadius.circular(8),
+      color: primaryColor,
+      border: Border.all(color: secondaryColor, width: 1.5),
+    );

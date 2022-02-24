@@ -1,23 +1,22 @@
 import 'dart:convert';
 import 'dart:typed_data';
-
 import 'package:aes_crypt/aes_crypt.dart';
-import 'package:crypto/crypto.dart';
 import 'package:lists/db/db.dart';
 import 'package:lists/helpers/crypto.dart';
 
 class Collection {
   late final Map<String, String> _entries;
   late String _name;
-  late String _password;
+  late bool _password;
   late Uint8List _icon;
   int _length = 0;
-  static const emptyHash = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+  bool _loaded = false;
 
   String get name => _name;
+  bool get loaded => _loaded;
   Uint8List get icon => _icon;
 
-  Collection(String name, String password, Uint8List icon) {
+  Collection(String name, bool password, Uint8List icon) {
     _password = password;
     _icon = icon;
     _name = name;
@@ -30,13 +29,6 @@ class Collection {
   int get length => _entries.isEmpty ? _length : _entries.length;
 
   operator [](String key) => _entries[key];
-
-  operator []=(String key, String value) {
-    if (_entries.containsKey(key) && _entries[key] == value) return;
-
-    _entries[key] = value;
-    _notifiyDB();
-  }
 
   Collection.fromJson(Map<String, dynamic> json) {
     _name = json['name'];
@@ -56,7 +48,8 @@ class Collection {
   }
 
   Future load(String password) async {
-    if (!checkPassword(password)) return;
+    if (_loaded) return;
+    if (!await checkPassword(password)) return;
 
     password = sha256Hash(password);
     var f = await DB.getCollectionFile(this);
@@ -66,14 +59,19 @@ class Collection {
 
     _entries.clear();
     _entries.addAll(jsonDecode(data).cast<String, String>());
+    _loaded = true;
   }
 
   void dispose() {
+    if (!_loaded) return;
+
     _entries.clear();
+    _loaded = false;
   }
 
-  Future save() async {
-    var crypt = AesCrypt(_password);
+  Future save(String password) async {
+    password = sha256Hash(password);
+    var crypt = AesCrypt(password);
     crypt.setOverwriteMode(AesCryptOwMode.on);
 
     var data = jsonEncode(_entries);
@@ -82,68 +80,83 @@ class Collection {
     await crypt.encryptTextToFile(data, f.path);
   }
 
-  bool get isPasswordProtected => _password != emptyHash;
+  bool get isPasswordProtected => _password;
   bool get hasIcon => _icon.isNotEmpty;
 
-  bool checkPassword(String password) => _password == sha256Hash(password);
+  Future<bool> checkPassword(String password) async {
+    var f = await DB.getCollectionFile(this);
 
-  bool changePassword(String oldPassword, String newPassword) {
-    if (!checkPassword(oldPassword)) return false;
+    try {
+      var aes = AesCrypt(sha256Hash(password));
 
-    _password = sha256Hash(newPassword);
-    _notifiyDB();
+      await aes.decryptDataFromFile(f.path);
+
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  Future<bool> changePassword(String oldPassword, String newPassword) async {
+    if (!await checkPassword(oldPassword)) return false;
+
+    _notifiyDB(newPassword);
 
     return true;
   }
 
-  bool changeName(String password, String newName) {
-    if (!checkPassword(password)) return false;
+  Future<bool> changeName(String password, String newName) async {
+    if (!await checkPassword(password)) return false;
 
     DB.getCollectionFile(this).then((f) {
       if (f.existsSync()) f.deleteSync();
     });
 
     _name = newName;
-    _notifiyDB();
+    _notifiyDB(password);
 
     return true;
   }
 
-  bool changeImgPath(String password, Uint8List newImgPath) {
-    if (!checkPassword(password)) return false;
+  Future<bool> changeImgPath(String password, Uint8List newImgPath) async {
+    if (!await checkPassword(password)) return false;
 
     _icon = newImgPath;
-    _notifiyDB();
+    _notifiyDB(password);
 
     return true;
   }
 
-  void _notifiyDB() {
-    _length = _entries.length;
+  void _notifiyDB(String password) {
+    save(password);
     DB.update();
   }
 
-  bool addEntry(String key, String value) {
+  Future<bool> addEntry(String password, String key, String value) async {
     if (_entries.containsKey(key)) return false;
 
     _entries[key] = value;
-    _notifiyDB();
+    _length = _entries.length;
+
+    _notifiyDB(password);
 
     return true;
   }
 
-  void removeEntry(String key) {
+  void removeEntry(String password, String key) {
     if (!_entries.containsKey(key)) return;
 
     _entries.remove(key);
-    _notifiyDB();
+    _length = _entries.length;
+
+    _notifiyDB(password);
   }
 
-  bool updateEntry(String oldKey, String newKey, String newValue) {
+  Future<bool> updateEntry(String password, String oldKey, String newKey, String newValue) async {
     if (!_entries.containsKey(oldKey)) return false;
 
-    removeEntry(oldKey);
+    removeEntry(password, oldKey);
 
-    return addEntry(newKey, newValue);
+    return addEntry(password, newKey, newValue);
   }
 }

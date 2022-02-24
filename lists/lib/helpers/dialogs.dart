@@ -2,7 +2,6 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:lists/db/collection.dart';
 import 'package:lists/db/db.dart';
 import 'package:lists/routes/list/list.dart';
@@ -27,14 +26,7 @@ _createNewList(BuildContext context, String name, String password, String imgPat
   var img = Uint8List(0);
   var f = File(imgPath);
   if (f.existsSync()) {
-    var res = await FlutterImageCompress.compressWithFile(
-      f.absolute.path,
-      minHeight: 30,
-      minWidth: 30,
-      quality: 94,
-    );
-
-    img = res!;
+    img = await f.readAsBytes();
   }
 
   if (!DB.createNewCollection(name, password, img)) {
@@ -48,24 +40,30 @@ _createNewList(BuildContext context, String name, String password, String imgPat
 
 showAlertDialog(BuildContext context, String title, String message) => showDialog(context: context, builder: (context) => AlertDialog(title: title, message: message));
 
-showCreateNewEntryDialog(BuildContext context, Collection collection) {
+showCreateNewEntryDialog(BuildContext context, String password, Collection collection) {
   showDialog(
     context: context,
     builder: (context) => CreateNewEntryDialog(
       collection: collection,
-      onCreate: (key, value) => _addEntry(context, key, value, collection),
+      onCreate: (key, value) => _addEntry(context, password, key, value, collection),
     ),
   );
 }
 
-_addEntry(BuildContext context, String key, String value, Collection collection) {
-  if (!collection.addEntry(key, value)) {
+_addEntry(BuildContext context, String password, String key, String value, Collection collection) async {
+  if (!await collection.addEntry(password, key, value)) {
     showAlertDialog(context, "Error", "Entry with this key already exists!");
     return;
   }
 
   Navigator.of(context).pop();
-  Navigator.of(context).pushNamed(ListRoute.routeName, arguments: collection);
+  Navigator.of(context).pushNamed(
+    ListRoute.routeName,
+    arguments: {
+      "collection": collection,
+      "password": password,
+    },
+  );
 }
 
 showPasswordDialog(BuildContext context, Collection collection) {
@@ -81,13 +79,16 @@ showPasswordDialog(BuildContext context, Collection collection) {
 }
 
 _checkPassword(BuildContext context, Collection collection, String password) async {
-  if (!collection.checkPassword(password)) {
+  if (!await collection.checkPassword(password)) {
     showAlertDialog(context, "Access denied", "Wrong password!");
     return;
   }
   await collection.load(password);
   Navigator.of(context).pop();
-  Navigator.of(context).pushNamed(ListRoute.routeName, arguments: collection);
+  Navigator.of(context).pushNamed(ListRoute.routeName, arguments: {
+    "collection": collection,
+    "password": password,
+  });
 }
 
 showSettingsDialog(BuildContext context) {

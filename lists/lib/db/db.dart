@@ -42,8 +42,6 @@ class DB {
     var collectionsFile = await DB.collectionsFile;
 
     await collectionsFile.writeAsString(jsonEncode(_collections));
-
-    for (var col in _collections) await col.save();
   }
 
   static Future load() async {
@@ -69,7 +67,10 @@ class DB {
   static bool createNewCollection(String name, String password, Uint8List icon) {
     if (_collectionsMap.containsKey(name)) return false;
 
-    _collections.add(Collection(name, sha256Hash(password), icon));
+    var collection = Collection(name, password.isNotEmpty, icon);
+
+    _collections.add(collection);
+    collection.save(password);
 
     update();
 

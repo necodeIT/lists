@@ -14,9 +14,9 @@ import 'package:system_theme/system_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  NcThemes.initPredefinedThemes();
 
   await Settings.load();
-
   SystemThemeObserver.start();
 
   runApp(

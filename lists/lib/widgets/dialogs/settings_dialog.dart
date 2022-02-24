@@ -59,6 +59,7 @@ class SettingsDialogState extends State<SettingsDialog> {
                     children: [
                       NcTitleText("Theme"),
                       DropDownButton(
+                        menuDecoration: dropDownButtonMenuStyle(),
                         title: NcCaptionText(Settings.theme),
                         items: [
                           for (var theme in NcThemes.all.keys)

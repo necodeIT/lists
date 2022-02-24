@@ -63,7 +63,7 @@ class Settings {
 
     var data = jsonDecode(await f.readAsString());
 
-    _theme = data["theme"];
+    setTheme(data["theme"]);
     _adaptAccent = data["adaptAccent"];
   }
 }

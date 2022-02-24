@@ -20,6 +20,8 @@ class ListRoute extends StatefulWidget {
 class _CollectionRouteState extends State<ListRoute> {
   String _query = '';
   late Collection _collection;
+  late String password;
+
   _updateQuery(String value) {
     setState(() {
       _query = value;
@@ -39,7 +41,9 @@ class _CollectionRouteState extends State<ListRoute> {
 
   @override
   Widget build(BuildContext context) {
-    _collection = ModalRoute.of(context)!.settings.arguments as Collection;
+    final routeArgs = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    _collection = routeArgs["collection"] as Collection;
+    password = routeArgs["password"] as String;
 
     return Container(
       color: secondaryColor,
@@ -68,7 +72,7 @@ class _CollectionRouteState extends State<ListRoute> {
                 TooltipIconButton(
                   tooltip: "Add new entry",
                   icon: FluentIcons.add,
-                  onPressed: () => showCreateNewEntryDialog(context, _collection),
+                  onPressed: () => showCreateNewEntryDialog(context, password, _collection),
                 ),
                 TooltipIconButton(
                   tooltip: "Open settigns",
@@ -82,11 +86,21 @@ class _CollectionRouteState extends State<ListRoute> {
           Expanded(
             child: Padding(
               padding: EdgeInsets.all(NcSpacing.smallSpacing),
-              child: ListView(
-                children: [
-                  for (var entry in _collection.entries)
-                    if (entry.key.contains(_query)) EntryTile(entry: entry)
-                ],
+              child: FutureBuilder(
+                future: _collection.load(password),
+                builder: (context, snapshot) => snapshot.connectionState == ConnectionState.waiting
+                    ? Center(
+                        child: ProgressRing(
+                          backgroundColor: Colors.transparent,
+                        ),
+                      )
+                    : ListView(
+                        controller: ScrollController(),
+                        children: [
+                          for (var entry in _collection.entries)
+                            if (entry.key.contains(_query)) EntryTile(entry: entry)
+                        ],
+                      ),
               ),
             ),
           ),
