@@ -1,11 +1,13 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:lists/fluent_icons.dart';
 import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/helpers/styles/styles.dart';
+import 'package:lists/widgets/tooltip_icon_button.dart';
 import 'package:mime/mime.dart';
 import 'package:nekolib_ui/core.dart';
-import 'package:flutter/material.dart' show Icons;
+
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 class CreateNewListDialog extends StatefulWidget {
@@ -133,11 +135,10 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
             controller: _imagePathController,
             style: textBoxTextStyle(),
             placeholderStyle: textBoxPlaceholderStyle(),
-            suffix: IconButton(
-              icon: Icon(
-                Icons.folder,
-                color: adaptiveAccentColor,
-              ),
+            suffix: TooltipIconButton(
+              tooltip: "Browse",
+              icon: FluentIcons.ic_fluent_folder_open_24_filled,
+              color: adaptiveAccentColor,
               onPressed: _borwseImage,
             ),
           ),
@@ -149,11 +150,10 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
               onChanged: _updatePassword,
               style: textBoxTextStyle(),
               placeholderStyle: textBoxPlaceholderStyle(),
-              suffix: TextButton(
-                child: Icon(
-                  _showPassword ? Ionicons.eye_off : Ionicons.eye,
-                  color: adaptiveAccentColor,
-                ),
+              suffix: TooltipIconButton(
+                tooltip: _showPassword ? "Hide password" : "Show password",
+                icon: _showPassword ? FluentIcons.ic_fluent_eye_hide_24_filled : FluentIcons.ic_fluent_eye_show_24_filled,
+                color: adaptiveAccentColor,
                 onPressed: _toggleShowPassword,
               ),
             ),
@@ -165,11 +165,10 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
               style: textBoxTextStyle(),
               placeholderStyle: textBoxPlaceholderStyle(),
               onChanged: _updateRepeatPassword,
-              suffix: IconButton(
-                icon: Icon(
-                  _showRepeatPassword ? Ionicons.eye_off : Ionicons.eye,
-                  color: adaptiveAccentColor,
-                ),
+              suffix: TooltipIconButton(
+                tooltip: _showRepeatPassword ? "Hide password" : "Show password",
+                icon: _showRepeatPassword ? FluentIcons.ic_fluent_eye_hide_24_filled : FluentIcons.ic_fluent_eye_show_24_filled,
+                color: adaptiveAccentColor,
                 onPressed: _toggleShowRepeatPassword,
               ),
             ),

@@ -80,7 +80,7 @@ class Collection {
     await crypt.encryptTextToFile(data, f.path);
   }
 
-  bool get isPasswordProtected => _password;
+  bool get isProtected => _password;
   bool get hasIcon => _icon.isNotEmpty;
 
   Future<bool> checkPassword(String password) async {

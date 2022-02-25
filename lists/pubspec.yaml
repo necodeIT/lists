@@ -37,8 +37,6 @@ dependencies:
   fluent_ui:
     git:
       url: https://github.com/necodeIT/fluent_ui.git
-  fluentui_icons: ^1.0.0
-  fluentui_system_icons: ^1.1.160
   flutter:
     sdk: flutter
   flutter_vector_icons: ^1.0.0
@@ -78,10 +76,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: FluentIcons
+      fonts:
+        - asset: assets/fonts/FluentIcons.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

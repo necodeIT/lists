@@ -1,5 +1,10 @@
 part of list_styles;
 
+buttonThemeData() => ButtonThemeData(
+      defaultButtonStyle: buttonStyle(),
+      filledButtonStyle: filledButtonStyle(),
+    );
+
 ButtonStyle filledButtonStyle() => ButtonStyle(
       padding: ButtonState.all(EdgeInsets.all(8.0)),
       backgroundColor: ButtonState.all(adaptiveAccentColor),

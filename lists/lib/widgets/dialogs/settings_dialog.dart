@@ -1,12 +1,13 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:flutter/material.dart' show Icons;
 import 'package:lists/db/settings.dart';
+import 'package:lists/fluent_icons.dart';
 import 'package:lists/helpers/styles/styles.dart';
 import 'package:lists/widgets/expander_header.dart';
 import 'package:lists/widgets/info_box_container.dart';
 import 'package:lists/widgets/tooltip_icon_button.dart';
 import 'package:lists/widgets/vertical_divider.dart';
 import 'package:nekolib_ui/core.dart';
-import 'package:flutter/material.dart' show Icons;
 
 class SettingsDialog extends StatefulWidget {
   const SettingsDialog({Key? key}) : super(key: key);
@@ -45,7 +46,7 @@ class SettingsDialogState extends State<SettingsDialog> {
           TooltipIconButton(
             tooltip: "Close",
             icon: Icons.close,
-            size: 20,
+            size: 25,
             onPressed: Navigator.of(context).pop,
           ),
         ],
@@ -57,7 +58,7 @@ class SettingsDialogState extends State<SettingsDialog> {
             initiallyExpanded: true,
             headerBackgroundColor: expanderHeaderBackground(),
             contentBackgroundColor: expanderContentBackground(),
-            header: ExpanderHeader(icon: FluentIcons.color, text: "Appearance"),
+            header: ExpanderHeader(icon: FluentIcons.ic_fluent_color_24_regular, text: "Appearance"),
             content: Column(
               children: [
                 InfoBoxContainer(
@@ -112,7 +113,7 @@ class SettingsDialogState extends State<SettingsDialog> {
                   margin: expanderInfoBoxContainerMargin(),
                   shadow: false,
                   borderColor: Colors.transparent,
-                  icon: Settings.useSystemTheme ? null : FluentIcons.error,
+                  icon: Settings.useSystemTheme ? null : FluentIcons.ic_fluent_error_circle_24_regular,
                   iconToolTip: "Adaptive accent is only available when using the system theme",
                   title: GestureDetector(
                     child: NcTitleText("Adaptive accent"),
@@ -135,7 +136,7 @@ class SettingsDialogState extends State<SettingsDialog> {
                       child: NcCaptionText("Adaptive accent is not implemented yet"),
                       onTap: () => _setAdaptAccent(false),
                     ),
-                    icon: FluentIcons.info,
+                    icon: FluentIcons.ic_fluent_info_24_regular,
                     // iconColor: warningColor,
                   ),
               ],
@@ -147,7 +148,7 @@ class SettingsDialogState extends State<SettingsDialog> {
             headerBackgroundColor: expanderHeaderBackground(),
             contentBackgroundColor: expanderContentBackground(),
             initiallyExpanded: false,
-            header: ExpanderHeader(icon: FluentIcons.sync, text: "Sync"),
+            header: ExpanderHeader(icon: FluentIcons.ic_fluent_arrow_sync_24_filled, text: "Sync"),
             content: Column(
               children: [
                 InfoBoxContainer(
@@ -157,7 +158,7 @@ class SettingsDialogState extends State<SettingsDialog> {
                   margin: expanderInfoBoxContainerMargin(),
                   borderColor: Colors.transparent,
                   shadow: false,
-                  icon: FluentIcons.info,
+                  icon: FluentIcons.ic_fluent_info_24_regular,
                   iconToolTip: "Sync enables you to sync your lists across other devices.",
                   title: GestureDetector(
                     child: NcTitleText("Enable sync"),
@@ -187,7 +188,7 @@ class SettingsDialogState extends State<SettingsDialog> {
             headerBackgroundColor: expanderHeaderBackground(),
             contentBackgroundColor: expanderContentBackground(),
             initiallyExpanded: false,
-            header: ExpanderHeader(icon: FluentIcons.mini_expand, text: "Legacy"),
+            header: ExpanderHeader(icon: FluentIcons.ic_fluent_apps_add_in_24_filled, text: "Legacy"),
             content: Column(
               children: [
                 InfoBoxContainer(
@@ -200,7 +201,7 @@ class SettingsDialogState extends State<SettingsDialog> {
                   title: NcTitleText("Export list to file"),
                   trailing: TooltipIconButton(
                     onPressed: () {},
-                    icon: FluentIcons.pop_expand,
+                    icon: FluentIcons.ic_fluent_window_new_24_filled,
                     tooltip: "Export list",
                   ),
                 ),
@@ -214,7 +215,7 @@ class SettingsDialogState extends State<SettingsDialog> {
                   title: NcTitleText("Import list from file"),
                   trailing: TooltipIconButton(
                     onPressed: () {},
-                    icon: FluentIcons.pop_expand,
+                    icon: FluentIcons.ic_fluent_window_new_24_filled,
                     tooltip: "Import list",
                   ),
                 ),
@@ -228,7 +229,7 @@ class SettingsDialogState extends State<SettingsDialog> {
                   title: NcTitleText("Import from older versions"),
                   trailing: TooltipIconButton(
                     onPressed: () {},
-                    icon: FluentIcons.pop_expand,
+                    icon: FluentIcons.ic_fluent_window_new_24_filled,
                     tooltip: "Import lists",
                   ),
                 ),

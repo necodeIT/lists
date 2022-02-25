@@ -17,6 +17,7 @@ class InfoBoxContainer extends StatelessWidget {
     this.trailing,
     this.iconSize = 20,
     this.iconToolTip,
+    this.width,
   }) : super(key: key);
 
   final Color? backgroundColor;
@@ -25,6 +26,7 @@ class InfoBoxContainer extends StatelessWidget {
   final EdgeInsets padding;
   final EdgeInsets? margin;
   final double? height;
+  final double? width;
   final bool shadow;
   final Widget? title;
   final IconData? icon;
@@ -32,6 +34,14 @@ class InfoBoxContainer extends StatelessWidget {
   final double iconSize;
   final String? iconToolTip;
 
+  static Decoration decoration({Color? backgroundColor, Color? borderColor, bool shadow = true}) => BoxDecoration(
+        color: backgroundColor ?? primaryColor,
+        border: Border.all(
+          color: borderColor ?? tertiaryColor,
+        ),
+        borderRadius: BorderRadius.circular(4.0),
+        boxShadow: shadow ? kElevationToShadow[1] : null,
+      );
   @override
   Widget build(BuildContext context) {
     var icon = Icon(
@@ -40,18 +50,13 @@ class InfoBoxContainer extends StatelessWidget {
       size: iconSize,
     );
 
-    return Container(
+    return AnimatedContainer(
+      duration: FluentTheme.of(context).fasterAnimationDuration,
       height: height,
+      width: width,
       margin: margin,
       padding: padding,
-      decoration: BoxDecoration(
-        color: backgroundColor ?? primaryColor,
-        border: Border.all(
-          color: borderColor ?? tertiaryColor,
-        ),
-        borderRadius: BorderRadius.circular(4.0),
-        boxShadow: shadow ? kElevationToShadow[1] : null,
-      ),
+      decoration: decoration(backgroundColor: backgroundColor, borderColor: borderColor, shadow: shadow),
       child: Row(
         children: [
           if (this.icon != null && iconToolTip != null) Tooltip(message: iconToolTip, child: icon),

@@ -10,3 +10,20 @@ part 'buttons.dart';
 part 'dialogs.dart';
 part 'accent_colors.dart';
 part 'text_box.dart';
+part 'toggle_switch.dart';
+part 'tooltip.dart';
+part 'scrollbar.dart';
+
+ThemeData theme() => ThemeData(
+      dialogTheme: contentDialogStyle(),
+      iconTheme: IconThemeData(
+        color: textColor,
+      ),
+      toggleSwitchTheme: toggleSwitchThemeData(),
+      tooltipTheme: tooltipThemeData(),
+      buttonTheme: buttonThemeData(),
+      brightness: brightness,
+      scaffoldBackgroundColor: secondaryColor,
+      accentColor: adaptiveAccentColor,
+      scrollbarTheme: scrollbarThemeData(),
+    );

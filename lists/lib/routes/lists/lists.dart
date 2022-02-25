@@ -1,6 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart' show Icons;
 import 'package:lists/db/db.dart';
+import 'package:lists/fluent_icons.dart';
 import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/routes/lists/list.dart';
 import 'package:lists/widgets/searchbar.dart';
@@ -47,12 +47,12 @@ class _ListsRouteState extends State<ListsRoute> {
                 NcSpacing.small(),
                 TooltipIconButton(
                   tooltip: "Create new list",
-                  icon: FluentIcons.add,
+                  icon: FluentIcons.ic_fluent_add_24_filled,
                   onPressed: () => showCreateNewListDialog(context),
                 ),
                 TooltipIconButton(
                   tooltip: "Open settigns",
-                  icon: FluentIcons.settings,
+                  icon: FluentIcons.ic_fluent_settings_24_regular,
                   onPressed: () => showSettingsDialog(context),
                 ),
               ],

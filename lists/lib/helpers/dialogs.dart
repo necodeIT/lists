@@ -66,14 +66,15 @@ _addEntry(BuildContext context, String password, String key, String value, Colle
   );
 }
 
-showPasswordDialog(BuildContext context, Collection collection) {
-  if (!collection.isPasswordProtected) return _checkPassword(context, collection, "");
+showPasswordDialog(BuildContext context, Collection collection, [Function(BuildContext, Collection, String)? onPasswordEntered]) {
+  Function callback = onPasswordEntered ?? _checkPassword;
+  if (!collection.isProtected) return callback(context, collection, "");
 
   showDialog(
     context: context,
     builder: (context) => PasswordDialog(
       collection: collection,
-      onConfirm: (password) => _checkPassword(context, collection, password),
+      onConfirm: (password) => callback(context, collection, password),
     ),
   );
 }

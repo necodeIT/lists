@@ -40,57 +40,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return FluentApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        dialogTheme: contentDialogStyle(),
-        iconTheme: IconThemeData(
-          color: textColor,
-        ),
-        toggleSwitchTheme: ToggleSwitchThemeData(
-          checkedThumbDecoration: ButtonState.all(
-            BoxDecoration(
-              color: primaryColor,
-              borderRadius: BorderRadius.circular(50),
-            ),
-          ),
-          uncheckedDecoration: ButtonState.all(
-            BoxDecoration(
-              color: Colors.transparent,
-              border: Border.all(color: textColor),
-              borderRadius: BorderRadius.circular(50),
-            ),
-          ),
-          uncheckedThumbDecoration: ButtonState.all(
-            BoxDecoration(
-              color: textColor,
-              borderRadius: BorderRadius.circular(50),
-            ),
-          ),
-        ),
-        tooltipTheme: TooltipThemeData(
-          textStyle: TextStyle(
-            color: textColor,
-          ),
-          decoration: BoxDecoration(
-            color: primaryColor,
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(
-              color: secondaryColor,
-            ),
-            boxShadow: kElevationToShadow[1],
-          ),
-        ),
-        buttonTheme: ButtonThemeData(
-          defaultButtonStyle: buttonStyle(),
-          filledButtonStyle: filledButtonStyle(),
-        ),
-        brightness: brightness,
-        scaffoldBackgroundColor: secondaryColor,
-        accentColor: adaptiveAccentColor,
-        scrollbarTheme: ScrollbarThemeData(
-          scrollbarColor: tertiaryColor,
-          scrollbarPressingColor: adaptiveAccentColor,
-        ),
-      ),
+      theme: theme(),
       title: 'Lists',
       initialRoute: DB.collections.isNotEmpty ? ListsRoute.routeName : HomeRoute.routeName,
       routes: {

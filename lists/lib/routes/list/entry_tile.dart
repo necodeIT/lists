@@ -2,6 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:context_menus/context_menus.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:lists/fluent_icons.dart';
 import 'package:lists/helpers/styles/styles.dart';
 import 'package:lists/widgets/tooltip_icon_button.dart';
 import 'package:lists/widgets/vertical_divider.dart';
@@ -81,7 +82,7 @@ class _EntryTileState extends State<EntryTile> {
               if (_showContent)
                 TooltipIconButton(
                   tooltip: "Copy",
-                  icon: FluentIcons.copy,
+                  icon: FluentIcons.ic_fluent_copy_24_filled,
                   onPressed: _copyToClipboard,
                 ),
               if (!_showContent)

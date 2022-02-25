@@ -1,4 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:lists/fluent_icons.dart';
 import 'package:lists/helpers/styles/styles.dart';
 
 class Searchbar extends StatelessWidget {
@@ -14,7 +15,7 @@ class Searchbar extends StatelessWidget {
         style: textBoxTextStyle(),
         placeholderStyle: textBoxPlaceholderStyle(),
         placeholder: placeholder,
-        suffix: Icon(FluentIcons.search),
+        suffix: Icon(FluentIcons.ic_fluent_search_24_filled, size: 15),
         onChanged: onQuery,
       ),
     );

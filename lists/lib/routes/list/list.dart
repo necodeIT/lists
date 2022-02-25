@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lists/db/collection.dart';
+import 'package:lists/fluent_icons.dart';
 import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/routes/list/entry_tile.dart';
 import 'package:lists/routes/lists/lists.dart';
@@ -60,7 +61,7 @@ class _CollectionRouteState extends State<ListRoute> {
               children: [
                 TooltipIconButton(
                   tooltip: "Go back to overview",
-                  icon: FluentIcons.up,
+                  icon: FluentIcons.ic_fluent_arrow_up_24_filled,
                   onPressed: () => Navigator.of(context).pushNamed(ListsRoute.routeName),
                 ),
                 NcSpacing.xs(),
@@ -71,12 +72,12 @@ class _CollectionRouteState extends State<ListRoute> {
                 NcSpacing.small(),
                 TooltipIconButton(
                   tooltip: "Add new entry",
-                  icon: FluentIcons.add,
+                  icon: FluentIcons.ic_fluent_add_24_filled,
                   onPressed: () => showCreateNewEntryDialog(context, password, _collection),
                 ),
                 TooltipIconButton(
                   tooltip: "Open settigns",
-                  icon: FluentIcons.settings,
+                  icon: FluentIcons.ic_fluent_settings_24_regular,
                   onPressed: () => showSettingsDialog(context),
                 ),
               ],

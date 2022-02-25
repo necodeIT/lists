@@ -4,7 +4,7 @@ import 'package:nekolib_ui/core.dart';
 class ExpanderHeader extends StatelessWidget {
   const ExpanderHeader({Key? key, required this.icon, required this.text}) : super(key: key);
 
-  static const double iconSize = 18;
+  static const double iconSize = 22;
   final IconData icon;
   final String text;
 

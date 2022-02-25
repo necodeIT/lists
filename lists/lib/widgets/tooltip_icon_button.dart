@@ -2,7 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:nekolib_ui/core.dart';
 
 class TooltipIconButton extends StatelessWidget {
-  const TooltipIconButton({Key? key, required this.tooltip, required this.icon, this.onPressed, this.size, this.color}) : super(key: key);
+  const TooltipIconButton({Key? key, required this.tooltip, required this.icon, this.onPressed, this.size = 18, this.color}) : super(key: key);
 
   final String tooltip;
   final IconData icon;

@@ -1,12 +1,10 @@
-import 'dart:io';
-
 import 'package:context_menus/context_menus.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart' show Icons;
 import 'package:lists/assets/assets.dart';
 import 'package:lists/db/collection.dart';
+import 'package:lists/fluent_icons.dart';
+import 'package:lists/helpers/collection.dart';
 import 'package:lists/helpers/dialogs.dart';
-import 'package:lists/routes/list/list.dart';
 import 'package:lists/widgets/tooltip_icon_button.dart';
 import 'package:nekolib_ui/core.dart';
 
@@ -33,12 +31,12 @@ class _CollectionTileState extends State<CollectionTile> {
             TooltipIconButton(
               tooltip: "Edit ${widget.collection.name}",
               onPressed: () {},
-              icon: FluentIcons.edit,
+              icon: FluentIcons.ic_fluent_edit_24_filled,
             ),
             TooltipIconButton(
               tooltip: "Delete ${widget.collection.name}",
-              onPressed: () {},
-              icon: FluentIcons.delete,
+              onPressed: () => deleteCollection(context, widget.collection),
+              icon: FluentIcons.ic_fluent_delete_24_filled,
             ),
           ],
         ),
@@ -90,16 +88,16 @@ class _CollectionTileState extends State<CollectionTile> {
               NcSpacing.large(),
               Row(
                 children: [
-                  if (widget.collection.isPasswordProtected)
+                  if (widget.collection.isProtected)
                     Tooltip(
                       message: 'This list is password protected',
                       child: Icon(
-                        Icons.vpn_key,
+                        FluentIcons.ic_fluent_key_24_filled,
                         color: textColor,
                         size: 15,
                       ),
                     ),
-                  if (widget.collection.isPasswordProtected) NcSpacing.small(),
+                  if (widget.collection.isProtected) NcSpacing.small(),
                   NcBodyText('${widget.collection.length} item${widget.collection.length != 1 ? "s" : ""}'),
                 ],
               ),
