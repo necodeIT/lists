@@ -39,7 +39,6 @@ dependencies:
       url: https://github.com/necodeIT/fluent_ui.git
   flutter:
     sdk: flutter
-  flutter_vector_icons: ^1.0.0
   mime: ^1.0.1
   nekolib_ui:
     git:

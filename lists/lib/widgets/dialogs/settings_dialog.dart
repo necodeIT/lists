@@ -226,7 +226,7 @@ class SettingsDialogState extends State<SettingsDialog> {
                   margin: expanderInfoBoxContainerMargin(),
                   borderColor: Colors.transparent,
                   shadow: false,
-                  title: NcTitleText("Import from older versions"),
+                  title: NcTitleText("Import lists from older versions"),
                   trailing: TooltipIconButton(
                     onPressed: () {},
                     icon: FluentIcons.ic_fluent_window_new_24_filled,

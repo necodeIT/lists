@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:lists/db/collection.dart';
+import 'package:lists/fluent_icons.dart';
 import 'package:lists/helpers/styles/styles.dart';
 import 'package:lists/widgets/tooltip_icon_button.dart';
 import 'package:nekolib_ui/core.dart';
@@ -37,7 +38,7 @@ class _PasswordDialogState extends State<PasswordDialog> {
         controller: _controller,
         suffix: TooltipIconButton(
           tooltip: _showPw ? "Hide password" : "Show password",
-          icon: _showPw ? Ionicons.eye_off : Ionicons.eye,
+          icon: _showPw ? FluentIcons.ic_fluent_eye_hide_24_filled : FluentIcons.ic_fluent_eye_show_24_filled,
           color: adaptiveAccentColor,
           onPressed: _toggleShowPw,
         ),
