@@ -5,6 +5,7 @@ class ExpanderHeader extends StatelessWidget {
   const ExpanderHeader({Key? key, required this.icon, required this.text}) : super(key: key);
 
   static const double iconSize = 22;
+  static const double fontSize = 17;
   final IconData icon;
   final String text;
 
@@ -14,7 +15,7 @@ class ExpanderHeader extends StatelessWidget {
       children: [
         Icon(icon, size: iconSize),
         NcSpacing.small(),
-        NcTitleText(text),
+        NcTitleText(text, fontSize: fontSize),
       ],
     );
   }
