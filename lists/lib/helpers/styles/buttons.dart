@@ -14,13 +14,14 @@ ButtonStyle filledButtonStyle() => ButtonStyle(
 //   darkTheme: darkTheme.tertiaryColor,
 // });
 
-ButtonStyle buttonStyle() => ButtonStyle(
+ButtonStyle buttonStyle([Color? color, double? elevation, BorderStyle? borderStyle]) => ButtonStyle(
       padding: ButtonState.all(EdgeInsets.all(8.0)),
-      backgroundColor: ButtonState.all(secondaryColor),
+      backgroundColor: ButtonState.all(color ?? secondaryColor),
       border: ButtonState.all(
-        BorderSide(color: secondaryColor),
+        BorderSide(color: color ?? secondaryColor, style: borderStyle ?? BorderStyle.solid),
       ),
-      elevation: ButtonState.all(1.5),
+      foregroundColor: ButtonState.all(textColor),
+      elevation: ButtonState.all(elevation ?? 1.5),
     );
 
 BoxDecoration dropDownButtonMenuStyle() => BoxDecoration(
@@ -29,6 +30,9 @@ BoxDecoration dropDownButtonMenuStyle() => BoxDecoration(
       border: Border.all(color: secondaryColor, width: 1.5),
     );
 
-Color expanderContentBackground() => secondaryColor.withOpacity(.7);
-Color expanderInfoBoxContainerBackroundColor() => tertiaryColor.withOpacity(.4);
+Color expanderContentBackground() => tertiaryColor.withOpacity(.5);
+Color expanderInfoBoxContainerBackroundColor() => secondaryColor;
+double expanderInfoBoxContainerHeight() => 50;
+EdgeInsets expanderInfoBoxContainerPadding() => EdgeInsets.symmetric(horizontal: 16);
+EdgeInsets expanderInfoBoxContainerMargin() => EdgeInsets.symmetric(vertical: 1);
 ButtonState<Color> expanderHeaderBackground() => ButtonState.all(secondaryColor);

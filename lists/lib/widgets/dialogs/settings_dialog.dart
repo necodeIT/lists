@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:lists/db/settings.dart';
 import 'package:lists/helpers/styles/styles.dart';
+import 'package:lists/widgets/expander_header.dart';
 import 'package:lists/widgets/info_box_container.dart';
 import 'package:lists/widgets/tooltip_icon_button.dart';
 import 'package:lists/widgets/vertical_divider.dart';
@@ -27,6 +28,12 @@ class SettingsDialogState extends State<SettingsDialog> {
     });
   }
 
+  _setSync(bool? value) {
+    setState(() {
+      Settings.setSync(value ?? false);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return ContentDialog(
@@ -47,71 +54,131 @@ class SettingsDialogState extends State<SettingsDialog> {
           Expander(
             contentPadding: 0,
             initiallyExpanded: true,
+            headerBackgroundColor: expanderHeaderBackground(),
             contentBackgroundColor: expanderContentBackground(),
-            header: Row(
-              children: [
-                Icon(FluentIcons.color, size: 18),
-                NcSpacing.small(),
-                NcTitleText("Themes"),
-              ],
-            ),
+            header: ExpanderHeader(icon: FluentIcons.color, text: "Appearance"),
             content: Column(
               children: [
                 InfoBoxContainer(
+                  padding: expanderInfoBoxContainerPadding(),
+                  margin: expanderInfoBoxContainerMargin(),
+                  height: expanderInfoBoxContainerHeight(),
                   backgroundColor: expanderInfoBoxContainerBackroundColor(),
+                  shadow: false,
                   borderColor: Colors.transparent,
                   title: NcTitleText("Select Theme"),
-                  trailing: DropDownButton(
-                    menuDecoration: dropDownButtonMenuStyle(),
-                    title: NcCaptionText(Settings.theme),
-                    items: [
-                      for (var theme in NcThemes.all.keys)
+                  trailing: FluentTheme(
+                    data: ThemeData(
+                      buttonTheme: ButtonThemeData(
+                        defaultButtonStyle: buttonStyle(tertiaryColor.withOpacity(.2), 0, BorderStyle.none),
+                      ),
+                    ),
+                    child: DropDownButton(
+                      menuDecoration: dropDownButtonMenuStyle(),
+                      title: NcCaptionText(Settings.theme),
+                      items: [
+                        for (var theme in NcThemes.all.keys)
+                          DropDownButtonItem(
+                            onTap: () => _setTheme(theme),
+                            title: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                FluentVertivalDvider(color: Settings.theme == theme ? adaptiveAccentColor : Colors.transparent),
+                                NcSpacing.xs(),
+                                NcCaptionText(theme),
+                              ],
+                            ),
+                          ),
                         DropDownButtonItem(
-                          onTap: () => _setTheme(theme),
+                          onTap: () => _setTheme(Settings.systemTheme),
                           title: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              FluentVertivalDvider(color: Settings.theme == theme ? adaptiveAccentColor : Colors.transparent),
+                              FluentVertivalDvider(color: Settings.useSystemTheme ? adaptiveAccentColor : Colors.transparent),
                               NcSpacing.xs(),
-                              NcCaptionText(theme),
+                              NcCaptionText(Settings.systemTheme),
                             ],
                           ),
                         ),
-                      DropDownButtonItem(
-                        onTap: () => _setTheme(Settings.systemTheme),
-                        title: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            FluentVertivalDvider(color: Settings.useSystemTheme ? adaptiveAccentColor : Colors.transparent),
-                            NcSpacing.xs(),
-                            NcCaptionText(Settings.systemTheme),
-                          ],
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 InfoBoxContainer(
-                  title: NcTitleText("Adaptive Accent"),
+                  padding: expanderInfoBoxContainerPadding(),
+                  height: expanderInfoBoxContainerHeight(),
+                  backgroundColor: expanderInfoBoxContainerBackroundColor(),
+                  margin: expanderInfoBoxContainerMargin(),
+                  shadow: false,
+                  borderColor: Colors.transparent,
+                  icon: Settings.useSystemTheme ? null : FluentIcons.error,
+                  iconToolTip: "Adaptive Accent is only available when using the system theme",
+                  title: GestureDetector(
+                    child: NcTitleText("Adaptive Accent"),
+                    onTap: Settings.useSystemTheme ? () => _setAdaptAccent(!Settings.adaptAccent) : null,
+                  ),
                   trailing: Checkbox(
                     checked: Settings.adaptAccent,
                     onChanged: Settings.useSystemTheme ? _setAdaptAccent : null,
                   ),
                 ),
+                if (Settings.adaptAccent)
+                  InfoBoxContainer(
+                    padding: expanderInfoBoxContainerPadding(),
+                    height: expanderInfoBoxContainerHeight(),
+                    backgroundColor: warningColor.withOpacity(.2),
+                    margin: expanderInfoBoxContainerMargin(),
+                    shadow: false,
+                    borderColor: warningColor,
+                    title: GestureDetector(
+                      child: NcCaptionText("Adaptive Accent is currently unavailable", color: warningColor),
+                      onTap: () => _setAdaptAccent(false),
+                    ),
+                    icon: FluentIcons.info,
+                    iconColor: warningColor,
+                  ),
               ],
             ),
           ),
-          NcSpacing.large(),
+          NcSpacing.xs(),
           Expander(
+            contentPadding: 0,
+            headerBackgroundColor: expanderHeaderBackground(),
+            contentBackgroundColor: expanderContentBackground(),
             initiallyExpanded: false,
-            header: Row(
+            header: ExpanderHeader(icon: FluentIcons.sync, text: "Sync"),
+            content: Column(
               children: [
-                Icon(FluentIcons.sync, size: 18),
-                NcSpacing.small(),
-                NcTitleText("Sync"),
+                InfoBoxContainer(
+                  padding: expanderInfoBoxContainerPadding(),
+                  height: expanderInfoBoxContainerHeight(),
+                  backgroundColor: expanderInfoBoxContainerBackroundColor(),
+                  margin: expanderInfoBoxContainerMargin(),
+                  borderColor: Colors.transparent,
+                  shadow: false,
+                  icon: FluentIcons.info,
+                  iconToolTip: "Sync enables you to sync your lists across other devices.",
+                  title: GestureDetector(
+                    child: NcTitleText("Enable sync"),
+                    onTap: () => _setSync(!Settings.sync),
+                  ),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      NcBodyText(Settings.sync ? "On" : "Off"),
+                      Transform.scale(
+                        alignment: Alignment.centerRight,
+                        scale: .9,
+                        child: ToggleSwitch(
+                          checked: Settings.sync,
+                          onChanged: _setSync,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
-            content: NcBodyText("Sync your lists across devices"),
           ),
         ],
       ),

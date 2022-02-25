@@ -14,17 +14,18 @@ class Settings {
   static const systemTheme = "System";
   static String _theme = systemTheme;
   static bool _adaptAccent = true;
+  static bool _sync = false;
 
   static bool get adaptAccent => _adaptAccent && useSystemTheme;
   static bool get useSystemTheme => _theme == systemTheme;
   static String get theme => _theme;
+  static bool get sync => _sync;
 
   static void setAdaptAccent(bool value) {
+    if (!useSystemTheme) return;
     if (value == _adaptAccent) return;
 
-    _adaptAccent = false;
-
-    // TODO: _adaptAccent = value;
+    _adaptAccent = value;
 
     // TODO: NcThemes.setTheme(NcThemes.current, force: true);
 
@@ -45,12 +46,19 @@ class Settings {
     NcThemes.setTheme(NcThemes.all[theme]!);
   }
 
+  static void setSync(bool value) {
+    if (value == _sync) return;
+    _sync = value;
+    save();
+  }
+
   static Future save() async {
     var f = await settingsFile;
 
     var data = {
       "theme": _theme,
       "adaptAccent": _adaptAccent,
+      "sync": _sync,
     };
 
     await f.writeAsString(jsonEncode(data));
@@ -65,5 +73,6 @@ class Settings {
 
     setTheme(data["theme"]);
     _adaptAccent = data["adaptAccent"];
+    _sync = data["sync"];
   }
 }

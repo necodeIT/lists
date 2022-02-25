@@ -1,4 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:lists/widgets/expander_header.dart';
 import 'package:nekolib_ui/core.dart';
 
 class InfoBoxContainer extends StatelessWidget {
@@ -14,6 +15,8 @@ class InfoBoxContainer extends StatelessWidget {
     this.title,
     this.icon,
     this.trailing,
+    this.iconSize = 20,
+    this.iconToolTip,
   }) : super(key: key);
 
   final Color? backgroundColor;
@@ -26,9 +29,17 @@ class InfoBoxContainer extends StatelessWidget {
   final Widget? title;
   final IconData? icon;
   final Widget? trailing;
+  final double iconSize;
+  final String? iconToolTip;
 
   @override
   Widget build(BuildContext context) {
+    var icon = Icon(
+      this.icon,
+      color: iconColor,
+      size: iconSize,
+    );
+
     return Container(
       height: height,
       margin: margin,
@@ -43,11 +54,9 @@ class InfoBoxContainer extends StatelessWidget {
       ),
       child: Row(
         children: [
-          if (icon != null)
-            Icon(
-              icon,
-              color: iconColor,
-            ),
+          if (this.icon != null && iconToolTip != null) Tooltip(message: iconToolTip, child: icon),
+          if (this.icon != null && iconToolTip == null) icon,
+          if (this.icon != null) NcSpacing.small(),
           if (title != null)
             Expanded(
               child: title!,
