@@ -6,6 +6,7 @@ import 'package:lists/routes/home/home.dart';
 import 'package:lists/routes/lists/lists.dart';
 
 deleteCollection(BuildContext context, Collection collection) {
+  // TODO: show confirmation dialog instead of password input
   showPasswordDialog(context, collection, _deleteCollection);
 }
 
