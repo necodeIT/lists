@@ -114,7 +114,7 @@ class SettingsDialogState extends State<SettingsDialog> {
                   shadow: false,
                   borderColor: Colors.transparent,
                   icon: Settings.useSystemTheme ? null : FluentIcons.ic_fluent_error_circle_24_regular,
-                  iconToolTip: "Adaptive accent is only available when using the system theme",
+                  iconToolTip: "Adaptive accent is only available when using system theme",
                   title: GestureDetector(
                     child: NcTitleText("Adaptive accent"),
                     onTap: Settings.useSystemTheme ? () => _setAdaptAccent(!Settings.adaptAccent) : null,
