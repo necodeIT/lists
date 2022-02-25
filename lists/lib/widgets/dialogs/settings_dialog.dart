@@ -67,7 +67,7 @@ class SettingsDialogState extends State<SettingsDialog> {
                   backgroundColor: expanderInfoBoxContainerBackroundColor(),
                   shadow: false,
                   borderColor: Colors.transparent,
-                  title: NcTitleText("Select Theme"),
+                  title: NcTitleText("Select theme"),
                   trailing: FluentTheme(
                     data: ThemeData(
                       buttonTheme: ButtonThemeData(
@@ -113,9 +113,9 @@ class SettingsDialogState extends State<SettingsDialog> {
                   shadow: false,
                   borderColor: Colors.transparent,
                   icon: Settings.useSystemTheme ? null : FluentIcons.error,
-                  iconToolTip: "Adaptive Accent is only available when using the system theme",
+                  iconToolTip: "Adaptive accent is only available when using the system theme",
                   title: GestureDetector(
-                    child: NcTitleText("Adaptive Accent"),
+                    child: NcTitleText("Adaptive accent"),
                     onTap: Settings.useSystemTheme ? () => _setAdaptAccent(!Settings.adaptAccent) : null,
                   ),
                   trailing: Checkbox(
@@ -132,7 +132,7 @@ class SettingsDialogState extends State<SettingsDialog> {
                     shadow: false,
                     borderColor: warningColor.withOpacity(.3),
                     title: GestureDetector(
-                      child: NcCaptionText("Adaptive Accent is currently unavailable"),
+                      child: NcCaptionText("Adaptive accent is not implemented yet"),
                       onTap: () => _setAdaptAccent(false),
                     ),
                     icon: FluentIcons.info,
@@ -197,21 +197,7 @@ class SettingsDialogState extends State<SettingsDialog> {
                   margin: expanderInfoBoxContainerMargin(),
                   borderColor: Colors.transparent,
                   shadow: false,
-                  title: NcTitleText("Import Lists from older versions"),
-                  trailing: TooltipIconButton(
-                    onPressed: () {},
-                    icon: FluentIcons.pop_expand,
-                    tooltip: "Import lists",
-                  ),
-                ),
-                InfoBoxContainer(
-                  padding: expanderInfoBoxContainerPadding(),
-                  height: expanderInfoBoxContainerHeight(),
-                  backgroundColor: expanderInfoBoxContainerBackroundColor(),
-                  margin: expanderInfoBoxContainerMargin(),
-                  borderColor: Colors.transparent,
-                  shadow: false,
-                  title: NcTitleText("Export List to file"),
+                  title: NcTitleText("Export list to file"),
                   trailing: TooltipIconButton(
                     onPressed: () {},
                     icon: FluentIcons.pop_expand,
@@ -225,11 +211,25 @@ class SettingsDialogState extends State<SettingsDialog> {
                   margin: expanderInfoBoxContainerMargin(),
                   borderColor: Colors.transparent,
                   shadow: false,
-                  title: NcTitleText("Import List from file"),
+                  title: NcTitleText("Import list from file"),
                   trailing: TooltipIconButton(
                     onPressed: () {},
                     icon: FluentIcons.pop_expand,
                     tooltip: "Import list",
+                  ),
+                ),
+                InfoBoxContainer(
+                  padding: expanderInfoBoxContainerPadding(),
+                  height: expanderInfoBoxContainerHeight(),
+                  backgroundColor: expanderInfoBoxContainerBackroundColor(),
+                  margin: expanderInfoBoxContainerMargin(),
+                  borderColor: Colors.transparent,
+                  shadow: false,
+                  title: NcTitleText("Import from older versions"),
+                  trailing: TooltipIconButton(
+                    onPressed: () {},
+                    icon: FluentIcons.pop_expand,
+                    tooltip: "Import lists",
                   ),
                 ),
               ],
