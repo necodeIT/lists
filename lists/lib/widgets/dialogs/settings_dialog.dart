@@ -37,6 +37,7 @@ class SettingsDialogState extends State<SettingsDialog> {
   @override
   Widget build(BuildContext context) {
     return ContentDialog(
+      constraints: const BoxConstraints(maxWidth: 700),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -175,6 +176,60 @@ class SettingsDialogState extends State<SettingsDialog> {
                         ),
                       ),
                     ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          NcSpacing.xs(),
+          Expander(
+            contentPadding: 0,
+            headerBackgroundColor: expanderHeaderBackground(),
+            contentBackgroundColor: expanderContentBackground(),
+            initiallyExpanded: false,
+            header: ExpanderHeader(icon: FluentIcons.mini_expand, text: "Legacy"),
+            content: Column(
+              children: [
+                InfoBoxContainer(
+                  padding: expanderInfoBoxContainerPadding(),
+                  height: expanderInfoBoxContainerHeight(),
+                  backgroundColor: expanderInfoBoxContainerBackroundColor(),
+                  margin: expanderInfoBoxContainerMargin(),
+                  borderColor: Colors.transparent,
+                  shadow: false,
+                  title: NcTitleText("Import Lists from older versions"),
+                  trailing: TooltipIconButton(
+                    onPressed: () {},
+                    icon: FluentIcons.pop_expand,
+                    tooltip: "Import lists",
+                  ),
+                ),
+                InfoBoxContainer(
+                  padding: expanderInfoBoxContainerPadding(),
+                  height: expanderInfoBoxContainerHeight(),
+                  backgroundColor: expanderInfoBoxContainerBackroundColor(),
+                  margin: expanderInfoBoxContainerMargin(),
+                  borderColor: Colors.transparent,
+                  shadow: false,
+                  title: NcTitleText("Export List to file"),
+                  trailing: TooltipIconButton(
+                    onPressed: () {},
+                    icon: FluentIcons.pop_expand,
+                    tooltip: "Export list",
+                  ),
+                ),
+                InfoBoxContainer(
+                  padding: expanderInfoBoxContainerPadding(),
+                  height: expanderInfoBoxContainerHeight(),
+                  backgroundColor: expanderInfoBoxContainerBackroundColor(),
+                  margin: expanderInfoBoxContainerMargin(),
+                  borderColor: Colors.transparent,
+                  shadow: false,
+                  title: NcTitleText("Import List from file"),
+                  trailing: TooltipIconButton(
+                    onPressed: () {},
+                    icon: FluentIcons.pop_expand,
+                    tooltip: "Import list",
                   ),
                 ),
               ],
