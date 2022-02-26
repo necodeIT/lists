@@ -6,16 +6,16 @@ import 'package:lists/routes/home/home.dart';
 import 'package:lists/routes/lists/lists.dart';
 
 deleteCollection(BuildContext context, Collection collection) {
-  // TODO: show confirmation dialog instead of password input
-  showPasswordDialog(context, collection, _deleteCollection);
+  showConfirmDialog(
+    context: context,
+    title: "Delete ${collection.name}",
+    message: "Are you sure you want to delete ${collection.name}?\nThis action cannot be undone.",
+    confirmText: "Delete",
+    onConfirm: () => _deleteCollection(context, collection),
+  );
 }
 
-_deleteCollection(BuildContext context, Collection collection, String password) async {
-  if (collection.isProtected && !await collection.checkPassword(password)) {
-    showAlertDialog(context, "Access denied", "Could not delete ${collection.name}: Wrong password!");
-    return;
-  }
-
+_deleteCollection(BuildContext context, Collection collection) async {
   await DB.deleteCollection(collection);
 
   Navigator.of(context).pop();

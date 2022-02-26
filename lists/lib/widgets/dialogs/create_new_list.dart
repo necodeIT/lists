@@ -183,7 +183,7 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
       actions: [
         FilledButton(
           child: NcTitleText(
-            'Create List',
+            'Create list',
             textAlign: TextAlign.center,
             buttonText: true,
           ),

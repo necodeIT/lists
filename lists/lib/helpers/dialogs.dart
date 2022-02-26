@@ -7,6 +7,7 @@ import 'package:lists/db/db.dart';
 import 'package:lists/routes/list/list.dart';
 import 'package:lists/routes/lists/lists.dart';
 import 'package:lists/widgets/dialogs/alert.dart';
+import 'package:lists/widgets/dialogs/confirm_dialog.dart';
 import 'package:lists/widgets/dialogs/create_new_list.dart';
 import 'package:lists/widgets/dialogs/new_entry.dart';
 import 'package:lists/widgets/dialogs/password_dialog.dart';
@@ -18,6 +19,20 @@ showCreateNewListDialog(BuildContext context) {
     context: context,
     builder: (context) => CreateNewListDialog(
       onCreate: (name, password, imgPath) => _createNewList(context, name, password, imgPath),
+    ),
+  );
+}
+
+showConfirmDialog({required BuildContext context, required String title, String? message, required Function onConfirm, Function? onCancel, String confirmText = "Confirm", String cancelText = "Cancel"}) {
+  showDialog(
+    context: context,
+    builder: (context) => ConfirmDialog(
+      title: title,
+      message: message,
+      onConfirm: onConfirm,
+      onCancel: onCancel,
+      confirmText: confirmText,
+      cancelText: cancelText,
     ),
   );
 }

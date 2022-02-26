@@ -9,7 +9,7 @@ class ContextMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlyoutContent(
-      padding: EdgeInsets.all(4),
+      padding: const EdgeInsets.all(4),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(4.0),
         side: BorderSide(
