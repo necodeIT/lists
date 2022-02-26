@@ -30,7 +30,7 @@ class _CollectionTileState extends State<CollectionTile> {
           children: [
             TooltipIconButton(
               tooltip: "Edit ${widget.collection.name}",
-              onPressed: () {},
+              onPressed: () => updateCollection(context, widget.collection),
               icon: FluentIcons.ic_fluent_edit_24_filled,
             ),
             TooltipIconButton(

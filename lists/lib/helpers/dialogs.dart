@@ -12,7 +12,6 @@ import 'package:lists/widgets/dialogs/create_new_list.dart';
 import 'package:lists/widgets/dialogs/new_entry.dart';
 import 'package:lists/widgets/dialogs/password_dialog.dart';
 import 'package:lists/widgets/dialogs/settings_dialog.dart';
-import 'package:nekolib_ui/core.dart';
 
 showCreateNewListDialog(BuildContext context) {
   showDialog(

@@ -18,6 +18,7 @@ class DB {
   static final List<Collection> _collections = [];
   static bool _cleanUp = false;
   static List<Collection> get collections => List.unmodifiable(_collections);
+  static List<String> get collectionNames => _collectionsMap.keys.toList();
 
   static Future<Directory> get appDir async {
     var dir = await getApplicationDocumentsDirectory();
@@ -36,17 +37,17 @@ class DB {
     var dir = await appDir;
     var name = sha256Hash(collection);
 
-    return File('${dir.path}/$name.$fileExtention');
+    return File('${dir.path}/$name$fileExtention');
   }
 
   static Future<File> get settingsFile async {
     var dir = await appDir;
-    return File('${dir.path}/$settingsFileName.$fileExtention');
+    return File('${dir.path}/$settingsFileName$fileExtention');
   }
 
   static Future<File> get collectionsFile async {
     var dir = await appDir;
-    return File('${dir.path}/$collectionsFileName.$fileExtention');
+    return File('${dir.path}/$collectionsFileName$fileExtention');
   }
 
   static Future<File> get cacheFile async {
@@ -117,6 +118,13 @@ class DB {
     save();
   }
 
+  static void cleanUp() {
+    if (_cleanUp) return;
+
+    _cleanUp = true;
+    save();
+  }
+
   static bool createNewCollection(String name, String password, Uint8List icon) {
     if (_collectionsMap.containsKey(name)) return false;
 
@@ -146,11 +154,9 @@ class DB {
     // Sometimes exceptions occur when deleting files
     // Dunno why, but it's not a big deal as we can clean up on next boot
     try {
-      if (await f.exists()) {
-        await f.delete();
-      }
+      if (await f.exists()) await f.delete();
     } catch (e) {
-      _cleanUp = true; // Flag for cleanup next boot
+      cleanUp();
     }
 
     _collections.remove(collection);

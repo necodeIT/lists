@@ -1,9 +1,14 @@
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/widgets.dart';
 import 'package:lists/db/collection.dart';
 import 'package:lists/db/db.dart';
 import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/routes/home/home.dart';
 import 'package:lists/routes/lists/lists.dart';
+import 'package:lists/widgets/dialogs/update_list.dart';
 
 deleteCollection(BuildContext context, Collection collection) {
   showConfirmDialog(
@@ -13,6 +18,52 @@ deleteCollection(BuildContext context, Collection collection) {
     confirmText: "Delete",
     onConfirm: () => _deleteCollection(context, collection),
   );
+}
+
+updateCollection(BuildContext context, Collection collection) {
+  if (!collection.isProtected) return _showUpdateDialog(context, "", collection);
+
+  showPasswordDialog(context, collection, (context, collection, password) => _showUpdateDialog(context, password, collection));
+}
+
+_showUpdateDialog(BuildContext context, String password, Collection collection) async {
+  if (!await collection.checkPassword(password)) {
+    showAlertDialog(context, "Access denied", "Wrong password!");
+    return;
+  }
+
+  if (collection.isProtected) Navigator.of(context).pop();
+
+  showDialog(
+    context: context,
+    builder: (context) => UpdateListDialog(
+      onUpdate: (name, newPassword, iconPath, changedIcon) => _updateCollection(context, password, collection, newPassword, name, iconPath, changedIcon),
+      collection: collection,
+      password: password,
+    ),
+  );
+}
+
+_updateCollection(BuildContext context, String password, Collection collection, String newPassword, String newName, String newIconPath, bool changedIcon) async {
+  Uint8List icon = collection.icon;
+
+  if (changedIcon) {
+    if (newIconPath.isEmpty) {
+      icon = Uint8List.fromList([]);
+    } else {
+      icon = File(newIconPath).readAsBytesSync();
+    }
+  }
+
+  await collection.update(
+    newName: newName,
+    icon: icon,
+    password: password,
+    newPassword: newPassword,
+  );
+
+  Navigator.of(context).pop();
+  Navigator.of(context).pushNamed(ListsRoute.routeName);
 }
 
 _deleteCollection(BuildContext context, Collection collection) async {

@@ -7,7 +7,7 @@ import 'package:lists/helpers/crypto.dart';
 class Collection {
   late final Map<String, String> _entries;
   late String _name;
-  late bool _password;
+  late bool _protected;
   late Uint8List _icon;
   int _length = 0;
   bool _loaded = false;
@@ -17,7 +17,7 @@ class Collection {
   Uint8List get icon => _icon;
 
   Collection(String name, bool password, Uint8List icon) {
-    _password = password;
+    _protected = password;
     _icon = icon;
     _name = name;
     _entries = {};
@@ -32,7 +32,7 @@ class Collection {
 
   Collection.fromJson(Map<String, dynamic> json) {
     _name = json['name'];
-    _password = json['password'];
+    _protected = json["protected"] ?? json['password'];
     _icon = Uint8List.fromList(json['icon']?.cast<int>() ?? []);
     _entries = {};
     _length = json['length'] ?? 0;
@@ -41,7 +41,7 @@ class Collection {
   Map<String, dynamic> toJson() {
     return {
       'name': name,
-      'password': _password,
+      'protected': _protected,
       'icon': _icon,
       'length': _length,
     };
@@ -80,7 +80,7 @@ class Collection {
     await crypt.encryptTextToFile(data, f.path);
   }
 
-  bool get isProtected => _password;
+  bool get isProtected => _protected;
   bool get hasIcon => _icon.isNotEmpty;
 
   Future<bool> checkPassword(String password) async {
@@ -97,31 +97,25 @@ class Collection {
     }
   }
 
-  Future<bool> changePassword(String oldPassword, String newPassword) async {
-    if (!await checkPassword(oldPassword)) return false;
-
-    _notifiyDB(newPassword);
-
-    return true;
-  }
-
-  Future<bool> changeName(String password, String newName) async {
+  Future<bool> update({required String password, Uint8List? icon, String? newPassword, String? newName}) async {
     if (!await checkPassword(password)) return false;
+    await load(password);
 
-    DB.getCollectionFile(this).then((f) {
-      if (f.existsSync()) f.deleteSync();
-    });
+    password = newPassword ?? password;
+    _protected = password.isNotEmpty;
 
-    _name = newName;
-    _notifiyDB(password);
+    var f = await DB.getCollectionFile(this);
 
-    return true;
-  }
+    _name = newName ?? _name;
 
-  Future<bool> changeImgPath(String password, Uint8List newImgPath) async {
-    if (!await checkPassword(password)) return false;
+    _icon = icon ?? _icon;
 
-    _icon = newImgPath;
+    try {
+      if (await f.exists()) await f.delete();
+    } catch (e) {
+      DB.cleanUp();
+    }
+
     _notifiyDB(password);
 
     return true;
