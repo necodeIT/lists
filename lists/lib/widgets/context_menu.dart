@@ -1,0 +1,24 @@
+import 'package:fluent_ui/fluent_ui.dart';
+import 'package:nekolib_ui/core.dart';
+
+class ContextMenu extends StatelessWidget {
+  const ContextMenu({Key? key, required this.child}) : super(key: key);
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return FlyoutContent(
+      padding: EdgeInsets.all(4),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(4.0),
+        side: BorderSide(
+          color: secondaryColor,
+          width: 1.5,
+        ),
+      ),
+      color: primaryColor,
+      child: child,
+    );
+  }
+}

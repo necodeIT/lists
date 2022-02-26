@@ -2,8 +2,8 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:context_menus/context_menus.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:lists/fluent_icons.dart';
 import 'package:lists/helpers/styles/styles.dart';
+import 'package:lists/widgets/context_menu.dart';
 import 'package:lists/widgets/tooltip_icon_button.dart';
 import 'package:lists/widgets/vertical_divider.dart';
 import 'package:nekolib_ui/core.dart';
@@ -43,7 +43,23 @@ class _EntryTileState extends State<EntryTile> {
       onTap: _copyToClipboard,
       // onSecondaryTapDown: _showContextMenu,
       child: ContextMenuRegion(
-        contextMenu: FlyoutContent(child: NcBodyText("Test")),
+        contextMenu: ContextMenu(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TooltipIconButton(
+                tooltip: "Edit ${widget.entry.key}",
+                onPressed: () {},
+                icon: FluentIcons.ic_fluent_edit_24_filled,
+              ),
+              TooltipIconButton(
+                tooltip: "Delete ${widget.entry.key}",
+                onPressed: () {},
+                icon: FluentIcons.ic_fluent_delete_24_filled,
+              ),
+            ],
+          ),
+        ),
         child: Container(
           height: 40,
           margin: EdgeInsets.only(bottom: 8),

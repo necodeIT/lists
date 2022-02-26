@@ -1,7 +1,6 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart' show Icons;
 import 'package:lists/db/settings.dart';
-import 'package:lists/fluent_icons.dart';
 import 'package:lists/helpers/styles/styles.dart';
 import 'package:lists/widgets/expander_header.dart';
 import 'package:lists/widgets/info_box_container.dart';

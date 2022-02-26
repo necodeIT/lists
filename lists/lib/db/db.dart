@@ -114,6 +114,7 @@ class DB {
     }
 
     _cleanUp = false;
+    save();
   }
 
   static bool createNewCollection(String name, String password, Uint8List icon) {

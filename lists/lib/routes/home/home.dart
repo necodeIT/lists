@@ -1,8 +1,4 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:flutter/material.dart';
-import 'package:lists/db/db.dart';
-import 'package:lists/fluent_icons.dart';
-import 'package:lists/helpers/styles/styles.dart';
 import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/routes/home/svg.dart';
 import 'package:lists/widgets/info_box_container.dart';

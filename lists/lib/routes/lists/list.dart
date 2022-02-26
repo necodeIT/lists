@@ -2,9 +2,10 @@ import 'package:context_menus/context_menus.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:lists/assets/assets.dart';
 import 'package:lists/db/collection.dart';
-import 'package:lists/fluent_icons.dart';
 import 'package:lists/helpers/collection.dart';
 import 'package:lists/helpers/dialogs.dart';
+import 'package:lists/helpers/styles/styles.dart';
+import 'package:lists/widgets/context_menu.dart';
 import 'package:lists/widgets/tooltip_icon_button.dart';
 import 'package:nekolib_ui/core.dart';
 
@@ -23,8 +24,7 @@ class _CollectionTileState extends State<CollectionTile> {
   @override
   Widget build(BuildContext context) {
     return ContextMenuRegion(
-      contextMenu: FlyoutContent(
-        padding: EdgeInsets.all(4),
+      contextMenu: ContextMenu(
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -87,18 +87,19 @@ class _CollectionTileState extends State<CollectionTile> {
               ),
               NcSpacing.large(),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  NcBodyText('${widget.collection.length} item${widget.collection.length != 1 ? "s" : ""}'),
+                  if (widget.collection.isProtected) NcSpacing.small(),
                   if (widget.collection.isProtected)
                     Tooltip(
                       message: 'This list is password protected',
                       child: Icon(
-                        FluentIcons.ic_fluent_key_24_filled,
+                        FluentIcons.ic_fluent_shield_24_regular,
                         color: textColor,
-                        size: 15,
+                        size: 18,
                       ),
                     ),
-                  if (widget.collection.isProtected) NcSpacing.small(),
-                  NcBodyText('${widget.collection.length} item${widget.collection.length != 1 ? "s" : ""}'),
                 ],
               ),
             ],

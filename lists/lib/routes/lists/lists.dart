@@ -1,6 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:lists/db/db.dart';
-import 'package:lists/fluent_icons.dart';
 import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/routes/lists/list.dart';
 import 'package:lists/widgets/searchbar.dart';

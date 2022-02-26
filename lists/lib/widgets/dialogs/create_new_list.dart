@@ -1,14 +1,11 @@
 import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:lists/fluent_icons.dart';
 import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/helpers/styles/styles.dart';
 import 'package:lists/widgets/tooltip_icon_button.dart';
 import 'package:mime/mime.dart';
 import 'package:nekolib_ui/core.dart';
-
-import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 
 class CreateNewListDialog extends StatefulWidget {
   const CreateNewListDialog({Key? key, required this.onCreate}) : super(key: key);
