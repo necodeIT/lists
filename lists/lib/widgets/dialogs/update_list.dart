@@ -126,7 +126,7 @@ class _UpdateListDialog extends State<UpdateListDialog> {
   @override
   Widget build(BuildContext context) {
     return ContentDialog(
-      title: NcTitleText('Create new list'),
+      title: NcTitleText('Edit ${widget.collection.name}'),
       content: Column(
         children: [
           if (!_changedIcon) NcSpacing.large(),

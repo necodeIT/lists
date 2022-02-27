@@ -25,7 +25,7 @@ class Collection {
 
   List<String> get keys => _entries.keys.toList();
   List<String> get values => _entries.keys.toList();
-  Iterable<MapEntry<String, String>> get entries => _entries.entries;
+  Map<String, String> get entries => _entries;
   int get length => _entries.isEmpty ? _length : _entries.length;
 
   operator [](String key) => _entries[key];
@@ -137,19 +137,24 @@ class Collection {
     return true;
   }
 
-  void removeEntry(String password, String key) {
-    if (!_entries.containsKey(key)) return;
+  Future<bool> removeEntry(String password, String key) async {
+    if (!await checkPassword(password)) return false;
+    if (!_entries.containsKey(key)) return false;
 
     _entries.remove(key);
     _length = _entries.length;
 
     _notifiyDB(password);
+
+    return true;
   }
 
   Future<bool> updateEntry(String password, String oldKey, String newKey, String newValue) async {
+    if (!await checkPassword(password)) return false;
+
     if (!_entries.containsKey(oldKey)) return false;
 
-    removeEntry(password, oldKey);
+    await removeEntry(password, oldKey);
 
     return addEntry(password, newKey, newValue);
   }

@@ -37,6 +37,7 @@ class SettingsDialogState extends State<SettingsDialog> {
   @override
   Widget build(BuildContext context) {
     return ContentDialog(
+      scrollContent: true,
       constraints: const BoxConstraints(maxWidth: 700),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -51,6 +52,7 @@ class SettingsDialogState extends State<SettingsDialog> {
         ],
       ),
       content: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Expander(
             contentPadding: 0,
@@ -131,12 +133,8 @@ class SettingsDialogState extends State<SettingsDialog> {
                     margin: expanderInfoBoxContainerMargin(),
                     shadow: false,
                     borderColor: warningColor.withOpacity(.3),
-                    title: GestureDetector(
-                      child: NcCaptionText("Adaptive accent is not implemented yet"),
-                      onTap: () => _setAdaptAccent(false),
-                    ),
+                    title: NcCaptionText("Adaptive accent is not implemented yet"),
                     icon: FluentIcons.ic_fluent_info_24_regular,
-                    // iconColor: warningColor,
                   ),
               ],
             ),
@@ -177,6 +175,16 @@ class SettingsDialogState extends State<SettingsDialog> {
                       ),
                     ],
                   ),
+                ),
+                InfoBoxContainer(
+                  padding: expanderInfoBoxContainerPadding(),
+                  height: expanderInfoBoxContainerHeight(),
+                  backgroundColor: warningColor.withOpacity(.3),
+                  margin: expanderInfoBoxContainerMargin(),
+                  shadow: false,
+                  borderColor: warningColor.withOpacity(.3),
+                  title: NcCaptionText("Sync is not implemented yet"),
+                  icon: FluentIcons.ic_fluent_info_24_regular,
                 ),
               ],
             ),
@@ -231,6 +239,16 @@ class SettingsDialogState extends State<SettingsDialog> {
                     icon: FluentIcons.ic_fluent_window_new_24_filled,
                     tooltip: "Import lists",
                   ),
+                ),
+                InfoBoxContainer(
+                  padding: expanderInfoBoxContainerPadding(),
+                  height: expanderInfoBoxContainerHeight(),
+                  backgroundColor: warningColor.withOpacity(.3),
+                  margin: expanderInfoBoxContainerMargin(),
+                  shadow: false,
+                  borderColor: warningColor.withOpacity(.3),
+                  title: NcCaptionText("Legacy support is not implemented yet"),
+                  icon: FluentIcons.ic_fluent_info_24_regular,
                 ),
               ],
             ),

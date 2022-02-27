@@ -19,7 +19,7 @@ class ListRoute extends StatefulWidget {
 class _CollectionRouteState extends State<ListRoute> {
   String _query = '';
   late Collection _collection;
-  late String password;
+  late String _password;
 
   _updateQuery(String value) {
     setState(() {
@@ -42,7 +42,7 @@ class _CollectionRouteState extends State<ListRoute> {
   Widget build(BuildContext context) {
     final routeArgs = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
     _collection = routeArgs["collection"] as Collection;
-    password = routeArgs["password"] as String;
+    _password = routeArgs["password"] as String;
 
     return Container(
       color: secondaryColor,
@@ -71,7 +71,7 @@ class _CollectionRouteState extends State<ListRoute> {
                 TooltipIconButton(
                   tooltip: "Add new entry",
                   icon: FluentIcons.ic_fluent_add_24_filled,
-                  onPressed: () => showCreateNewEntryDialog(context, password, _collection),
+                  onPressed: () => showCreateNewEntryDialog(context, _password, _collection),
                 ),
                 TooltipIconButton(
                   tooltip: "Open settigns",
@@ -86,7 +86,7 @@ class _CollectionRouteState extends State<ListRoute> {
             child: Padding(
               padding: EdgeInsets.all(NcSpacing.smallSpacing),
               child: FutureBuilder(
-                future: _collection.load(password),
+                future: _collection.load(_password),
                 builder: (context, snapshot) => snapshot.connectionState == ConnectionState.waiting
                     ? Center(
                         child: ProgressRing(
@@ -96,8 +96,8 @@ class _CollectionRouteState extends State<ListRoute> {
                     : ListView(
                         controller: ScrollController(),
                         children: [
-                          for (var entry in _collection.entries)
-                            if (entry.key.contains(_query)) EntryTile(entry: entry)
+                          for (var entry in _collection.entries.keys.toList())
+                            if (entry.contains(_query)) EntryTile(entry: entry, collection: _collection, password: _password)
                         ],
                       ),
               ),

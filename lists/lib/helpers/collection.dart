@@ -7,7 +7,9 @@ import 'package:lists/db/collection.dart';
 import 'package:lists/db/db.dart';
 import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/routes/home/home.dart';
+import 'package:lists/routes/list/list.dart';
 import 'package:lists/routes/lists/lists.dart';
+import 'package:lists/widgets/dialogs/update_entry.dart';
 import 'package:lists/widgets/dialogs/update_list.dart';
 
 deleteCollection(BuildContext context, Collection collection) {
@@ -18,6 +20,47 @@ deleteCollection(BuildContext context, Collection collection) {
     confirmText: "Delete",
     onConfirm: () => _deleteCollection(context, collection),
   );
+}
+
+removeEntry(BuildContext context, String password, Collection collection, String key) {
+  showConfirmDialog(
+    context: context,
+    title: "Delete $key",
+    message: "Are you sure you want to delete $key?\nThis action cannot be undone.",
+    confirmText: "Delete",
+    onConfirm: () => _removeEntry(context, password, collection, key),
+  );
+}
+
+_removeEntry(BuildContext context, String password, Collection collection, String key) async {
+  await collection.removeEntry(password, key);
+
+  Navigator.pop(context);
+  Navigator.of(context).pushNamed(ListRoute.routeName, arguments: {
+    "collection": collection,
+    "password": password,
+  });
+}
+
+editEntry(BuildContext context, String password, Collection collection, String key) {
+  showDialog(
+    context: context,
+    builder: (context) => UpdateEntryDialog(
+      collection: collection,
+      entry: key,
+      onUpdate: (newKey, newValue) => _updateEntry(context, password, collection, key, newKey, newValue),
+    ),
+  );
+}
+
+_updateEntry(BuildContext context, String password, Collection collection, String oldKey, String newKey, String value) async {
+  await collection.updateEntry(password, oldKey, newKey, value);
+
+  Navigator.pop(context);
+  Navigator.of(context).pushNamed(ListRoute.routeName, arguments: {
+    "collection": collection,
+    "password": password,
+  });
 }
 
 updateCollection(BuildContext context, Collection collection) {
