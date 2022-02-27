@@ -37,6 +37,7 @@ class _CreateNewEntryDialogState extends State<CreateNewEntryDialog> {
     return ContentDialog(
       title: NcTitleText("Add new entry to ${widget.collection.name}"),
       content: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           TextBox(
             autofocus: true,

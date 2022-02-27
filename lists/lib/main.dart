@@ -9,6 +9,7 @@ import 'package:lists/helpers/styles/styles.dart';
 import 'package:lists/routes/home/home.dart';
 import 'package:lists/routes/list/list.dart';
 import 'package:lists/routes/lists/lists.dart';
+import 'package:lists/routes/upgrade/upgrade.dart';
 import 'package:nekolib_ui/core.dart';
 import 'package:system_theme/system_theme.dart';
 
@@ -28,6 +29,7 @@ void main() async {
 }
 
 Future loadAll() async {
+  await Updater.update();
   await DB.load();
 
   // await Future.delayed(Duration(seconds: 2));
@@ -42,11 +44,16 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: theme(),
       title: 'Lists',
-      initialRoute: DB.collections.isNotEmpty ? ListsRoute.routeName : HomeRoute.routeName,
+      initialRoute: Updater.updateAvailable
+          ? UpgradeRoute.routeName
+          : DB.collections.isNotEmpty
+              ? ListsRoute.routeName
+              : HomeRoute.routeName,
       routes: {
         HomeRoute.routeName: (context) => ContextMenuOverlay(child: HomeRoute()),
         ListsRoute.routeName: (context) => ContextMenuOverlay(child: ListsRoute()),
         ListRoute.routeName: (context) => ContextMenuOverlay(child: ListRoute()),
+        UpgradeRoute.routeName: (context) => ContextMenuOverlay(child: UpgradeRoute()),
       },
     );
   }

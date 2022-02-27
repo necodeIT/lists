@@ -58,6 +58,7 @@ class _UpdateEntryDialog extends State<UpdateEntryDialog> {
     return ContentDialog(
       title: NcTitleText('Edit ${widget.entry}'),
       content: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           TextBox(
             placeholder: 'Enter key',

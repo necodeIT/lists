@@ -116,69 +116,75 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
   @override
   Widget build(BuildContext context) {
     return ContentDialog(
+      scrollContent: true,
       title: NcTitleText('Create new list'),
-      content: Column(
-        children: [
-          TextBox(
-            placeholder: 'Enter list name',
-            autofocus: true,
-            style: textBoxTextStyle(),
-            placeholderStyle: textBoxPlaceholderStyle(),
-            onChanged: _updateName,
-          ),
-          NcSpacing.large(),
-          TextBox(
-            placeholder: 'Icon (optional)',
-            controller: _imagePathController,
-            style: textBoxTextStyle(),
-            placeholderStyle: textBoxPlaceholderStyle(),
-            suffix: TooltipIconButton(
-              tooltip: "Browse",
-              icon: FluentIcons.ic_fluent_folder_open_24_filled,
-              color: adaptiveAccentColor,
-              onPressed: _borwseImage,
-            ),
-          ),
-          if (_enablePassword) NcSpacing.large(),
-          if (_enablePassword)
+      content: AnimatedSize(
+        curve: FluentTheme.of(context).animationCurve,
+        duration: FluentTheme.of(context).fastAnimationDuration,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
             TextBox(
-              placeholder: 'Enter password',
-              obscureText: !_showPassword,
-              onChanged: _updatePassword,
+              placeholder: 'Enter list name',
+              autofocus: true,
+              style: textBoxTextStyle(),
+              placeholderStyle: textBoxPlaceholderStyle(),
+              onChanged: _updateName,
+            ),
+            NcSpacing.large(),
+            TextBox(
+              placeholder: 'Icon (optional)',
+              controller: _imagePathController,
               style: textBoxTextStyle(),
               placeholderStyle: textBoxPlaceholderStyle(),
               suffix: TooltipIconButton(
-                tooltip: _showPassword ? "Hide password" : "Show password",
-                icon: _showPassword ? FluentIcons.ic_fluent_eye_hide_24_filled : FluentIcons.ic_fluent_eye_show_24_filled,
+                tooltip: "Browse",
+                icon: FluentIcons.ic_fluent_folder_open_24_filled,
                 color: adaptiveAccentColor,
-                onPressed: _toggleShowPassword,
+                onPressed: _borwseImage,
               ),
             ),
-          if (_enablePassword) NcSpacing.large(),
-          if (_enablePassword)
-            TextBox(
-              placeholder: 'Repeat password',
-              obscureText: !_showRepeatPassword,
-              style: textBoxTextStyle(),
-              placeholderStyle: textBoxPlaceholderStyle(),
-              onChanged: _updateRepeatPassword,
-              suffix: TooltipIconButton(
-                tooltip: _showRepeatPassword ? "Hide password" : "Show password",
-                icon: _showRepeatPassword ? FluentIcons.ic_fluent_eye_hide_24_filled : FluentIcons.ic_fluent_eye_show_24_filled,
-                color: adaptiveAccentColor,
-                onPressed: _toggleShowRepeatPassword,
+            if (_enablePassword) NcSpacing.large(),
+            if (_enablePassword)
+              TextBox(
+                placeholder: 'Enter password',
+                obscureText: !_showPassword,
+                onChanged: _updatePassword,
+                style: textBoxTextStyle(),
+                placeholderStyle: textBoxPlaceholderStyle(),
+                suffix: TooltipIconButton(
+                  tooltip: _showPassword ? "Hide password" : "Show password",
+                  icon: _showPassword ? FluentIcons.ic_fluent_eye_hide_24_filled : FluentIcons.ic_fluent_eye_show_24_filled,
+                  color: adaptiveAccentColor,
+                  onPressed: _toggleShowPassword,
+                ),
+              ),
+            if (_enablePassword) NcSpacing.large(),
+            if (_enablePassword)
+              TextBox(
+                placeholder: 'Repeat password',
+                obscureText: !_showRepeatPassword,
+                style: textBoxTextStyle(),
+                placeholderStyle: textBoxPlaceholderStyle(),
+                onChanged: _updateRepeatPassword,
+                suffix: TooltipIconButton(
+                  tooltip: _showRepeatPassword ? "Hide password" : "Show password",
+                  icon: _showRepeatPassword ? FluentIcons.ic_fluent_eye_hide_24_filled : FluentIcons.ic_fluent_eye_show_24_filled,
+                  color: adaptiveAccentColor,
+                  onPressed: _toggleShowRepeatPassword,
+                ),
+              ),
+            NcSpacing.large(),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Checkbox(
+                checked: _enablePassword,
+                content: NcCaptionText("Password"),
+                onChanged: _updateEnablePassword,
               ),
             ),
-          NcSpacing.large(),
-          Align(
-            alignment: Alignment.centerRight,
-            child: Checkbox(
-              checked: _enablePassword,
-              content: NcCaptionText("Password"),
-              onChanged: _updateEnablePassword,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
       actions: [
         FilledButton(

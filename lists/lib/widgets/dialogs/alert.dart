@@ -11,8 +11,12 @@ class AlertDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ContentDialog(
+      scrollContent: true,
       title: NcTitleText(title),
-      content: NcCaptionText(message),
+      content: NcCaptionText(
+        message,
+        overflow: TextOverflow.visible,
+      ),
       actions: [
         FilledButton(
           style: filledButtonStyle(),

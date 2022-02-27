@@ -1,4 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:lists/db/updater.dart';
 import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/routes/home/svg.dart';
 import 'package:lists/widgets/info_box_container.dart';
