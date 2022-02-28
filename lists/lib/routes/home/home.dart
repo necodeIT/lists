@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:lists/db/updater.dart';
 import 'package:lists/helpers/dialogs.dart';
+import 'package:lists/routes/home/card.dart';
 import 'package:lists/routes/home/svg.dart';
 import 'package:lists/widgets/info_box_container.dart';
 import 'package:nekolib_ui/core.dart';
@@ -35,46 +36,18 @@ class _HomeRouteState extends State<HomeRoute> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              GestureDetector(
+              HomeCard(
                 onTap: () => showCreateNewListDialog(context),
-                child: Container(
-                  width: 250,
-                  height: 300,
-                  decoration: InfoBoxContainer.decoration(),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(FluentIcons.ic_fluent_add_circle_24_filled, size: 60),
-                      NcSpacing.medium(),
-                      NcBodyText(
-                        "Create your first list",
-                        fontSize: 20,
-                      ),
-                    ],
-                  ),
-                ),
+                title: "Create your first list",
+                icon: FluentIcons.ic_fluent_add_circle_24_filled,
               ),
               NcSpacing.xl(),
               NcCaptionText("or", fontSize: 20),
               NcSpacing.xl(),
-              GestureDetector(
+              HomeCard(
                 onTap: () => showCreateNewListDialog(context),
-                child: Container(
-                  width: 250,
-                  height: 300,
-                  decoration: InfoBoxContainer.decoration(),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(FluentIcons.ic_fluent_arrow_sync_circle_24_filled, size: 60),
-                      NcSpacing.medium(),
-                      NcBodyText(
-                        "Login and sync lists",
-                        fontSize: 20,
-                      ),
-                    ],
-                  ),
-                ),
+                title: "Login and sync lists",
+                icon: FluentIcons.ic_fluent_arrow_sync_circle_24_filled,
               ),
             ],
           ),

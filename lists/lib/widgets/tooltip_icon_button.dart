@@ -12,15 +12,18 @@ class TooltipIconButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Tooltip(
-      message: tooltip,
-      child: IconButton(
-        icon: Icon(
-          icon,
-          color: color ?? textColor,
-          size: size,
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: Tooltip(
+        message: tooltip,
+        child: IconButton(
+          icon: Icon(
+            icon,
+            color: color ?? textColor,
+            size: size,
+          ),
+          onPressed: onPressed,
         ),
-        onPressed: onPressed,
       ),
     );
   }
