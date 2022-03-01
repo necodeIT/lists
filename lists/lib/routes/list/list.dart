@@ -1,6 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:lists/db/collection.dart';
 import 'package:lists/helpers/dialogs.dart';
+import 'package:lists/helpers/string.dart';
 import 'package:lists/routes/list/entry_tile.dart';
 import 'package:lists/routes/lists/lists.dart';
 import 'package:lists/widgets/searchbar.dart';
@@ -97,7 +98,7 @@ class _CollectionRouteState extends State<ListRoute> {
                         controller: ScrollController(),
                         children: [
                           for (var entry in _collection.entries.keys.toList())
-                            if (entry.contains(_query)) EntryTile(entry: entry, collection: _collection, password: _password)
+                            if (entry.containsIgnoreCase(_query)) EntryTile(entry: entry, collection: _collection, password: _password)
                         ],
                       ),
               ),

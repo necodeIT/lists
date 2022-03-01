@@ -41,6 +41,7 @@ dependencies:
   fluent_ui:
     git:
       url: https://github.com/necodeIT/fluent_ui.git
+      ref: master
   flutter:
     sdk: flutter
   http: ^0.13.4

@@ -6,6 +6,7 @@ import 'package:lists/routes/lists/list.dart';
 import 'package:lists/widgets/searchbar.dart';
 import 'package:lists/widgets/tooltip_icon_button.dart';
 import 'package:nekolib_ui/core.dart';
+import 'package:lists/helpers/string.dart';
 
 class ListsRoute extends StatefulWidget {
   const ListsRoute({Key? key}) : super(key: key);
@@ -69,7 +70,7 @@ class _ListsRouteState extends State<ListsRoute> {
                   runSpacing: NcSpacing.smallSpacing,
                   children: [
                     for (var list in DB.collections)
-                      if (list.name.contains(_query)) CollectionTile(collection: list),
+                      if (list.name.containsIgnoreCase(_query)) CollectionTile(collection: list),
                   ],
                 ),
               ),
