@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:aes_crypt/aes_crypt.dart';
 import 'package:lists/db/db.dart';
-import 'package:lists/helpers/crypto.dart';
+import 'package:lists/helpers/string.dart';
 
 class Collection {
   late final Map<String, String> _entries;
@@ -51,7 +51,7 @@ class Collection {
     if (_loaded) return;
     if (!await checkPassword(password)) return;
 
-    password = sha256Hash(password);
+    password = password.sha256();
     var f = await DB.getCollectionFile(this);
 
     var crypt = AesCrypt(password);
@@ -70,7 +70,7 @@ class Collection {
   }
 
   Future save(String password) async {
-    password = sha256Hash(password);
+    password = password.sha256();
     var crypt = AesCrypt(password);
     crypt.setOverwriteMode(AesCryptOwMode.on);
 
@@ -87,7 +87,7 @@ class Collection {
     var f = await DB.getCollectionFile(this);
 
     try {
-      var aes = AesCrypt(sha256Hash(password));
+      var aes = AesCrypt(password.sha256());
 
       await aes.decryptDataFromFile(f.path);
 
@@ -116,14 +116,14 @@ class Collection {
       DB.cleanUp();
     }
 
-    _notifiyDB(password);
+    await _notifiyDB(password);
 
     return true;
   }
 
-  void _notifiyDB(String password) {
-    save(password);
-    DB.update();
+  Future<void> _notifiyDB(String password) async {
+    await save(password);
+    await DB.update();
   }
 
   Future<bool> addEntry(String password, String key, String value) async {
@@ -132,7 +132,7 @@ class Collection {
     _entries[key] = value;
     _length = _entries.length;
 
-    _notifiyDB(password);
+    await _notifiyDB(password);
 
     return true;
   }
@@ -144,7 +144,7 @@ class Collection {
     _entries.remove(key);
     _length = _entries.length;
 
-    _notifiyDB(password);
+    await _notifiyDB(password);
 
     return true;
   }

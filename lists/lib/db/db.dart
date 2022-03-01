@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:lists/db/collection.dart';
 import 'package:lists/db/updater.dart';
-import 'package:lists/helpers/crypto.dart';
+import 'package:lists/helpers/string.dart';
 import 'package:path_provider/path_provider.dart';
 
 class DB {
@@ -35,7 +34,7 @@ class DB {
 
   static Future<File> _getCollectionFile(String collection) async {
     var dir = await appDir;
-    var name = sha256Hash(collection);
+    var name = collection.sha256();
 
     return File('${dir.path}/$name$fileExtention');
   }
@@ -99,7 +98,7 @@ class DB {
 
     if (!_cleanUp) return;
 
-    var keys = _collectionsMap.keys.map((e) => sha256Hash(e)).toList();
+    var keys = _collectionsMap.keys.map((e) => e.sha256()).toList();
 
     var dir = await appDir;
     var files = await dir.list().toList();
@@ -138,14 +137,14 @@ class DB {
     return true;
   }
 
-  static void update({bool silent = false}) {
+  static Future<void> update({bool silent = false}) async {
     _collectionsMap.clear();
 
     for (var collection in _collections) {
       _collectionsMap[collection.name] = collection;
     }
 
-    if (!silent) save();
+    if (!silent) await save();
   }
 
   static Future<void> deleteCollection(Collection collection) async {
