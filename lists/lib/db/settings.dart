@@ -27,9 +27,9 @@ class Settings {
 
     _adaptAccent = value;
 
-    // TODO: NcThemes.setTheme(NcThemes.current, force: true);
+    NcThemes.setTheme(NcThemes.current, force: true);
 
-    // TODO: save();
+    save();
   }
 
   static void setTheme(String theme) {

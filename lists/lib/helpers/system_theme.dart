@@ -15,10 +15,10 @@ class SystemThemeObserver {
     if (!Settings.useSystemTheme) return;
     var darkMode = await SystemTheme.darkMode;
 
-    // TODO: if (Settings.adaptAccent) await SystemTheme.accentInstance.load();
+    if (Settings.adaptAccent) await SystemTheme.accentInstance.load();
 
-    // TODO: var accent = SystemTheme.accentInstance.accent.toAccentColor();
-    var accent = _accentColor;
+    var accent = SystemTheme.accentInstance.accent.toAccentColor();
+
     if (force || (darkMode != _lastValue || accent != _accentColor && Settings.adaptAccent)) {
       _lastValue = darkMode;
 

@@ -45,9 +45,8 @@ class _UpgradeRouteState extends State<UpgradeRoute> {
         _done = true;
       });
 
-      TODO:
       await Process.start(value, []);
-      TODO:
+
       exit(0);
     });
   }

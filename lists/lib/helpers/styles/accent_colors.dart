@@ -1,7 +1,7 @@
 part of list_styles;
 
-// TODO: AccentColor get adaptiveAccentColor => Settings.adaptAccent ? SystemThemeObserver.accentColor : _accentColors.value;
-AccentColor get adaptiveAccentColor => _accentColors.value;
+AccentColor get adaptiveAccentColor => Settings.adaptAccent ? SystemThemeObserver.accentColor : _accentColors.value;
+// AccentColor get adaptiveAccentColor => _accentColors.value;
 
 ThemeableProperty _accentColors = ThemeableProperty<AccentColor>(
   {
