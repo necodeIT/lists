@@ -11,18 +11,33 @@ class SystemThemeObserver {
 
   static AccentColor get accentColor => _accentColor;
 
+  static bool _error = false;
+
+  static bool get error => _error && Settings.adaptAccent;
+
   static Future adaptSystemTheme({bool force = false}) async {
     if (!Settings.useSystemTheme) return;
     var darkMode = await SystemTheme.darkMode;
 
-    if (Settings.adaptAccent) await SystemTheme.accentInstance.load();
+    var accent = Colors.blue;
+    var error = false;
 
-    var accent = SystemTheme.accentInstance.accent.toAccentColor();
+    if (Settings.adaptAccent) {
+      try {
+        await SystemTheme.accentInstance.load();
 
-    if (force || (darkMode != _lastValue || accent != _accentColor && Settings.adaptAccent)) {
+        SystemTheme.accentInstance.accent.toAccentColor();
+      } on Exception {
+        error = true;
+      }
+    }
+
+    if (force || (darkMode != _lastValue || accent != _accentColor && Settings.adaptAccent) || SystemThemeObserver.error != error) {
       _lastValue = darkMode;
 
       _accentColor = accent;
+
+      _error = error;
 
       NcThemes.setTheme(darkMode ? darkTheme : lightTheme, force: true);
     }

@@ -6,6 +6,7 @@ import 'package:lists/db/settings.dart';
 import 'package:lists/db/updater.dart';
 import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/helpers/styles/styles.dart';
+import 'package:lists/helpers/system_theme.dart';
 import 'package:lists/routes/upgrade/upgrade.dart';
 import 'package:lists/widgets/expander_header.dart';
 import 'package:lists/widgets/info_box_container.dart';

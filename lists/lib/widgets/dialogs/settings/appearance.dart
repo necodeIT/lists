@@ -87,7 +87,7 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
             icon: Settings.useSystemTheme ? null : FluentIcons.ic_fluent_error_circle_24_regular,
             iconToolTip: "Adaptive accent is only available when using system theme",
             title: GestureDetector(
-              child: NcTitleText("Adaptive accent"),
+              child: NcTitleText("Adaptive accent (unstable)"),
               onTap: Settings.useSystemTheme ? () => _setAdaptAccent(!Settings.adaptAccent) : null,
             ),
             trailing: Checkbox(
@@ -95,16 +95,16 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
               onChanged: Settings.useSystemTheme ? _setAdaptAccent : null,
             ),
           ),
-          if (Settings.adaptAccent)
+          if (SystemThemeObserver.error)
             InfoBoxContainer(
               padding: expanderInfoBoxContainerPadding(),
               height: expanderInfoBoxContainerHeight(),
-              backgroundColor: warningColor.withOpacity(.3),
+              backgroundColor: errorColor.withOpacity(.3),
               margin: expanderInfoBoxContainerMargin(),
               shadow: false,
-              borderColor: warningColor.withOpacity(.3),
-              title: NcCaptionText("Adaptive accent is not implemented yet"),
-              icon: FluentIcons.ic_fluent_info_24_regular,
+              borderColor: errorColor.withOpacity(.3),
+              title: NcCaptionText("Error reading system accent color! Using default."),
+              icon: FluentIcons.ic_fluent_error_circle_24_regular,
             ),
         ],
       ),
