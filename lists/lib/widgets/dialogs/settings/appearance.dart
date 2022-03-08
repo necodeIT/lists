@@ -32,13 +32,7 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
       header: ExpanderHeader(icon: FluentIcons.ic_fluent_color_24_regular, text: "Appearance"),
       content: Column(
         children: [
-          InfoBoxContainer(
-            padding: expanderInfoBoxContainerPadding(),
-            margin: expanderInfoBoxContainerMargin(),
-            height: expanderInfoBoxContainerHeight(),
-            backgroundColor: expanderInfoBoxContainerBackroundColor(),
-            shadow: false,
-            borderColor: Colors.transparent,
+          SettingsContainer(
             title: NcTitleText("Select theme"),
             trailing: FluentTheme(
               data: ThemeData(
@@ -77,15 +71,9 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
               ),
             ),
           ),
-          InfoBoxContainer(
-            padding: expanderInfoBoxContainerPadding(),
-            height: expanderInfoBoxContainerHeight(),
-            backgroundColor: expanderInfoBoxContainerBackroundColor(),
-            margin: expanderInfoBoxContainerMargin(),
-            shadow: false,
-            borderColor: Colors.transparent,
+          SettingsContainer(
             icon: Settings.useSystemTheme ? null : FluentIcons.ic_fluent_error_circle_24_regular,
-            iconToolTip: "Adaptive accent is only available when using system theme",
+            iconTooltip: "Adaptive accent is only available when using system theme",
             title: GestureDetector(
               child: NcTitleText("Adaptive accent (unstable)"),
               onTap: Settings.useSystemTheme ? () => _setAdaptAccent(!Settings.adaptAccent) : null,
@@ -96,13 +84,8 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
             ),
           ),
           if (SystemThemeObserver.error)
-            InfoBoxContainer(
-              padding: expanderInfoBoxContainerPadding(),
-              height: expanderInfoBoxContainerHeight(),
-              backgroundColor: errorColor.withOpacity(.3),
-              margin: expanderInfoBoxContainerMargin(),
-              shadow: false,
-              borderColor: errorColor.withOpacity(.3),
+            SettingsContainer(
+              color: errorColor.withOpacity(.3),
               title: NcCaptionText("Error reading system accent color! Using default."),
               icon: FluentIcons.ic_fluent_error_circle_24_regular,
             ),

@@ -15,19 +15,25 @@ class SystemThemeObserver {
 
   static bool get error => _error && Settings.adaptAccent;
 
+  static DateTime _lastError = DateTime.now().subtract(Duration(seconds: 1));
+  static Duration _errorCooldown = Duration(seconds: 1);
+
   static Future adaptSystemTheme({bool force = false}) async {
     if (!Settings.useSystemTheme) return;
     var darkMode = await SystemTheme.darkMode;
 
     var accent = Colors.blue;
-    var error = false;
 
-    if (Settings.adaptAccent) {
+    var error = _lastError.add(_errorCooldown).isAfter(DateTime.now());
+    if (Settings.adaptAccent && !error) {
       try {
         await SystemTheme.accentInstance.load();
 
         SystemTheme.accentInstance.accent.toAccentColor();
       } on Exception {
+        _lastError = DateTime.now();
+        _errorCooldown = Duration(seconds: _errorCooldown.inSeconds * 2);
+
         error = true;
       }
     }

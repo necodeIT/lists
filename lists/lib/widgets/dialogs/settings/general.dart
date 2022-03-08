@@ -30,25 +30,13 @@ class _GeneralOptionsState extends State<GeneralOptions> {
       header: ExpanderHeader(icon: FluentIcons.ic_fluent_settings_24_regular, text: "General"),
       content: Column(
         children: [
-          InfoBoxContainer(
-            padding: expanderInfoBoxContainerPadding(),
-            margin: expanderInfoBoxContainerMargin(),
-            height: expanderInfoBoxContainerHeight(),
-            backgroundColor: expanderInfoBoxContainerBackroundColor(),
+          SettingsContainer(
             icon: FluentIcons.ic_fluent_number_symbol_24_filled,
-            shadow: false,
-            borderColor: Colors.transparent,
             title: NcTitleText("Version"),
             trailing: NcBodyText(Updater.versionName),
           ),
-          InfoBoxContainer(
-            padding: expanderInfoBoxContainerPadding(),
-            margin: expanderInfoBoxContainerMargin(),
-            height: expanderInfoBoxContainerHeight(),
-            backgroundColor: expanderInfoBoxContainerBackroundColor(),
-            shadow: false,
+          SettingsContainer(
             icon: FluentIcons.ic_fluent_arrow_clockwise_dashes_24_filled,
-            borderColor: Colors.transparent,
             title: NcTitleText("Check for updates"),
             trailing: TooltipIconButton(
               icon: FluentIcons.ic_fluent_arrow_clockwise_24_filled,
@@ -62,13 +50,7 @@ class _GeneralOptionsState extends State<GeneralOptions> {
               builder: (context, snapshot) {
                 var error = Updater.getErrorMessage();
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return InfoBoxContainer(
-                    padding: expanderInfoBoxContainerPadding(),
-                    margin: expanderInfoBoxContainerMargin(),
-                    height: expanderInfoBoxContainerHeight(),
-                    backgroundColor: expanderInfoBoxContainerBackroundColor(),
-                    shadow: false,
-                    borderColor: Colors.transparent,
+                  return SettingsContainer(
                     title: NcTitleText("Checking for updates..."),
                     trailing: SizedBox(
                       width: 15,
@@ -80,24 +62,14 @@ class _GeneralOptionsState extends State<GeneralOptions> {
                   );
                 } else if (error.isEmpty) {
                   return !Updater.updateAvailable
-                      ? InfoBoxContainer(
-                          padding: expanderInfoBoxContainerPadding(),
-                          margin: expanderInfoBoxContainerMargin(),
-                          height: expanderInfoBoxContainerHeight(),
-                          backgroundColor: successColor.withOpacity(.3),
-                          shadow: false,
+                      ? SettingsContainer(
                           icon: FluentIcons.ic_fluent_checkmark_24_filled,
-                          borderColor: successColor.withOpacity(.3),
+                          color: successColor.withOpacity(.3),
                           title: NcTitleText("You are on the latest version!"),
                         )
-                      : InfoBoxContainer(
-                          padding: expanderInfoBoxContainerPadding(),
-                          margin: expanderInfoBoxContainerMargin(),
-                          height: expanderInfoBoxContainerHeight(),
-                          backgroundColor: warningColor.withOpacity(.3),
-                          shadow: false,
+                      : SettingsContainer(
                           icon: FluentIcons.ic_fluent_info_24_regular,
-                          borderColor: warningColor.withOpacity(.3),
+                          color: warningColor.withOpacity(.3),
                           title: NcTitleText("Update available"),
                           trailing: TooltipIconButton(
                             tooltip: "Update",
@@ -106,14 +78,9 @@ class _GeneralOptionsState extends State<GeneralOptions> {
                           ),
                         );
                 } else {
-                  return InfoBoxContainer(
-                    padding: expanderInfoBoxContainerPadding(),
-                    margin: expanderInfoBoxContainerMargin(),
-                    height: expanderInfoBoxContainerHeight(),
-                    backgroundColor: errorColor.withOpacity(.3),
-                    shadow: false,
+                  return SettingsContainer(
                     icon: FluentIcons.ic_fluent_error_circle_24_regular,
-                    borderColor: errorColor.withOpacity(.3),
+                    color: errorColor.withOpacity(.3),
                     title: NcTitleText("Error checking for updates"),
                     trailing: TooltipIconButton(
                       icon: FluentIcons.ic_fluent_more_horizontal_24_filled,

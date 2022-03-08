@@ -27,10 +27,10 @@ class _SyncOptionsState extends State<SyncOptions> {
       content: Column(
         children: [
           InfoBoxContainer(
-            padding: expanderInfoBoxContainerPadding(),
-            height: expanderInfoBoxContainerHeight(),
-            backgroundColor: expanderInfoBoxContainerBackroundColor(),
-            margin: expanderInfoBoxContainerMargin(),
+            padding: settingsContainerPadding(),
+            height: settingsContainerHeight(),
+            backgroundColor: settingsContainerBackroundColor(),
+            margin: settingsContainerMargin(),
             borderColor: Colors.transparent,
             shadow: false,
             icon: FluentIcons.ic_fluent_info_24_regular,
@@ -55,10 +55,10 @@ class _SyncOptionsState extends State<SyncOptions> {
             ),
           ),
           InfoBoxContainer(
-            padding: expanderInfoBoxContainerPadding(),
-            height: expanderInfoBoxContainerHeight(),
+            padding: settingsContainerPadding(),
+            height: settingsContainerHeight(),
             backgroundColor: warningColor.withOpacity(.3),
-            margin: expanderInfoBoxContainerMargin(),
+            margin: settingsContainerMargin(),
             shadow: false,
             borderColor: warningColor.withOpacity(.3),
             title: NcCaptionText("Sync is not implemented yet"),

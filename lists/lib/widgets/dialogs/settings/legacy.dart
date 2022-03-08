@@ -15,13 +15,7 @@ class LegacyOptions extends StatelessWidget {
       header: ExpanderHeader(icon: FluentIcons.ic_fluent_apps_add_in_24_filled, text: "Legacy"),
       content: Column(
         children: [
-          InfoBoxContainer(
-            padding: expanderInfoBoxContainerPadding(),
-            height: expanderInfoBoxContainerHeight(),
-            backgroundColor: expanderInfoBoxContainerBackroundColor(),
-            margin: expanderInfoBoxContainerMargin(),
-            borderColor: Colors.transparent,
-            shadow: false,
+          SettingsContainer(
             title: NcTitleText("Export list to file"),
             trailing: TooltipIconButton(
               onPressed: () {},
@@ -29,13 +23,7 @@ class LegacyOptions extends StatelessWidget {
               tooltip: "Export list",
             ),
           ),
-          InfoBoxContainer(
-            padding: expanderInfoBoxContainerPadding(),
-            height: expanderInfoBoxContainerHeight(),
-            backgroundColor: expanderInfoBoxContainerBackroundColor(),
-            margin: expanderInfoBoxContainerMargin(),
-            borderColor: Colors.transparent,
-            shadow: false,
+          SettingsContainer(
             title: NcTitleText("Import list from file"),
             trailing: TooltipIconButton(
               onPressed: () {},
@@ -43,13 +31,7 @@ class LegacyOptions extends StatelessWidget {
               tooltip: "Import list",
             ),
           ),
-          InfoBoxContainer(
-            padding: expanderInfoBoxContainerPadding(),
-            height: expanderInfoBoxContainerHeight(),
-            backgroundColor: expanderInfoBoxContainerBackroundColor(),
-            margin: expanderInfoBoxContainerMargin(),
-            borderColor: Colors.transparent,
-            shadow: false,
+          SettingsContainer(
             title: NcTitleText("Import lists from older versions"),
             trailing: TooltipIconButton(
               onPressed: () {},
@@ -57,13 +39,8 @@ class LegacyOptions extends StatelessWidget {
               tooltip: "Import lists",
             ),
           ),
-          InfoBoxContainer(
-            padding: expanderInfoBoxContainerPadding(),
-            height: expanderInfoBoxContainerHeight(),
-            backgroundColor: warningColor.withOpacity(.3),
-            margin: expanderInfoBoxContainerMargin(),
-            shadow: false,
-            borderColor: warningColor.withOpacity(.3),
+          SettingsContainer(
+            color: warningColor.withOpacity(.3),
             title: NcCaptionText("Legacy support is not implemented yet"),
             icon: FluentIcons.ic_fluent_info_24_regular,
           ),
