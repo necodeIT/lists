@@ -38,7 +38,7 @@ class SystemThemeObserver {
       }
     }
 
-    if (force || (darkMode != _lastValue || accent != _accentColor && Settings.adaptAccent) || SystemThemeObserver.error != error) {
+    if (force || (darkMode != _lastValue || accent != _accentColor && Settings.adaptAccent) || _error != error) {
       _lastValue = darkMode;
 
       _accentColor = accent;
