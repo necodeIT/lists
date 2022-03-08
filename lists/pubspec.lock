@@ -223,7 +223,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: cb1813a977f50d906810054a6b64e4970e0eb289
+      resolved-ref: "0f19d02999f601fa7d848b4ece669a9dacbbcc51"
       url: "https://github.com/necodeIT/fluent_ui.git"
     source: git
     version: "3.9.0"
@@ -338,7 +338,7 @@ packages:
     description:
       path: ui
       ref: flutter
-      resolved-ref: "5885503e6d5ad6be2694378007a6ebc91fe23e02"
+      resolved-ref: b2ea3ce0015ee67d7efa55fbbb4c8a9c545eadac
       url: "https://github.com/necodeIT/nekolib.git"
     source: git
     version: "0.0.1"
@@ -584,7 +584,7 @@ packages:
       name: url_launcher_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.6"
+    version: "2.0.9"
   url_launcher_windows:
     dependency: transitive
     description:
@@ -622,4 +622,4 @@ packages:
     version: "5.3.1"
 sdks:
   dart: ">=2.15.0 <3.0.0"
-  flutter: ">=2.8.0"
+  flutter: ">=2.10.0"
