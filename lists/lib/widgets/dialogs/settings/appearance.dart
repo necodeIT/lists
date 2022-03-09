@@ -87,6 +87,15 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
             SettingsContainer(
               color: errorColor.withOpacity(.3),
               title: NcCaptionText("Error reading system accent color! Using default."),
+              trailing: TooltipIconButton(
+                icon: FluentIcons.ic_fluent_more_horizontal_24_filled,
+                tooltip: "Details...",
+                onPressed: () => showAlertDialog(
+                  context,
+                  "Accent Color Error",
+                  "This error randomly occurs when the system accent color is not readable by the app.\n\nI don't know why this happens but the default accent color of the currently active theme is used instead.\n\nIf you know why this happens, please report it on the GitHub repo and/or submit a pull request.\n\nPS: Please help me it's driving me crazy!",
+                ),
+              ),
               icon: FluentIcons.ic_fluent_error_circle_24_regular,
             ),
         ],
