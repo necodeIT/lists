@@ -45,11 +45,10 @@ class _CollectionTileState extends State<CollectionTile> {
         child: SizedBox(
           height: 260,
           width: 200,
-          child: OffsetOnHover(
+          child: ScaleOnHover(
             duration: FluentTheme.of(context).fastAnimationDuration,
             curve: FluentTheme.of(context).animationCurve,
-            // scale: 1.025,
-            offset: Offset(0, -5),
+            scale: 1.025,
             child: Container(
               padding: EdgeInsets.all(15),
               margin: EdgeInsets.only(bottom: 8),
