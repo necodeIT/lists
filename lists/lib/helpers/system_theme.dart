@@ -29,7 +29,7 @@ class SystemThemeObserver {
       try {
         await SystemTheme.accentInstance.load();
 
-        SystemTheme.accentInstance.accent.toAccentColor();
+        accent = SystemTheme.accentInstance.accent.toAccentColor();
       } on Exception {
         _lastError = DateTime.now();
         _errorCooldown = Duration(seconds: _errorCooldown.inSeconds * 2);
