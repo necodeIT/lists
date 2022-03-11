@@ -1,11 +1,11 @@
 import 'package:context_menus/context_menus.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:lists/assets/assets.dart';
-import 'package:lists/db/collection.dart';
+import 'package:lists/models/collection.dart';
 import 'package:lists/helpers/collection.dart';
 import 'package:lists/helpers/dialogs.dart';
-import 'package:lists/widgets/context_menu.dart';
-import 'package:lists/widgets/tooltip_icon_button.dart';
+import 'package:lists/view/widgets/context_menu.dart';
+import 'package:lists/view/widgets/tooltip_icon_button.dart';
 import 'package:nekolib_ui/core.dart';
 import 'package:nekolib_ui/utils.dart';
 

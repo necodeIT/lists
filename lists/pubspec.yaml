@@ -44,6 +44,7 @@ dependencies:
       ref: master
   flutter:
     sdk: flutter
+  flutter_riverpod: ^1.0.3
   http: ^0.13.4
   mime: ^1.0.1
   nekolib_ui:

@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:lists/db/settings.dart';
+import 'package:lists/models/settings.dart';
 import 'package:nekolib_ui/core.dart';
 import 'package:system_theme/system_theme.dart';
 

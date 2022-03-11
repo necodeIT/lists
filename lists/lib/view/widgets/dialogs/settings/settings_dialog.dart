@@ -2,18 +2,18 @@ import 'dart:math';
 
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart' show Icons;
-import 'package:lists/db/settings.dart';
-import 'package:lists/db/updater.dart';
+import 'package:lists/models/settings.dart';
+import 'package:lists/models/updater.dart';
 import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/helpers/styles/styles.dart';
 import 'package:lists/helpers/system_theme.dart';
-import 'package:lists/routes/upgrade/upgrade.dart';
-import 'package:lists/widgets/dialogs/settings/icon.dart';
-import 'package:lists/widgets/dialogs/settings/settings_container.dart';
-import 'package:lists/widgets/expander_header.dart';
-import 'package:lists/widgets/info_box_container.dart';
-import 'package:lists/widgets/tooltip_icon_button.dart';
-import 'package:lists/widgets/vertical_divider.dart';
+import 'package:lists/view/routes/upgrade/upgrade.dart';
+import 'package:lists/view/widgets/dialogs/settings/icon.dart';
+import 'package:lists/view/widgets/dialogs/settings/settings_container.dart';
+import 'package:lists/view/widgets/expander_header.dart';
+import 'package:lists/view/widgets/info_box_container.dart';
+import 'package:lists/view/widgets/tooltip_icon_button.dart';
+import 'package:lists/view/widgets/vertical_divider.dart';
 import 'package:nekolib_ui/core.dart';
 
 part 'appearance.dart';

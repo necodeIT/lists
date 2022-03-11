@@ -1,5 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:lists/widgets/info_box_container.dart';
+import 'package:lists/view/widgets/info_box_container.dart';
 import 'package:nekolib_ui/core.dart';
 
 class HomeCard extends StatelessWidget {

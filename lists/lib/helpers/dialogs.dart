@@ -2,16 +2,16 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:lists/db/collection.dart';
-import 'package:lists/db/db.dart';
-import 'package:lists/routes/list/list.dart';
-import 'package:lists/routes/lists/lists.dart';
-import 'package:lists/widgets/dialogs/alert.dart';
-import 'package:lists/widgets/dialogs/confirm_dialog.dart';
-import 'package:lists/widgets/dialogs/create_new_list.dart';
-import 'package:lists/widgets/dialogs/new_entry.dart';
-import 'package:lists/widgets/dialogs/password_dialog.dart';
-import 'package:lists/widgets/dialogs/settings/settings_dialog.dart';
+import 'package:lists/models/collection.dart';
+import 'package:lists/models/db.dart';
+import 'package:lists/view/routes/list/list.dart';
+import 'package:lists/view/routes/lists/lists.dart';
+import 'package:lists/view/widgets/dialogs/alert.dart';
+import 'package:lists/view/widgets/dialogs/confirm_dialog.dart';
+import 'package:lists/view/widgets/dialogs/create_new_list.dart';
+import 'package:lists/view/widgets/dialogs/new_entry.dart';
+import 'package:lists/view/widgets/dialogs/password_dialog.dart';
+import 'package:lists/view/widgets/dialogs/settings/settings_dialog.dart';
 
 showCreateNewListDialog(BuildContext context) {
   showDialog(

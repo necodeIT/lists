@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
-import 'package:lists/db/collection.dart';
-import 'package:lists/db/updater.dart';
+import 'package:lists/models/collection.dart';
+import 'package:lists/models/updater.dart';
 import 'package:lists/helpers/string.dart';
 import 'package:path_provider/path_provider.dart';
 

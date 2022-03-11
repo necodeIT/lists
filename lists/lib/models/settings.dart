@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:lists/db/db.dart';
+import 'package:lists/models/db.dart';
 import 'package:lists/helpers/system_theme.dart';
 import 'package:nekolib_ui/core.dart';
 

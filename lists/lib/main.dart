@@ -1,15 +1,15 @@
 import 'package:context_menus/context_menus.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:lists/db/db.dart';
-import 'package:lists/db/settings.dart';
-import 'package:lists/db/updater.dart';
+import 'package:lists/models/db.dart';
+import 'package:lists/models/settings.dart';
+import 'package:lists/models/updater.dart';
 import 'package:lists/helpers/app_loader.dart';
 import 'package:lists/helpers/system_theme.dart';
 import 'package:lists/helpers/styles/styles.dart';
-import 'package:lists/routes/home/home.dart';
-import 'package:lists/routes/list/list.dart';
-import 'package:lists/routes/lists/lists.dart';
-import 'package:lists/routes/upgrade/upgrade.dart';
+import 'package:lists/view/routes/home/home.dart';
+import 'package:lists/view/routes/list/list.dart';
+import 'package:lists/view/routes/lists/lists.dart';
+import 'package:lists/view/routes/upgrade/upgrade.dart';
 import 'package:nekolib_ui/core.dart';
 
 void main() async {

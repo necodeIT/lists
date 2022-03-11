@@ -1,33 +1,26 @@
 import 'dart:io';
-import 'package:badges/badges.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:lists/assets/assets.dart';
-import 'package:lists/db/collection.dart';
-import 'package:lists/db/db.dart';
 import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/helpers/styles/styles.dart';
-import 'package:lists/widgets/tooltip_icon_button.dart';
+import 'package:lists/view/widgets/tooltip_icon_button.dart';
 import 'package:mime/mime.dart';
 import 'package:nekolib_ui/core.dart';
 
-class UpdateListDialog extends StatefulWidget {
-  const UpdateListDialog({Key? key, required this.onUpdate, required this.collection, required this.password}) : super(key: key);
+class CreateNewListDialog extends StatefulWidget {
+  const CreateNewListDialog({Key? key, required this.onCreate}) : super(key: key);
 
-  final Function(String, String, String, bool) onUpdate;
-  final String password;
-  final Collection collection;
+  final Function(String, String, String) onCreate;
 
   @override
-  State<UpdateListDialog> createState() => _UpdateListDialog();
+  State<CreateNewListDialog> createState() => _CreateNewListDialogState();
 }
 
-class _UpdateListDialog extends State<UpdateListDialog> {
+class _CreateNewListDialogState extends State<CreateNewListDialog> {
+  String _name = "";
+  String _password = "";
+  String _repeatPassword = "";
   final TextEditingController _imagePathController = TextEditingController();
-  late final TextEditingController _nameController;
-  late final TextEditingController _passwordController;
-  late final TextEditingController _repeatPasswordController;
-  bool _changedIcon = false;
 
   bool _enablePassword = false;
 
@@ -37,9 +30,27 @@ class _UpdateListDialog extends State<UpdateListDialog> {
     });
   }
 
+  _updateName(String value) {
+    setState(() {
+      _name = value;
+    });
+  }
+
+  _updatePassword(String value) {
+    setState(() {
+      _password = value;
+    });
+  }
+
+  _updateRepeatPassword(String value) {
+    setState(() {
+      _repeatPassword = value;
+    });
+  }
+
   Future _borwseImage() async {
     var f = await FilePicker.platform.pickFiles(
-      dialogTitle: "Pick icon image for ${_nameController.text}",
+      dialogTitle: "Pick icon image for $_name",
       type: FileType.custom,
       allowedExtensions: ['jpg', 'jpeg', 'png'],
     );
@@ -51,43 +62,38 @@ class _UpdateListDialog extends State<UpdateListDialog> {
   }
 
   bool _validateInput() {
-    if (_nameController.text.isEmpty) {
-      showAlertDialog(context, "Invalid parameters", "Name cannot be empty!");
+    if (_name.isEmpty) {
+      showAlertDialog(context, "Invalid parameters", "Name cannot be empty");
       return false;
     }
     if (_enablePassword) {
-      if (_passwordController.text.isEmpty || _repeatPasswordController.text.isEmpty) {
-        showAlertDialog(context, "Invalid parameters", "Password cannot be empty!");
+      if (_password.isEmpty || _repeatPassword.isEmpty) {
+        showAlertDialog(context, "Invalid parameters", "Password cannot be empty");
         return false;
       }
-      if (_passwordController.text != _repeatPasswordController.text) {
-        showAlertDialog(context, "Invalid parameters", "Passwords do not match!");
+      if (_password != _repeatPassword) {
+        showAlertDialog(context, "Invalid parameters", "Passwords do not match");
         return false;
       }
     }
     if (_imagePathController.text.isNotEmpty) {
       var f = File(_imagePathController.text);
       if (!f.existsSync()) {
-        showAlertDialog(context, "Invalid parameters", "Icon image file does not exist!");
+        showAlertDialog(context, "Invalid parameters", "Icon image file does not exist");
         return false;
       }
 
       var type = lookupMimeType(f.path);
 
       if (type == null) {
-        showAlertDialog(context, "Invalid parameters", "Icon image file is not a valid image!");
+        showAlertDialog(context, "Invalid parameters", "Icon image file is not a valid image");
         return false;
       }
 
       if (!type.startsWith("image/")) {
-        showAlertDialog(context, "Invalid parameters", "Icon image file is not a valid image!");
+        showAlertDialog(context, "Invalid parameters", "Icon image file is not a valid image");
         return false;
       }
-    }
-
-    if (_nameController.text != widget.collection.name && DB.collectionNames.contains(_nameController.text)) {
-      showAlertDialog(context, "Invalid parameters", "List with this name already exists!");
-      return false;
     }
     return true;
   }
@@ -107,84 +113,43 @@ class _UpdateListDialog extends State<UpdateListDialog> {
     });
   }
 
-  _changeIcon() {
-    setState(() {
-      _changedIcon = true;
-    });
-  }
-
-  @override
-  void initState() {
-    _nameController = TextEditingController(text: widget.collection.name);
-    _passwordController = TextEditingController(text: widget.password);
-    _repeatPasswordController = TextEditingController(text: widget.password);
-    _enablePassword = widget.password.isNotEmpty;
-
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return ContentDialog(
       scrollContent: true,
-      title: NcTitleText('Edit ${widget.collection.name}'),
+      title: NcTitleText('Create new list'),
       content: AnimatedSize(
         curve: FluentTheme.of(context).animationCurve,
         duration: FluentTheme.of(context).fastAnimationDuration,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (!_changedIcon) NcSpacing.large(),
-            if (!_changedIcon)
-              Badge(
-                padding: EdgeInsets.zero,
-                child: widget.collection.hasIcon
-                    ? Image.memory(
-                        widget.collection.icon,
-                        height: 100,
-                        width: 100,
-                      )
-                    : Image.asset(
-                        img_default_list_icon,
-                        color: textColor,
-                        height: 100,
-                        width: 100,
-                      ),
-                badgeContent: TooltipIconButton(
-                  tooltip: 'Change icon',
-                  icon: FluentIcons.ic_fluent_archive_24_filled,
-                  onPressed: _changeIcon,
-                  size: 12,
-                ),
-              ),
-            if (!_changedIcon) NcSpacing.large(),
             TextBox(
               placeholder: 'Enter list name',
               autofocus: true,
               style: textBoxTextStyle(),
               placeholderStyle: textBoxPlaceholderStyle(),
-              controller: _nameController,
+              onChanged: _updateName,
             ),
-            if (_changedIcon) NcSpacing.large(),
-            if (_changedIcon)
-              TextBox(
-                placeholder: 'Icon (optional)',
-                controller: _imagePathController,
-                style: textBoxTextStyle(),
-                placeholderStyle: textBoxPlaceholderStyle(),
-                suffix: TooltipIconButton(
-                  tooltip: "Browse",
-                  icon: FluentIcons.ic_fluent_folder_open_24_filled,
-                  color: adaptiveAccentColor,
-                  onPressed: _borwseImage,
-                ),
+            NcSpacing.large(),
+            TextBox(
+              placeholder: 'Icon (optional)',
+              controller: _imagePathController,
+              style: textBoxTextStyle(),
+              placeholderStyle: textBoxPlaceholderStyle(),
+              suffix: TooltipIconButton(
+                tooltip: "Browse",
+                icon: FluentIcons.ic_fluent_folder_open_24_filled,
+                color: adaptiveAccentColor,
+                onPressed: _borwseImage,
               ),
+            ),
             if (_enablePassword) NcSpacing.large(),
             if (_enablePassword)
               TextBox(
                 placeholder: 'Enter password',
                 obscureText: !_showPassword,
-                controller: _passwordController,
+                onChanged: _updatePassword,
                 style: textBoxTextStyle(),
                 placeholderStyle: textBoxPlaceholderStyle(),
                 suffix: TooltipIconButton(
@@ -201,7 +166,7 @@ class _UpdateListDialog extends State<UpdateListDialog> {
                 obscureText: !_showRepeatPassword,
                 style: textBoxTextStyle(),
                 placeholderStyle: textBoxPlaceholderStyle(),
-                controller: _repeatPasswordController,
+                onChanged: _updateRepeatPassword,
                 suffix: TooltipIconButton(
                   tooltip: _showRepeatPassword ? "Hide password" : "Show password",
                   icon: _showRepeatPassword ? FluentIcons.ic_fluent_eye_hide_24_filled : FluentIcons.ic_fluent_eye_show_24_filled,
@@ -224,14 +189,14 @@ class _UpdateListDialog extends State<UpdateListDialog> {
       actions: [
         FilledButton(
           child: NcTitleText(
-            'Update list',
+            'Create list',
             textAlign: TextAlign.center,
             buttonText: true,
           ),
           style: filledButtonStyle(),
           onPressed: () {
             if (!_validateInput()) return;
-            widget.onUpdate(_nameController.text, _enablePassword ? _passwordController.text : "", _imagePathController.text, _changedIcon);
+            widget.onCreate(_name, _password, _imagePathController.text);
           },
         ),
         Button(

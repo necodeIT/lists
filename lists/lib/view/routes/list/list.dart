@@ -1,11 +1,11 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:lists/db/collection.dart';
+import 'package:lists/models/collection.dart';
 import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/helpers/string.dart';
-import 'package:lists/routes/list/entry_tile.dart';
-import 'package:lists/routes/lists/lists.dart';
-import 'package:lists/widgets/searchbar.dart';
-import 'package:lists/widgets/tooltip_icon_button.dart';
+import 'package:lists/view/routes/list/entry_tile.dart';
+import 'package:lists/view/routes/lists/lists.dart';
+import 'package:lists/view/widgets/searchbar.dart';
+import 'package:lists/view/widgets/tooltip_icon_button.dart';
 import 'package:nekolib_ui/core.dart';
 
 class ListRoute extends StatefulWidget {
