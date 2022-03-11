@@ -36,13 +36,10 @@ class _GeneralOptionsState extends State<GeneralOptions> {
             trailing: NcBodyText(Updater.versionName),
           ),
           SettingsContainer(
-            icon: FluentIcons.ic_fluent_arrow_clockwise_dashes_24_filled,
+            icon: FluentIcons.ic_fluent_arrow_clockwise_24_filled,
             title: NcTitleText("Check for updates"),
-            trailing: TooltipIconButton(
-              icon: FluentIcons.ic_fluent_arrow_clockwise_24_filled,
-              tooltip: "Check for updates",
-              onPressed: _checkUpdates,
-            ),
+            onTap: _checkUpdates,
+            trailing: SettingsIcon(icon: FluentIcons.ic_fluent_chevron_right_24_filled),
           ),
           if (_checkedUpdates)
             FutureBuilder<bool>(

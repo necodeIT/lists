@@ -3,29 +3,42 @@ import 'package:lists/db/settings.dart';
 import 'package:lists/helpers/styles/styles.dart';
 import 'package:lists/widgets/info_box_container.dart';
 import 'package:nekolib_ui/core.dart';
+import 'package:nekolib_ui/utils.dart';
 
 class SettingsContainer extends StatelessWidget {
-  const SettingsContainer({Key? key, required this.title, this.color, this.trailing, this.icon, this.iconTooltip}) : super(key: key);
+  const SettingsContainer({Key? key, required this.title, this.color, this.trailing, this.icon, this.iconTooltip, this.onTap, this.hoverColor}) : super(key: key);
 
   final Widget title;
   final Color? color;
+  final Color? hoverColor;
   final Widget? trailing;
   final IconData? icon;
   final String? iconTooltip;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return InfoBoxContainer(
-      padding: settingsContainerPadding(),
-      height: settingsContainerHeight(),
-      backgroundColor: color ?? settingsContainerBackroundColor(),
-      margin: settingsContainerMargin(),
-      shadow: false,
-      borderColor: color ?? Colors.transparent,
-      icon: icon,
-      iconToolTip: iconTooltip,
-      title: title,
-      trailing: trailing,
+    return GestureDetector(
+      onTap: onTap,
+      child: HoverBuilder(
+        builder: (context, hovering) {
+          var backgroundColor = hovering && onTap != null ? hoverColor ?? secondaryColor.withOpacity(.1) : color ?? secondaryColor;
+          var borderColor = hovering && onTap != null ? hoverColor ?? Colors.transparent : color ?? Colors.transparent;
+
+          return InfoBoxContainer(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            height: 50,
+            backgroundColor: backgroundColor,
+            margin: const EdgeInsets.symmetric(vertical: 1),
+            shadow: false,
+            borderColor: borderColor,
+            icon: icon,
+            iconToolTip: iconTooltip,
+            title: title,
+            trailing: trailing,
+          );
+        },
+      ),
     );
   }
 }

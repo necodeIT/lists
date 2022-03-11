@@ -17,27 +17,18 @@ class LegacyOptions extends StatelessWidget {
         children: [
           SettingsContainer(
             title: NcTitleText("Export list to file"),
-            trailing: TooltipIconButton(
-              onPressed: () {},
-              icon: FluentIcons.ic_fluent_window_new_24_filled,
-              tooltip: "Export list",
-            ),
+            onTap: () {},
+            trailing: SettingsIcon(icon: FluentIcons.ic_fluent_chevron_right_24_filled),
           ),
           SettingsContainer(
             title: NcTitleText("Import list from file"),
-            trailing: TooltipIconButton(
-              onPressed: () {},
-              icon: FluentIcons.ic_fluent_window_new_24_filled,
-              tooltip: "Import list",
-            ),
+            onTap: () {},
+            trailing: SettingsIcon(icon: FluentIcons.ic_fluent_chevron_right_24_filled),
           ),
           SettingsContainer(
             title: NcTitleText("Import lists from older versions"),
-            trailing: TooltipIconButton(
-              onPressed: () {},
-              icon: FluentIcons.ic_fluent_window_new_24_filled,
-              tooltip: "Import lists",
-            ),
+            onTap: () {},
+            trailing: SettingsIcon(icon: FluentIcons.ic_fluent_chevron_right_24_filled),
           ),
           SettingsContainer(
             color: warningColor.withOpacity(.3),

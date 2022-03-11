@@ -11,7 +11,6 @@ import 'package:lists/routes/list/list.dart';
 import 'package:lists/routes/lists/lists.dart';
 import 'package:lists/routes/upgrade/upgrade.dart';
 import 'package:nekolib_ui/core.dart';
-import 'package:system_theme/system_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,8 +30,6 @@ void main() async {
 Future loadAll() async {
   await Updater.update();
   await DB.load();
-
-  // await Future.delayed(Duration(seconds: 2));
 }
 
 class App extends StatelessWidget {

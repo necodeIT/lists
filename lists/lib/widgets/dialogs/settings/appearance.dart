@@ -74,10 +74,8 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
           SettingsContainer(
             icon: Settings.useSystemTheme ? null : FluentIcons.ic_fluent_error_circle_24_regular,
             iconTooltip: "Adaptive accent is only available when using system theme",
-            title: GestureDetector(
-              child: NcTitleText("Adaptive accent (unstable)"),
-              onTap: Settings.useSystemTheme ? () => _setAdaptAccent(!Settings.adaptAccent) : null,
-            ),
+            onTap: Settings.useSystemTheme ? () => _setAdaptAccent(!Settings.adaptAccent) : null,
+            title: NcTitleText("Adaptive accent (unstable)"),
             trailing: Checkbox(
               checked: Settings.adaptAccent,
               onChanged: Settings.useSystemTheme ? _setAdaptAccent : null,

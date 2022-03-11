@@ -7,6 +7,7 @@ import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/widgets/context_menu.dart';
 import 'package:lists/widgets/tooltip_icon_button.dart';
 import 'package:nekolib_ui/core.dart';
+import 'package:nekolib_ui/utils.dart';
 
 class CollectionTile extends StatefulWidget {
   const CollectionTile({Key? key, required this.collection}) : super(key: key);

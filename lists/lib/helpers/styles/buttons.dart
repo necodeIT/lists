@@ -36,8 +36,4 @@ BoxDecoration dropDownButtonMenuStyle() => BoxDecoration(
     );
 
 Color expanderContentBackground() => tertiaryColor.withOpacity(.5);
-Color settingsContainerBackroundColor() => secondaryColor;
-double settingsContainerHeight() => 50;
-EdgeInsets settingsContainerPadding() => EdgeInsets.symmetric(horizontal: 16);
-EdgeInsets settingsContainerMargin() => EdgeInsets.symmetric(vertical: 1);
 ButtonState<Color> expanderHeaderBackground() => ButtonState.all(secondaryColor);
