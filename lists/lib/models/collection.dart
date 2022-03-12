@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'package:aes_crypt/aes_crypt.dart';
-import 'package:lists/db/db.dart';
+import 'package:lists/models/db.dart';
 import 'package:lists/helpers/string.dart';
 
 class Collection {

@@ -223,10 +223,10 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "0f19d02999f601fa7d848b4ece669a9dacbbcc51"
+      resolved-ref: "7b03aeb2d24e02d3b9c598d47d289ff203f79654"
       url: "https://github.com/necodeIT/fluent_ui.git"
     source: git
-    version: "3.9.0"
+    version: "3.9.2"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -277,6 +277,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  google_fonts:
+    dependency: transitive
+    description:
+      name: google_fonts
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.3.1"
   http:
     dependency: "direct main"
     description:
@@ -345,7 +352,7 @@ packages:
     description:
       path: ui
       ref: flutter
-      resolved-ref: ea1534da35cf7c79d3a5ec60000ab51dc04f6110
+      resolved-ref: ffb6b40288c5d8845dff00fc6e2413e3a9b2ad57
       url: "https://github.com/necodeIT/nekolib.git"
     source: git
     version: "0.0.1"

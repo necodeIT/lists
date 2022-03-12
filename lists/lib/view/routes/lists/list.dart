@@ -50,14 +50,8 @@ class _CollectionTileState extends State<CollectionTile> {
             duration: FluentTheme.of(context).fastAnimationDuration,
             curve: FluentTheme.of(context).animationCurve,
             scale: 1.025,
-            child: Container(
-              padding: EdgeInsets.all(15),
-              margin: EdgeInsets.only(bottom: 8),
-              decoration: BoxDecoration(
-                color: primaryColor,
-                borderRadius: BorderRadius.circular(8.0),
-                boxShadow: kElevationToShadow[2],
-              ),
+            child: Card(
+              backgroundColor: primaryColor,
               child: Column(
                 children: [
                   Expanded(
