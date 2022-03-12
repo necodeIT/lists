@@ -51,7 +51,6 @@ class _CollectionTileState extends State<CollectionTile> {
             curve: FluentTheme.of(context).animationCurve,
             scale: 1.025,
             child: Card(
-              backgroundColor: primaryColor,
               child: Column(
                 children: [
                   Expanded(

@@ -16,9 +16,12 @@ part 'scrollbar.dart';
 
 ThemeData theme() => ThemeData(
       dialogTheme: contentDialogStyle(),
-      iconTheme: IconThemeData(
-        color: textColor,
-      ),
+      iconTheme: IconThemeData(color: textColor),
+      menuColor: tertiaryColor,
+      cardColor: primaryColor,
+      borderInputColor: textColor,
+      micaBackgroundColor: primaryColor,
+      acrylicBackgroundColor: primaryColor,
       toggleSwitchTheme: toggleSwitchThemeData(),
       tooltipTheme: tooltipThemeData(),
       buttonTheme: buttonThemeData(),

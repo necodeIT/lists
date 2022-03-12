@@ -22,7 +22,6 @@ class HomeCard extends StatelessWidget {
           width: 250,
           height: 300,
           child: Card(
-            backgroundColor: primaryColor,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
