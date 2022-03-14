@@ -15,6 +15,7 @@ part 'tooltip.dart';
 part 'scrollbar.dart';
 
 ThemeData theme() => ThemeData(
+      uncheckedColor: primaryColor,
       dialogTheme: contentDialogStyle(),
       iconTheme: IconThemeData(color: textColor),
       menuColor: tertiaryColor,

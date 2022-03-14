@@ -24,7 +24,6 @@ class _GeneralOptionsState extends State<GeneralOptions> {
   Widget build(BuildContext context) {
     return Expander(
       contentPadding: 0,
-      initiallyExpanded: true,
       headerBackgroundColor: expanderHeaderBackground(),
       contentBackgroundColor: expanderContentBackground(),
       header: ExpanderHeader(icon: FluentIcons.ic_fluent_settings_24_regular, text: "General"),

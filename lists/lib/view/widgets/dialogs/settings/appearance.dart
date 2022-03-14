@@ -10,7 +10,8 @@ class AppearanceOptions extends StatefulWidget {
 }
 
 class _AppearanceOptionsState extends State<AppearanceOptions> {
-  _setTheme(String theme) {
+  _setTheme(String? theme) {
+    if (theme == null) return;
     setState(() {
       Settings.setTheme(theme);
     });
@@ -26,7 +27,6 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
   Widget build(BuildContext context) {
     return Expander(
       contentPadding: 0,
-      initiallyExpanded: true,
       headerBackgroundColor: expanderHeaderBackground(),
       contentBackgroundColor: expanderContentBackground(),
       header: ExpanderHeader(icon: FluentIcons.ic_fluent_color_24_regular, text: "Appearance"),
@@ -36,36 +36,58 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
             title: NcTitleText("Select theme"),
             trailing: FluentTheme(
               data: ThemeData(
+                brightness: brightness,
+                accentColor: adaptiveAccentColor,
                 buttonTheme: ButtonThemeData(
-                  defaultButtonStyle: buttonStyle(tertiaryColor.withOpacity(.2), 0, BorderStyle.none),
+                  defaultButtonStyle: buttonStyle(primaryColor),
                 ),
+                menuColor: primaryColor,
               ),
-              child: DropDownButton(
-                menuDecoration: dropDownButtonMenuStyle(),
-                title: NcCaptionText(Settings.theme),
+              // child: DropDownButton(
+              //   menuDecoration: dropDownButtonMenuStyle(),
+              //   title: NcCaptionText(Settings.theme),
+              //   items: [
+              //     for (var theme in NcThemes.all.keys)
+              //       DropDownButtonItem(
+              //         onTap: () => _setTheme(theme),
+              //         title: Row(
+              //           mainAxisSize: MainAxisSize.min,
+              //           children: [
+              //             FluentVertivalDvider(color: Settings.theme == theme ? adaptiveAccentColor : Colors.transparent),
+              //             NcSpacing.xs(),
+              //             NcCaptionText(theme),
+              //           ],
+              //         ),
+              //       ),
+              //     DropDownButtonItem(
+              //       onTap: () => _setTheme(Settings.systemTheme),
+              //       title: Row(
+              //         mainAxisSize: MainAxisSize.min,
+              //         children: [
+              //           FluentVertivalDvider(color: Settings.useSystemTheme ? adaptiveAccentColor : Colors.transparent),
+              //           NcSpacing.xs(),
+              //           NcCaptionText(Settings.systemTheme),
+              //         ],
+              //       ),
+              //     ),
+              //   ],
+              // ),
+
+              child: Combobox<String>(
+                comboboxColor: Colors.red,
+                focusColor: Colors.red,
+                // icon: Icon(FluentIcons.ic_fluent_chevron_down_24_filled),
+                value: Settings.theme,
+                onChanged: _setTheme,
                 items: [
                   for (var theme in NcThemes.all.keys)
-                    DropDownButtonItem(
-                      onTap: () => _setTheme(theme),
-                      title: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          FluentVertivalDvider(color: Settings.theme == theme ? adaptiveAccentColor : Colors.transparent),
-                          NcSpacing.xs(),
-                          NcCaptionText(theme),
-                        ],
-                      ),
+                    ComboboxItem(
+                      child: NcCaptionText(theme),
+                      value: theme,
                     ),
-                  DropDownButtonItem(
-                    onTap: () => _setTheme(Settings.systemTheme),
-                    title: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        FluentVertivalDvider(color: Settings.useSystemTheme ? adaptiveAccentColor : Colors.transparent),
-                        NcSpacing.xs(),
-                        NcCaptionText(Settings.systemTheme),
-                      ],
-                    ),
+                  ComboboxItem(
+                    child: NcCaptionText(Settings.systemTheme),
+                    value: Settings.systemTheme,
                   ),
                 ],
               ),

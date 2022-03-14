@@ -2,9 +2,9 @@ part of list_styles;
 
 contentDialogStyle() => ContentDialogThemeData(
       decoration: BoxDecoration(
-        color: primaryColor,
+        color: secondaryColor,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: secondaryColor, width: 1.5),
+        border: Border.all(color: tertiaryColor, width: 1),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -14,7 +14,7 @@ contentDialogStyle() => ContentDialogThemeData(
         ],
       ),
       actionsDecoration: BoxDecoration(
-        color: primaryColor,
+        color: secondaryColor,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(

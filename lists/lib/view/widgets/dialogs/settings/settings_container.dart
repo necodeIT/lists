@@ -22,7 +22,7 @@ class SettingsContainer extends StatelessWidget {
       onTap: onTap,
       child: HoverBuilder(
         builder: (context, hovering) {
-          var backgroundColor = hovering && onTap != null ? hoverColor ?? secondaryColor.withOpacity(.1) : color ?? secondaryColor;
+          var backgroundColor = hovering && onTap != null ? hoverColor ?? primaryColor.withOpacity(.7) : color ?? primaryColor;
           var borderColor = hovering && onTap != null ? hoverColor ?? Colors.transparent : color ?? Colors.transparent;
 
           return InfoBoxContainer(
