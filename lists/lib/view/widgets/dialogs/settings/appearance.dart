@@ -74,9 +74,8 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
               // ),
 
               child: Combobox<String>(
-                comboboxColor: Colors.red,
-                focusColor: Colors.red,
                 // icon: Icon(FluentIcons.ic_fluent_chevron_down_24_filled),
+
                 value: Settings.theme,
                 onChanged: _setTheme,
                 items: [
