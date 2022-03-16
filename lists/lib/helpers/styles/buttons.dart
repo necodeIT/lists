@@ -43,17 +43,13 @@ ButtonStyle iconButtonStyle() => ButtonStyle(
       padding: ButtonState.all(const EdgeInsets.all(8)),
       backgroundColor: ButtonState.resolveWith(
         (states) {
-          if (states.isDisabled) {
-            return Colors.transparent;
-          } else if (states.isPressing) {
-            return tertiaryColor.withOpacity(.5);
+          if (states.isPressing) {
+            return tertiaryColor.withOpacity(.6);
           } else if (states.isFocused) {
-            return tertiaryColor;
-          } else if (states.isHovering) {
-            return tertiaryColor.withOpacity(.7);
+            return tertiaryColor.withOpacity(.4);
+          } else {
+            return Colors.transparent;
           }
-
-          return Colors.transparent;
         },
       ),
       foregroundColor: ButtonState.resolveWith((states) {
