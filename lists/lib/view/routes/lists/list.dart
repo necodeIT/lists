@@ -25,18 +25,23 @@ class _CollectionTileState extends State<CollectionTile> {
   Widget build(BuildContext context) {
     return ContextMenuRegion(
       contextMenu: ContextMenu(
-        child: Row(
+        child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            TooltipIconButton(
-              tooltip: "Edit ${widget.collection.name}",
-              onPressed: () => updateCollection(context, widget.collection),
-              icon: FluentIcons.ic_fluent_edit_24_filled,
-            ),
-            TooltipIconButton(
-              tooltip: "Delete ${widget.collection.name}",
-              onPressed: () => deleteCollection(context, widget.collection),
-              icon: FluentIcons.ic_fluent_delete_24_filled,
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                TooltipIconButton(
+                  tooltip: "Edit ${widget.collection.name}",
+                  onPressed: () => updateCollection(context, widget.collection),
+                  icon: FluentIcons.ic_fluent_edit_24_filled,
+                ),
+                TooltipIconButton(
+                  tooltip: "Delete ${widget.collection.name}",
+                  onPressed: () => deleteCollection(context, widget.collection),
+                  icon: FluentIcons.ic_fluent_delete_24_filled,
+                ),
+              ],
             ),
           ],
         ),

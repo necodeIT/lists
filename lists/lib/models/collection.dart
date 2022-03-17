@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 import 'package:aes_crypt/aes_crypt.dart';
 import 'package:lists/models/db.dart';
@@ -47,9 +48,9 @@ class Collection {
     };
   }
 
-  Future load(String password) async {
-    if (_loaded) return;
-    if (!await checkPassword(password)) return;
+  Future<bool> load(String password) async {
+    if (_loaded) return true;
+    if (!await checkPassword(password)) return false;
 
     password = password.sha256();
     var f = await DB.getCollectionFile(this);
@@ -60,6 +61,7 @@ class Collection {
     _entries.clear();
     _entries.addAll(jsonDecode(data).cast<String, String>());
     _loaded = true;
+    return true;
   }
 
   void dispose() {
@@ -157,5 +159,24 @@ class Collection {
     await removeEntry(password, oldKey);
 
     return addEntry(password, newKey, newValue);
+  }
+
+  Future<bool> export(String password, String path, bool enablePassword) async {
+    if (!await load(password)) return false;
+
+    try {
+      if (enablePassword) {
+        var f = await DB.getCollectionFile(this);
+        await f.copy(path);
+      } else {
+        var data = jsonEncode(toJson());
+        await File(path).writeAsString(data);
+      }
+    } catch (e) {
+      return false;
+    }
+
+    dispose();
+    return true;
   }
 }
