@@ -5,6 +5,7 @@ import 'package:lists/models/collection.dart';
 import 'package:lists/helpers/collection.dart';
 import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/view/widgets/context_menu.dart';
+import 'package:lists/view/widgets/hover_region.dart';
 import 'package:lists/view/widgets/tooltip_icon_button.dart';
 import 'package:nekolib_ui/core.dart';
 import 'package:nekolib_ui/utils.dart';
@@ -31,17 +32,28 @@ class _CollectionTileState extends State<CollectionTile> {
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                TooltipIconButton(
+                TooltipIconButton.small(
                   tooltip: "Edit ${widget.collection.name}",
                   onPressed: () => updateCollection(context, widget.collection),
                   icon: FluentIcons.ic_fluent_edit_24_filled,
                 ),
-                TooltipIconButton(
+                TooltipIconButton.small(
                   tooltip: "Delete ${widget.collection.name}",
                   onPressed: () => deleteCollection(context, widget.collection),
                   icon: FluentIcons.ic_fluent_delete_24_filled,
                 ),
               ],
+            ),
+            HoverRegion(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(FluentIcons.ic_fluent_arrow_export_ltr_24_filled, size: 14),
+                  NcSpacing.xs(),
+                  NcCaptionText("Export", fontSize: 14),
+                ],
+              ),
+              onTap: () => showPasswordDialog(context, widget.collection),
             ),
           ],
         ),
