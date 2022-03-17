@@ -47,7 +47,7 @@ class _CollectionTileState extends State<CollectionTile> {
           height: 260,
           width: 200,
           child: ScaleOnHover(
-            duration: FluentTheme.of(context).fastAnimationDuration,
+            duration: FluentTheme.of(context).fasterAnimationDuration,
             curve: FluentTheme.of(context).animationCurve,
             scale: 1.025,
             child: Card(

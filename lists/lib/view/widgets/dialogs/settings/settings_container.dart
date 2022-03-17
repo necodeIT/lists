@@ -16,28 +16,48 @@ class SettingsContainer extends StatelessWidget {
   final String? iconTooltip;
   final VoidCallback? onTap;
 
+  static const edgeInsets = EdgeInsets.symmetric(horizontal: 16);
+  static const edgeInsets2 = EdgeInsets.symmetric(vertical: 1);
+  static const double height = 50;
+  static const shadow = false;
+
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: HoverBuilder(
-        builder: (context, hovering) {
-          var backgroundColor = hovering && onTap != null ? hoverColor ?? primaryColor.withOpacity(.7) : color ?? primaryColor;
-          var borderColor = hovering && onTap != null ? hoverColor ?? Colors.transparent : color ?? Colors.transparent;
+    return ConditionalWrapper(
+      condition: onTap != null,
+      wrapper: (context, child) => GestureDetector(
+        onTap: onTap,
+        child: HoverBuilder(
+          builder: (context, hovering) {
+            var backgroundColor = hovering ? hoverColor ?? primaryColor.withOpacity(.7) : color ?? primaryColor;
+            var borderColor = hovering ? hoverColor ?? Colors.transparent : color ?? Colors.transparent;
 
-          return InfoBoxContainer(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            height: 50,
-            backgroundColor: backgroundColor,
-            margin: const EdgeInsets.symmetric(vertical: 1),
-            shadow: false,
-            borderColor: borderColor,
-            icon: icon,
-            iconToolTip: iconTooltip,
-            title: title,
-            trailing: trailing,
-          );
-        },
+            return InfoBoxContainer(
+              padding: edgeInsets,
+              height: height,
+              margin: edgeInsets2,
+              shadow: shadow,
+              backgroundColor: backgroundColor,
+              borderColor: borderColor,
+              icon: icon,
+              iconToolTip: iconTooltip,
+              title: title,
+              trailing: trailing,
+            );
+          },
+        ),
+      ),
+      child: InfoBoxContainer(
+        padding: edgeInsets,
+        height: height,
+        margin: edgeInsets2,
+        shadow: shadow,
+        backgroundColor: color ?? primaryColor,
+        borderColor: color ?? Colors.transparent,
+        icon: icon,
+        iconToolTip: iconTooltip,
+        title: title,
+        trailing: trailing,
       ),
     );
   }

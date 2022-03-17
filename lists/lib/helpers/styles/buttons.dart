@@ -45,7 +45,7 @@ ButtonStyle iconButtonStyle() => ButtonStyle(
         (states) {
           if (states.isPressing) {
             return tertiaryColor.withOpacity(.6);
-          } else if (states.isFocused) {
+          } else if (states.isHovering) {
             return tertiaryColor.withOpacity(.4);
           } else {
             return Colors.transparent;

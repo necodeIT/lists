@@ -38,6 +38,7 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
               data: ThemeData(
                 brightness: brightness,
                 accentColor: adaptiveAccentColor,
+                uncheckedColor: accentColor,
                 buttonTheme: ButtonThemeData(
                   defaultButtonStyle: buttonStyle(primaryColor),
                 ),
