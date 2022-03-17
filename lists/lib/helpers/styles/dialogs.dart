@@ -16,12 +16,5 @@ contentDialogStyle() => ContentDialogThemeData(
       actionsDecoration: BoxDecoration(
         color: secondaryColor,
         borderRadius: BorderRadius.circular(8),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 8,
-            offset: Offset(0, 4),
-          ),
-        ],
       ),
     );
