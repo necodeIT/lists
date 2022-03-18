@@ -15,7 +15,7 @@ class Updater {
   static const repoUrl = "$githubApiUrl/$repoOwner/$repoName";
 
   static const appName = "Lists";
-  static const version = "0.0.1";
+  static const version = "0.0.2";
   static const _versionName = "Alpha";
   static String get versionName => "$_versionName v$version";
 
