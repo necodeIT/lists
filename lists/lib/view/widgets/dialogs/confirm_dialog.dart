@@ -33,7 +33,6 @@ class ConfirmDialog extends StatelessWidget {
         Button(
           child: NcTitleText(
             cancelText,
-            buttonText: true,
             textAlign: TextAlign.center,
           ),
           onPressed: () {

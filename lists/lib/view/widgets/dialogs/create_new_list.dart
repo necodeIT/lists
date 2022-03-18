@@ -1,11 +1,18 @@
 import 'dart:io';
+import 'package:badges/badges.dart';
+import 'package:context_menus/context_menus.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:lists/assets/assets.dart';
 import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/helpers/styles/styles.dart';
+import 'package:lists/view/widgets/context_menu.dart';
+import 'package:lists/view/widgets/context_menu_item.dart';
+import 'package:lists/view/widgets/hover_region.dart';
 import 'package:lists/view/widgets/tooltip_icon_button.dart';
 import 'package:mime/mime.dart';
 import 'package:nekolib_ui/core.dart';
+import 'package:nekolib_ui/utils.dart';
 
 class CreateNewListDialog extends StatefulWidget {
   const CreateNewListDialog({Key? key, required this.onCreate}) : super(key: key);
@@ -20,7 +27,7 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
   String _name = "";
   String _password = "";
   String _repeatPassword = "";
-  final TextEditingController _imagePathController = TextEditingController();
+  String _imgPath = "";
 
   bool _enablePassword = false;
 
@@ -57,8 +64,9 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
 
     if (f == null) return;
 
-    // _imagePathController.value = TextEditingValue(text: f.files.first.path!);
-    _imagePathController.text = f.files.first.path!;
+    setState(() {
+      _imgPath = f.files.first.path!;
+    });
   }
 
   bool _validateInput() {
@@ -76,8 +84,8 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
         return false;
       }
     }
-    if (_imagePathController.text.isNotEmpty) {
-      var f = File(_imagePathController.text);
+    if (_imgPath.isNotEmpty) {
+      var f = File(_imgPath);
       if (!f.existsSync()) {
         showAlertDialog(context, "Invalid parameters", "Icon image file does not exist");
         return false;
@@ -124,6 +132,50 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            ContextMenuRegion(
+              contextMenu: ContextMenu(
+                child: ContextMenuItem(
+                  icon: FluentIcons.ic_fluent_archive_24_filled,
+                  title: 'Reset',
+                  onTap: () {
+                    setState(() {
+                      _imgPath = "";
+                    });
+                  },
+                ),
+              ),
+              child: Badge(
+                badgeColor: adaptiveAccentColor,
+                padding: EdgeInsets.zero,
+                child: _imgPath.isNotEmpty
+                    ? Image.file(
+                        File(_imgPath),
+                        height: 100,
+                        width: 100,
+                      )
+                    : Image.asset(
+                        img_default_list_icon,
+                        color: textColor,
+                        height: 100,
+                        width: 100,
+                      ),
+                badgeContent: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: GestureDetector(
+                    onTap: _borwseImage,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Icon(
+                        FluentIcons.ic_fluent_edit_24_filled,
+                        color: buttonTextColor,
+                        size: 12,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            NcSpacing.large(),
             TextBox(
               placeholder: 'Enter list name',
               autofocus: true,
@@ -131,19 +183,19 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
               placeholderStyle: textBoxPlaceholderStyle(),
               onChanged: _updateName,
             ),
-            NcSpacing.large(),
-            TextBox(
-              placeholder: 'Icon (optional)',
-              controller: _imagePathController,
-              style: textBoxTextStyle(),
-              placeholderStyle: textBoxPlaceholderStyle(),
-              suffix: TooltipIconButton(
-                tooltip: "Browse",
-                icon: FluentIcons.ic_fluent_folder_open_24_filled,
-                color: adaptiveAccentColor,
-                onPressed: _borwseImage,
-              ),
-            ),
+            // NcSpacing.large(),
+            // TextBox(
+            //   placeholder: 'Icon (optional)',
+            //   controller: _imagePathController,
+            //   style: textBoxTextStyle(),
+            //   placeholderStyle: textBoxPlaceholderStyle(),
+            //   suffix: TooltipIconButton.small(
+            //     tooltip: "Browse",
+            //     icon: FluentIcons.ic_fluent_folder_open_24_filled,
+            //     color: adaptiveAccentColor,
+            //     onPressed: _borwseImage,
+            //   ),
+            // ),
             if (_enablePassword) NcSpacing.large(),
             if (_enablePassword)
               TextBox(
@@ -152,7 +204,7 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
                 onChanged: _updatePassword,
                 style: textBoxTextStyle(),
                 placeholderStyle: textBoxPlaceholderStyle(),
-                suffix: TooltipIconButton(
+                suffix: TooltipIconButton.small(
                   tooltip: _showPassword ? "Hide password" : "Show password",
                   icon: _showPassword ? FluentIcons.ic_fluent_eye_hide_24_filled : FluentIcons.ic_fluent_eye_show_24_filled,
                   color: adaptiveAccentColor,
@@ -167,7 +219,7 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
                 style: textBoxTextStyle(),
                 placeholderStyle: textBoxPlaceholderStyle(),
                 onChanged: _updateRepeatPassword,
-                suffix: TooltipIconButton(
+                suffix: TooltipIconButton.small(
                   tooltip: _showRepeatPassword ? "Hide password" : "Show password",
                   icon: _showRepeatPassword ? FluentIcons.ic_fluent_eye_hide_24_filled : FluentIcons.ic_fluent_eye_show_24_filled,
                   color: adaptiveAccentColor,
@@ -196,7 +248,7 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
           style: filledButtonStyle(),
           onPressed: () {
             if (!_validateInput()) return;
-            widget.onCreate(_name, _password, _imagePathController.text);
+            widget.onCreate(_name, _password, _imgPath);
           },
         ),
         Button(

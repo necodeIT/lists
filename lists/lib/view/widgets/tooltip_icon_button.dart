@@ -19,7 +19,7 @@ class TooltipIconButton extends StatelessWidget {
     required this.tooltip,
     required this.icon,
     this.onPressed,
-    this.size = 18,
+    this.size = 16,
     this.color,
   })  : small = true,
         super(key: key);
@@ -42,6 +42,7 @@ class TooltipIconButton extends StatelessWidget {
       message: tooltip,
       child: small
           ? HoverRegion(
+              padding: EdgeInsets.all(4),
               onTap: onPressed,
               child: child,
             )

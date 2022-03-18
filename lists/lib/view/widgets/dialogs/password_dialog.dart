@@ -34,7 +34,7 @@ class _PasswordDialogState extends State<PasswordDialog> {
         onSubmitted: (_) => widget.onConfirm(_controller.text),
         obscureText: !_showPw,
         controller: _controller,
-        suffix: TooltipIconButton(
+        suffix: TooltipIconButton.small(
           tooltip: _showPw ? "Hide password" : "Show password",
           icon: _showPw ? FluentIcons.ic_fluent_eye_hide_24_filled : FluentIcons.ic_fluent_eye_show_24_filled,
           color: adaptiveAccentColor,

@@ -3,17 +3,18 @@ import 'package:nekolib_ui/core.dart';
 import 'package:nekolib_ui/utils.dart';
 
 class HoverRegion extends StatelessWidget {
-  const HoverRegion({Key? key, required this.child, this.onTap}) : super(key: key);
+  const HoverRegion({Key? key, required this.child, this.onTap, this.padding}) : super(key: key);
 
   final Widget child;
   final VoidCallback? onTap;
+  final EdgeInsets? padding;
 
   @override
   Widget build(BuildContext context) {
     return HoverBuilder(
       onTap: onTap,
       builder: (context, hovering) => Container(
-        padding: EdgeInsets.all(8),
+        padding: padding ?? EdgeInsets.all(8),
         child: child,
         decoration: hovering
             ? BoxDecoration(
