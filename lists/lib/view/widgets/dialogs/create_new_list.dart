@@ -24,6 +24,8 @@ class CreateNewListDialog extends StatefulWidget {
 }
 
 class _CreateNewListDialogState extends State<CreateNewListDialog> {
+  final _contextKey = GlobalKey<ContextMenuOverlayState>();
+
   String _name = "";
   String _password = "";
   String _repeatPassword = "";
@@ -123,144 +125,148 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return ContentDialog(
-      scrollContent: true,
-      title: NcTitleText('Create new list'),
-      content: AnimatedSize(
-        curve: FluentTheme.of(context).animationCurve,
-        duration: FluentTheme.of(context).fastAnimationDuration,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ContextMenuRegion(
-              contextMenu: ContextMenu(
-                child: ContextMenuItem(
-                  icon: FluentIcons.ic_fluent_archive_24_filled,
-                  title: 'Reset',
-                  onTap: () {
-                    setState(() {
-                      _imgPath = "";
-                    });
-                  },
+    return ContextMenuOverlay(
+      key: _contextKey,
+      child: ContentDialog(
+        scrollContent: true,
+        title: NcTitleText('Create new list'),
+        content: AnimatedSize(
+          curve: FluentTheme.of(context).animationCurve,
+          duration: FluentTheme.of(context).fastAnimationDuration,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ContextMenuRegion(
+                contextMenu: ContextMenu(
+                  child: ContextMenuItem(
+                    icon: FluentIcons.ic_fluent_archive_24_filled,
+                    title: 'Reset',
+                    onTap: () {
+                      setState(() {
+                        _imgPath = "";
+                        _contextKey.currentState!.hide();
+                      });
+                    },
+                  ),
                 ),
-              ),
-              child: Badge(
-                badgeColor: adaptiveAccentColor,
-                padding: EdgeInsets.zero,
-                child: _imgPath.isNotEmpty
-                    ? Image.file(
-                        File(_imgPath),
-                        height: 100,
-                        width: 100,
-                      )
-                    : Image.asset(
-                        img_default_list_icon,
-                        color: textColor,
-                        height: 100,
-                        width: 100,
-                      ),
-                badgeContent: MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: GestureDetector(
-                    onTap: _borwseImage,
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Icon(
-                        FluentIcons.ic_fluent_edit_24_filled,
-                        color: buttonTextColor,
-                        size: 12,
+                child: Badge(
+                  badgeColor: adaptiveAccentColor,
+                  padding: EdgeInsets.zero,
+                  child: _imgPath.isNotEmpty
+                      ? Image.file(
+                          File(_imgPath),
+                          height: 100,
+                          width: 100,
+                        )
+                      : Image.asset(
+                          img_default_list_icon,
+                          color: textColor,
+                          height: 100,
+                          width: 100,
+                        ),
+                  badgeContent: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: GestureDetector(
+                      onTap: _borwseImage,
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Icon(
+                          FluentIcons.ic_fluent_edit_24_filled,
+                          color: buttonTextColor,
+                          size: 12,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-            NcSpacing.large(),
-            TextBox(
-              placeholder: 'Enter list name',
-              autofocus: true,
-              style: textBoxTextStyle(),
-              placeholderStyle: textBoxPlaceholderStyle(),
-              onChanged: _updateName,
-            ),
-            // NcSpacing.large(),
-            // TextBox(
-            //   placeholder: 'Icon (optional)',
-            //   controller: _imagePathController,
-            //   style: textBoxTextStyle(),
-            //   placeholderStyle: textBoxPlaceholderStyle(),
-            //   suffix: TooltipIconButton.small(
-            //     tooltip: "Browse",
-            //     icon: FluentIcons.ic_fluent_folder_open_24_filled,
-            //     color: adaptiveAccentColor,
-            //     onPressed: _borwseImage,
-            //   ),
-            // ),
-            if (_enablePassword) NcSpacing.large(),
-            if (_enablePassword)
+              NcSpacing.large(),
               TextBox(
-                placeholder: 'Enter password',
-                obscureText: !_showPassword,
-                onChanged: _updatePassword,
+                placeholder: 'Enter list name',
+                autofocus: true,
                 style: textBoxTextStyle(),
                 placeholderStyle: textBoxPlaceholderStyle(),
-                suffix: TooltipIconButton.small(
-                  tooltip: _showPassword ? "Hide password" : "Show password",
-                  icon: _showPassword ? FluentIcons.ic_fluent_eye_hide_24_filled : FluentIcons.ic_fluent_eye_show_24_filled,
-                  color: adaptiveAccentColor,
-                  onPressed: _toggleShowPassword,
+                onChanged: _updateName,
+              ),
+              // NcSpacing.large(),
+              // TextBox(
+              //   placeholder: 'Icon (optional)',
+              //   controller: _imagePathController,
+              //   style: textBoxTextStyle(),
+              //   placeholderStyle: textBoxPlaceholderStyle(),
+              //   suffix: TooltipIconButton.small(
+              //     tooltip: "Browse",
+              //     icon: FluentIcons.ic_fluent_folder_open_24_filled,
+              //     color: adaptiveAccentColor,
+              //     onPressed: _borwseImage,
+              //   ),
+              // ),
+              if (_enablePassword) NcSpacing.large(),
+              if (_enablePassword)
+                TextBox(
+                  placeholder: 'Enter password',
+                  obscureText: !_showPassword,
+                  onChanged: _updatePassword,
+                  style: textBoxTextStyle(),
+                  placeholderStyle: textBoxPlaceholderStyle(),
+                  suffix: TooltipIconButton.small(
+                    tooltip: _showPassword ? "Hide password" : "Show password",
+                    icon: _showPassword ? FluentIcons.ic_fluent_eye_hide_24_filled : FluentIcons.ic_fluent_eye_show_24_filled,
+                    color: adaptiveAccentColor,
+                    onPressed: _toggleShowPassword,
+                  ),
+                ),
+              if (_enablePassword) NcSpacing.large(),
+              if (_enablePassword)
+                TextBox(
+                  placeholder: 'Repeat password',
+                  obscureText: !_showRepeatPassword,
+                  style: textBoxTextStyle(),
+                  placeholderStyle: textBoxPlaceholderStyle(),
+                  onChanged: _updateRepeatPassword,
+                  suffix: TooltipIconButton.small(
+                    tooltip: _showRepeatPassword ? "Hide password" : "Show password",
+                    icon: _showRepeatPassword ? FluentIcons.ic_fluent_eye_hide_24_filled : FluentIcons.ic_fluent_eye_show_24_filled,
+                    color: adaptiveAccentColor,
+                    onPressed: _toggleShowRepeatPassword,
+                  ),
+                ),
+              NcSpacing.large(),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Checkbox(
+                  checked: _enablePassword,
+                  content: NcCaptionText("Password"),
+                  onChanged: _updateEnablePassword,
                 ),
               ),
-            if (_enablePassword) NcSpacing.large(),
-            if (_enablePassword)
-              TextBox(
-                placeholder: 'Repeat password',
-                obscureText: !_showRepeatPassword,
-                style: textBoxTextStyle(),
-                placeholderStyle: textBoxPlaceholderStyle(),
-                onChanged: _updateRepeatPassword,
-                suffix: TooltipIconButton.small(
-                  tooltip: _showRepeatPassword ? "Hide password" : "Show password",
-                  icon: _showRepeatPassword ? FluentIcons.ic_fluent_eye_hide_24_filled : FluentIcons.ic_fluent_eye_show_24_filled,
-                  color: adaptiveAccentColor,
-                  onPressed: _toggleShowRepeatPassword,
-                ),
-              ),
-            NcSpacing.large(),
-            Align(
-              alignment: Alignment.centerRight,
-              child: Checkbox(
-                checked: _enablePassword,
-                content: NcCaptionText("Password"),
-                onChanged: _updateEnablePassword,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
+        actions: [
+          FilledButton(
+            child: NcTitleText(
+              'Create list',
+              textAlign: TextAlign.center,
+              buttonText: true,
+            ),
+            style: filledButtonStyle(),
+            onPressed: () {
+              if (!_validateInput()) return;
+              widget.onCreate(_name, _password, _imgPath);
+            },
+          ),
+          Button(
+            child: NcTitleText(
+              'Cancel',
+              textAlign: TextAlign.center,
+            ),
+            style: buttonStyle(),
+            onPressed: Navigator.of(context).pop,
+          ),
+        ],
+        style: contentDialogStyle(),
       ),
-      actions: [
-        FilledButton(
-          child: NcTitleText(
-            'Create list',
-            textAlign: TextAlign.center,
-            buttonText: true,
-          ),
-          style: filledButtonStyle(),
-          onPressed: () {
-            if (!_validateInput()) return;
-            widget.onCreate(_name, _password, _imgPath);
-          },
-        ),
-        Button(
-          child: NcTitleText(
-            'Cancel',
-            textAlign: TextAlign.center,
-          ),
-          style: buttonStyle(),
-          onPressed: Navigator.of(context).pop,
-        ),
-      ],
-      style: contentDialogStyle(),
     );
   }
 }

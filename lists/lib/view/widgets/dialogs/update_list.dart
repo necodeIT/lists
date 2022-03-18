@@ -30,6 +30,7 @@ class _UpdateListDialog extends State<UpdateListDialog> {
   late final TextEditingController _nameController;
   late final TextEditingController _passwordController;
   late final TextEditingController _repeatPasswordController;
+  final _contextKey = GlobalKey<ContextMenuOverlayState>();
   bool _changedIcon = false;
 
   bool _enablePassword = false;
@@ -124,141 +125,146 @@ class _UpdateListDialog extends State<UpdateListDialog> {
 
   @override
   Widget build(BuildContext context) {
-    return ContentDialog(
-      scrollContent: true,
-      title: NcTitleText('Edit ${widget.collection.name}'),
-      content: AnimatedSize(
-        curve: FluentTheme.of(context).animationCurve,
-        duration: FluentTheme.of(context).fastAnimationDuration,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            NcSpacing.large(),
-            ContextMenuRegion(
-              contextMenu: ContextMenu(
-                child: ContextMenuItem(
-                  icon: FluentIcons.ic_fluent_archive_24_filled,
-                  title: 'Reset',
-                  onTap: () {
-                    setState(() {
-                      _imgPath = "";
-                    });
-                  },
+    return ContextMenuOverlay(
+      key: _contextKey,
+      child: ContentDialog(
+        scrollContent: true,
+        title: NcTitleText('Edit ${widget.collection.name}'),
+        content: AnimatedSize(
+          curve: FluentTheme.of(context).animationCurve,
+          duration: FluentTheme.of(context).fastAnimationDuration,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              NcSpacing.large(),
+              ContextMenuRegion(
+                contextMenu: ContextMenu(
+                  child: ContextMenuItem(
+                    icon: FluentIcons.ic_fluent_archive_24_filled,
+                    title: 'Reset',
+                    onTap: () {
+                      setState(() {
+                        _imgPath = "";
+                        _contextKey.currentState!.hide();
+                        _changedIcon = true;
+                      });
+                    },
+                  ),
                 ),
-              ),
-              child: Badge(
-                badgeColor: adaptiveAccentColor,
-                padding: EdgeInsets.zero,
-                child: _changedIcon
-                    ? _imgPath.isNotEmpty
-                        ? Image.file(
-                            File(_imgPath),
-                            height: 100,
-                            width: 100,
-                          )
-                        : Image.asset(
-                            img_default_list_icon,
-                            color: textColor,
-                            height: 100,
-                            width: 100,
-                          )
-                    : widget.collection.hasIcon
-                        ? Image.memory(widget.collection.icon, height: 100, width: 100)
-                        : Image.asset(
-                            img_default_list_icon,
-                            color: textColor,
-                            height: 100,
-                            width: 100,
-                          ),
-                badgeContent: MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: GestureDetector(
-                    onTap: _browseImage,
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: Icon(
-                        FluentIcons.ic_fluent_edit_24_filled,
-                        color: buttonTextColor,
-                        size: 12,
+                child: Badge(
+                  badgeColor: adaptiveAccentColor,
+                  padding: EdgeInsets.zero,
+                  child: _changedIcon
+                      ? _imgPath.isNotEmpty
+                          ? Image.file(
+                              File(_imgPath),
+                              height: 100,
+                              width: 100,
+                            )
+                          : Image.asset(
+                              img_default_list_icon,
+                              color: textColor,
+                              height: 100,
+                              width: 100,
+                            )
+                      : widget.collection.hasIcon
+                          ? Image.memory(widget.collection.icon, height: 100, width: 100)
+                          : Image.asset(
+                              img_default_list_icon,
+                              color: textColor,
+                              height: 100,
+                              width: 100,
+                            ),
+                  badgeContent: MouseRegion(
+                    cursor: SystemMouseCursors.click,
+                    child: GestureDetector(
+                      onTap: _browseImage,
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Icon(
+                          FluentIcons.ic_fluent_edit_24_filled,
+                          color: buttonTextColor,
+                          size: 12,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-            NcSpacing.large(),
-            TextBox(
-              placeholder: 'Enter list name',
-              autofocus: true,
-              style: textBoxTextStyle(),
-              placeholderStyle: textBoxPlaceholderStyle(),
-              controller: _nameController,
-            ),
-            if (_enablePassword) NcSpacing.large(),
-            if (_enablePassword)
+              NcSpacing.large(),
               TextBox(
-                placeholder: 'Enter password',
-                obscureText: !_showPassword,
-                controller: _passwordController,
+                placeholder: 'Enter list name',
+                autofocus: true,
                 style: textBoxTextStyle(),
                 placeholderStyle: textBoxPlaceholderStyle(),
-                suffix: TooltipIconButton.small(
-                  tooltip: _showPassword ? "Hide password" : "Show password",
-                  icon: _showPassword ? FluentIcons.ic_fluent_eye_hide_24_filled : FluentIcons.ic_fluent_eye_show_24_filled,
-                  color: adaptiveAccentColor,
-                  onPressed: _toggleShowPassword,
+                controller: _nameController,
+              ),
+              if (_enablePassword) NcSpacing.large(),
+              if (_enablePassword)
+                TextBox(
+                  placeholder: 'Enter password',
+                  obscureText: !_showPassword,
+                  controller: _passwordController,
+                  style: textBoxTextStyle(),
+                  placeholderStyle: textBoxPlaceholderStyle(),
+                  suffix: TooltipIconButton.small(
+                    tooltip: _showPassword ? "Hide password" : "Show password",
+                    icon: _showPassword ? FluentIcons.ic_fluent_eye_hide_24_filled : FluentIcons.ic_fluent_eye_show_24_filled,
+                    color: adaptiveAccentColor,
+                    onPressed: _toggleShowPassword,
+                  ),
+                ),
+              if (_enablePassword) NcSpacing.large(),
+              if (_enablePassword)
+                TextBox(
+                  placeholder: 'Repeat password',
+                  obscureText: !_showRepeatPassword,
+                  style: textBoxTextStyle(),
+                  placeholderStyle: textBoxPlaceholderStyle(),
+                  controller: _repeatPasswordController,
+                  suffix: TooltipIconButton.small(
+                    tooltip: _showRepeatPassword ? "Hide password" : "Show password",
+                    icon: _showRepeatPassword ? FluentIcons.ic_fluent_eye_hide_24_filled : FluentIcons.ic_fluent_eye_show_24_filled,
+                    color: adaptiveAccentColor,
+                    onPressed: _toggleShowRepeatPassword,
+                  ),
+                ),
+              NcSpacing.large(),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Checkbox(
+                  checked: _enablePassword,
+                  content: NcCaptionText("Password"),
+                  onChanged: _updateEnablePassword,
                 ),
               ),
-            if (_enablePassword) NcSpacing.large(),
-            if (_enablePassword)
-              TextBox(
-                placeholder: 'Repeat password',
-                obscureText: !_showRepeatPassword,
-                style: textBoxTextStyle(),
-                placeholderStyle: textBoxPlaceholderStyle(),
-                controller: _repeatPasswordController,
-                suffix: TooltipIconButton.small(
-                  tooltip: _showRepeatPassword ? "Hide password" : "Show password",
-                  icon: _showRepeatPassword ? FluentIcons.ic_fluent_eye_hide_24_filled : FluentIcons.ic_fluent_eye_show_24_filled,
-                  color: adaptiveAccentColor,
-                  onPressed: _toggleShowRepeatPassword,
-                ),
-              ),
-            NcSpacing.large(),
-            Align(
-              alignment: Alignment.centerRight,
-              child: Checkbox(
-                checked: _enablePassword,
-                content: NcCaptionText("Password"),
-                onChanged: _updateEnablePassword,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
+        actions: [
+          FilledButton(
+            child: NcTitleText(
+              'Update list',
+              textAlign: TextAlign.center,
+              buttonText: true,
+            ),
+            style: filledButtonStyle(),
+            onPressed: () {
+              if (!_validateInput()) return;
+              widget.onUpdate(_nameController.text, _enablePassword ? _passwordController.text : "", _imgPath, _changedIcon);
+            },
+          ),
+          Button(
+            child: NcTitleText(
+              'Cancel',
+              textAlign: TextAlign.center,
+            ),
+            style: buttonStyle(),
+            onPressed: Navigator.of(context).pop,
+          ),
+        ],
+        style: contentDialogStyle(),
       ),
-      actions: [
-        FilledButton(
-          child: NcTitleText(
-            'Update list',
-            textAlign: TextAlign.center,
-            buttonText: true,
-          ),
-          style: filledButtonStyle(),
-          onPressed: () {
-            if (!_validateInput()) return;
-            widget.onUpdate(_nameController.text, _enablePassword ? _passwordController.text : "", _imgPath, _changedIcon);
-          },
-        ),
-        Button(
-          child: NcTitleText(
-            'Cancel',
-            textAlign: TextAlign.center,
-          ),
-          style: buttonStyle(),
-          onPressed: Navigator.of(context).pop,
-        ),
-      ],
-      style: contentDialogStyle(),
     );
   }
 }
