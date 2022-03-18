@@ -52,6 +52,7 @@ class _GeneralOptionsState extends State<GeneralOptions> {
                       width: 15,
                       height: 15,
                       child: ProgressRing(
+                        activeColor: adaptiveAccentColor,
                         strokeWidth: 3,
                       ),
                     ),

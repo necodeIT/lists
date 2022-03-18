@@ -16,8 +16,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   NcThemes.initPredefinedThemes();
 
-  await Settings.load();
   SystemThemeObserver.start();
+  await Settings.load();
 
   runApp(
     FutureBuilder(
