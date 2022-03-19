@@ -94,7 +94,6 @@ class _UpdateEntryDialog extends State<UpdateEntryDialog> {
             'Cancel',
             textAlign: TextAlign.center,
           ),
-          style: buttonStyle(),
           onPressed: Navigator.of(context).pop,
         ),
       ],

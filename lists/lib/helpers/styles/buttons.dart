@@ -1,7 +1,7 @@
 part of list_styles;
 
 buttonThemeData() => ButtonThemeData(
-      defaultButtonStyle: buttonStyle(),
+      defaultButtonStyle: buttonStyle(color: primaryColor, hoverColor: secondaryColor),
       filledButtonStyle: filledButtonStyle(),
     );
 
@@ -14,12 +14,7 @@ ButtonStyle filledButtonStyle() => ButtonStyle(
       elevation: ButtonState.all(1.5),
     );
 
-// var _buttonStyleColors = ThemeableProperty<Color>.only(Colors.transparent, {
-//   lightTheme: lightTheme.primaryColor,
-//   darkTheme: darkTheme.tertiaryColor,
-// });
-
-ButtonStyle buttonStyle([Color? color, Color? hoverColor, double? elevation, BorderStyle? borderStyle]) => ButtonStyle(
+ButtonStyle buttonStyle({Color? color, Color? hoverColor, double? elevation, BorderStyle? borderStyle}) => ButtonStyle(
       padding: ButtonState.all(EdgeInsets.all(8.0)),
       backgroundColor: ButtonState.resolveWith(
         (states) {

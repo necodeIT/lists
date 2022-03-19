@@ -38,7 +38,7 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
               data: ThemeData(
                 brightness: brightness,
                 buttonTheme: ButtonThemeData(
-                  defaultButtonStyle: buttonStyle(Colors.transparent, secondaryColor),
+                  defaultButtonStyle: buttonStyle(color: Colors.transparent, hoverColor: secondaryColor),
                 ),
                 menuColor: primaryColor,
               ),

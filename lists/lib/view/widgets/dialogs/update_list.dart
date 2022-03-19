@@ -259,7 +259,6 @@ class _UpdateListDialog extends State<UpdateListDialog> {
               'Cancel',
               textAlign: TextAlign.center,
             ),
-            style: buttonStyle(),
             onPressed: Navigator.of(context).pop,
           ),
         ],

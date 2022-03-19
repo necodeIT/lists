@@ -188,19 +188,6 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
                 placeholderStyle: textBoxPlaceholderStyle(),
                 onChanged: _updateName,
               ),
-              // NcSpacing.large(),
-              // TextBox(
-              //   placeholder: 'Icon (optional)',
-              //   controller: _imagePathController,
-              //   style: textBoxTextStyle(),
-              //   placeholderStyle: textBoxPlaceholderStyle(),
-              //   suffix: TooltipIconButton.small(
-              //     tooltip: "Browse",
-              //     icon: FluentIcons.ic_fluent_folder_open_24_filled,
-              //     color: adaptiveAccentColor,
-              //     onPressed: _borwseImage,
-              //   ),
-              // ),
               if (_enablePassword) NcSpacing.large(),
               if (_enablePassword)
                 TextBox(
@@ -261,7 +248,7 @@ class _CreateNewListDialogState extends State<CreateNewListDialog> {
               'Cancel',
               textAlign: TextAlign.center,
             ),
-            style: buttonStyle(),
+            // style: buttonStyle(),
             onPressed: Navigator.of(context).pop,
           ),
         ],
