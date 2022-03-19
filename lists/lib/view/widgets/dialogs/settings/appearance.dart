@@ -37,46 +37,15 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
             trailing: FluentTheme(
               data: ThemeData(
                 brightness: brightness,
-                accentColor: adaptiveAccentColor,
-                uncheckedColor: accentColor,
                 buttonTheme: ButtonThemeData(
-                  defaultButtonStyle: buttonStyle(primaryColor),
+                  defaultButtonStyle: buttonStyle(Colors.transparent, secondaryColor),
                 ),
                 menuColor: primaryColor,
               ),
-              // child: DropDownButton(
-              //   menuDecoration: dropDownButtonMenuStyle(),
-              //   title: NcCaptionText(Settings.theme),
-              //   items: [
-              //     for (var theme in NcThemes.all.keys)
-              //       DropDownButtonItem(
-              //         onTap: () => _setTheme(theme),
-              //         title: Row(
-              //           mainAxisSize: MainAxisSize.min,
-              //           children: [
-              //             FluentVertivalDvider(color: Settings.theme == theme ? adaptiveAccentColor : Colors.transparent),
-              //             NcSpacing.xs(),
-              //             NcCaptionText(theme),
-              //           ],
-              //         ),
-              //       ),
-              //     DropDownButtonItem(
-              //       onTap: () => _setTheme(Settings.systemTheme),
-              //       title: Row(
-              //         mainAxisSize: MainAxisSize.min,
-              //         children: [
-              //           FluentVertivalDvider(color: Settings.useSystemTheme ? adaptiveAccentColor : Colors.transparent),
-              //           NcSpacing.xs(),
-              //           NcCaptionText(Settings.systemTheme),
-              //         ],
-              //       ),
-              //     ),
-              //   ],
-              // ),
-
               child: Combobox<String>(
-                // icon: Icon(FluentIcons.ic_fluent_chevron_down_24_filled),
-
+                icon: Icon(
+                  FluentIcons.ic_fluent_chevron_down_24_filled,
+                ),
                 value: Settings.theme,
                 onChanged: _setTheme,
                 items: [
@@ -86,7 +55,7 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
                       value: theme,
                     ),
                   ComboboxItem(
-                    child: NcCaptionText(Settings.systemTheme),
+                    child: SizedBox(width: 60, child: NcCaptionText(Settings.systemTheme)),
                     value: Settings.systemTheme,
                   ),
                 ],

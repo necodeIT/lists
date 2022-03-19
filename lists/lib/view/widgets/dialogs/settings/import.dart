@@ -12,7 +12,7 @@ class LegacyOptions extends StatelessWidget {
       headerBackgroundColor: expanderHeaderBackground(),
       contentBackgroundColor: expanderContentBackground(),
       initiallyExpanded: false,
-      header: ExpanderHeader(icon: FluentIcons.ic_fluent_apps_add_in_24_filled, text: "Legacy"),
+      header: ExpanderHeader(icon: FluentIcons.ic_fluent_arrow_import_24_filled, text: "Import"),
       content: Column(
         children: [
           SettingsContainer(

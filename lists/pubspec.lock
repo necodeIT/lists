@@ -230,7 +230,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "356140139de93fb252c9561a3ca299528985c839"
+      resolved-ref: "039f4bb5312843ffb9adcf41f07adc2bb5125a7d"
       url: "https://github.com/necodeIT/fluent_ui.git"
     source: git
     version: "3.9.2"

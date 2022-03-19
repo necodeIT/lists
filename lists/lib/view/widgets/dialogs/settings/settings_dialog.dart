@@ -18,7 +18,7 @@ import 'package:nekolib_ui/core.dart';
 
 part 'appearance.dart';
 part 'sync.dart';
-part 'legacy.dart';
+part 'import.dart';
 part 'general.dart';
 
 class SettingsDialog extends StatefulWidget {

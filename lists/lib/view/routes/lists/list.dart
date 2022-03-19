@@ -44,17 +44,17 @@ class _CollectionTileState extends State<CollectionTile> {
                 ),
               ],
             ),
-            // HoverRegion(
-            //   child: Row(
-            //     mainAxisSize: MainAxisSize.min,
-            //     children: [
-            //       Icon(FluentIcons.ic_fluent_arrow_export_ltr_24_filled, size: 14),
-            //       NcSpacing.xs(),
-            //       NcCaptionText("Export", fontSize: 14),
-            //     ],
-            //   ),
-            //   onTap: () => showPasswordDialog(context, widget.collection),
-            // ),
+            HoverRegion(
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(FluentIcons.ic_fluent_arrow_export_ltr_24_filled, size: 14),
+                  NcSpacing.xs(),
+                  NcCaptionText("Export", fontSize: 14),
+                ],
+              ),
+              onTap: () => showPasswordDialog(context, widget.collection),
+            ),
           ],
         ),
       ),

@@ -7,9 +7,9 @@ buttonThemeData() => ButtonThemeData(
 
 ButtonStyle filledButtonStyle() => ButtonStyle(
       padding: ButtonState.all(EdgeInsets.all(8.0)),
-      backgroundColor: ButtonState.all(adaptiveAccentColor),
-      border: ButtonState.all(
-        BorderSide(color: adaptiveAccentColor),
+      backgroundColor: ButtonState.resolveWith((states) => states.isHovering ? adaptiveAccentColor.light : adaptiveAccentColor),
+      border: ButtonState.resolveWith(
+        (states) => BorderSide(color: states.isHovering ? adaptiveAccentColor.light : adaptiveAccentColor),
       ),
       elevation: ButtonState.all(1.5),
     );
@@ -19,12 +19,22 @@ ButtonStyle filledButtonStyle() => ButtonStyle(
 //   darkTheme: darkTheme.tertiaryColor,
 // });
 
-ButtonStyle buttonStyle([Color? color, double? elevation, BorderStyle? borderStyle]) => ButtonStyle(
+ButtonStyle buttonStyle([Color? color, Color? hoverColor, double? elevation, BorderStyle? borderStyle]) => ButtonStyle(
       padding: ButtonState.all(EdgeInsets.all(8.0)),
-      backgroundColor: ButtonState.all(color ?? primaryColor),
-      border: ButtonState.all(
-        BorderSide(color: color ?? primaryColor, style: borderStyle ?? BorderStyle.solid),
+      backgroundColor: ButtonState.resolveWith(
+        (states) {
+          if (states.isHovering) {
+            return hoverColor ?? primaryColor.withOpacity(0.7);
+          }
+
+          return color ?? primaryColor;
+        },
       ),
+      border: ButtonState.resolveWith((states) {
+        var defaultColor = color ?? primaryColor;
+        var hover = hoverColor ?? primaryColor.withOpacity(0.7);
+        return BorderSide(color: states.isHovering ? hover : defaultColor, style: borderStyle ?? BorderStyle.solid);
+      }),
       foregroundColor: ButtonState.all(textColor),
       elevation: ButtonState.all(elevation ?? 1.5),
     );
