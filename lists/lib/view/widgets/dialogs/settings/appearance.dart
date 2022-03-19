@@ -37,14 +37,17 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
             trailing: FluentTheme(
               data: ThemeData(
                 brightness: brightness,
+                accentColor: adaptiveAccentColor,
                 buttonTheme: ButtonThemeData(
                   defaultButtonStyle: buttonStyle(color: Colors.transparent, hoverColor: secondaryColor),
                 ),
                 menuColor: primaryColor,
               ),
               child: Combobox<String>(
+                iconSize: 16,
                 icon: Icon(
                   FluentIcons.ic_fluent_chevron_down_24_filled,
+                  color: textColor,
                 ),
                 value: Settings.theme,
                 onChanged: _setTheme,
