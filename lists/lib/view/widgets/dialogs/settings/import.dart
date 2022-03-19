@@ -15,11 +15,11 @@ class LegacyOptions extends StatelessWidget {
       header: ExpanderHeader(icon: FluentIcons.ic_fluent_arrow_import_24_filled, text: "Import"),
       content: Column(
         children: [
-          SettingsContainer(
-            title: NcTitleText("Export list to file"),
-            onTap: () {},
-            trailing: SettingsIcon(icon: FluentIcons.ic_fluent_chevron_right_24_filled),
-          ),
+          // SettingsContainer(
+          //   title: NcTitleText("Export list to file"),
+          //   onTap: () {},
+          //   trailing: SettingsIcon(icon: FluentIcons.ic_fluent_chevron_right_24_filled),
+          // ),
           SettingsContainer(
             title: NcTitleText("Import list from file"),
             onTap: () {},
@@ -32,7 +32,7 @@ class LegacyOptions extends StatelessWidget {
           ),
           SettingsContainer(
             color: warningColor.withOpacity(.3),
-            title: NcCaptionText("Legacy support is not implemented yet"),
+            title: NcCaptionText("Importing is not implemented yet"),
             icon: FluentIcons.ic_fluent_info_24_regular,
           ),
         ],
