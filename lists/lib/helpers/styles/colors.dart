@@ -1,7 +1,8 @@
 part of list_styles;
 
 AccentColor get adaptiveAccentColor => Settings.adaptAccent && !SystemThemeObserver.error ? SystemThemeObserver.accentColor : _accentColors.value;
-// AccentColor get adaptiveAccentColor => _accentColors.value;
+
+Color get surfaceColor => _surfaceColors.value;
 
 ThemeableProperty _accentColors = ThemeableProperty<AccentColor>(
   {
@@ -53,5 +54,14 @@ ThemeableProperty _accentColors = ThemeableProperty<AccentColor>(
         'lightest': Color(0xff68d0f7),
       },
     ),
+  },
+);
+
+ThemeableProperty _surfaceColors = ThemeableProperty<Color>(
+  {
+    sakuraTheme: sakuraTheme.primaryColor,
+    oceanTheme: oceanTheme.secondaryColor,
+    darkTheme: darkTheme.secondaryColor,
+    lightTheme: lightTheme.primaryColor,
   },
 );

@@ -46,14 +46,13 @@ class _CollectionRouteState extends State<ListRoute> {
     _password = routeArgs["password"] as String;
 
     return Container(
-      color: secondaryColor,
+      color: primaryColor,
       child: Column(
         children: [
           Container(
             padding: EdgeInsets.all(NcSpacing.smallSpacing),
             decoration: BoxDecoration(
-              color: primaryColor,
-              boxShadow: kElevationToShadow[1],
+              color: secondaryColor,
             ),
             child: Row(
               mainAxisSize: MainAxisSize.max,

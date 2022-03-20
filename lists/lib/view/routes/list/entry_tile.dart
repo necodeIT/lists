@@ -71,7 +71,7 @@ class _EntryTileState extends State<EntryTile> {
             margin: EdgeInsets.only(bottom: 8),
             padding: EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: _showContent ? primaryColor : adaptiveAccentColor.withOpacity(.5),
+              color: _showContent ? surfaceColor : adaptiveAccentColor.withOpacity(.5),
               border: Border.all(
                 color: adaptiveAccentColor,
                 style: _showContent ? BorderStyle.none : BorderStyle.solid,

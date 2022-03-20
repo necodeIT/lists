@@ -11,6 +11,7 @@ import 'package:lists/view/routes/list/list.dart';
 import 'package:lists/view/routes/lists/lists.dart';
 import 'package:lists/view/routes/upgrade/upgrade.dart';
 import 'package:lists/view/widgets/route.dart';
+import 'package:lists/view/widgets/window_handle.dart';
 import 'package:nekolib_ui/core.dart';
 
 void main() async {
@@ -28,7 +29,9 @@ void main() async {
   );
 
   doWhenWindowReady(() {
-    appWindow.size = Size(1200, 700);
+    var size = Size(1200, 700);
+    appWindow.size = size;
+    appWindow.minSize = size;
     appWindow.title = Updater.appName;
     appWindow.show();
   });
@@ -48,6 +51,7 @@ class App extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: theme(),
       title: 'Lists',
+      builder: WindowHandle.builder,
       initialRoute: Updater.updateAvailable
           ? UpgradeRoute.routeName
           : DB.collections.isNotEmpty
