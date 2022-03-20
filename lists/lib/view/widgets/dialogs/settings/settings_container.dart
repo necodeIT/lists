@@ -5,8 +5,12 @@ import 'package:lists/view/widgets/info_box_container.dart';
 import 'package:nekolib_ui/core.dart';
 import 'package:nekolib_ui/utils.dart';
 
+final ThemeableProperty<double> _opacity = ThemeableProperty<double>.only(.25, {sakuraTheme: 1, oceanTheme: .5});
+
+double get kDefaultOpacity => _opacity.value;
+
 class SettingsContainer extends StatelessWidget {
-  const SettingsContainer({Key? key, required this.title, this.color, this.trailing, this.icon, this.iconTooltip, this.onTap, this.hoverColor}) : super(key: key);
+  const SettingsContainer({Key? key, required this.title, this.color, this.trailing, this.icon, this.iconTooltip, this.onTap, this.hoverColor, this.border = false}) : super(key: key);
 
   final Widget title;
   final Color? color;
@@ -15,6 +19,7 @@ class SettingsContainer extends StatelessWidget {
   final IconData? icon;
   final String? iconTooltip;
   final VoidCallback? onTap;
+  final bool border;
 
   static const edgeInsets = EdgeInsets.symmetric(horizontal: 16);
   static const edgeInsets2 = EdgeInsets.symmetric(vertical: 1);
@@ -38,7 +43,7 @@ class SettingsContainer extends StatelessWidget {
               margin: edgeInsets2,
               shadow: shadow,
               backgroundColor: backgroundColor,
-              borderColor: borderColor,
+              borderColor: border ? borderColor : Colors.transparent,
               icon: icon,
               iconToolTip: iconTooltip,
               title: title,
@@ -53,7 +58,7 @@ class SettingsContainer extends StatelessWidget {
         margin: edgeInsets2,
         shadow: shadow,
         backgroundColor: color ?? primaryColor,
-        borderColor: color ?? Colors.transparent,
+        borderColor: border ? color ?? Colors.transparent : Colors.transparent,
         icon: icon,
         iconToolTip: iconTooltip,
         title: title,

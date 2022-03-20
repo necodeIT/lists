@@ -1,5 +1,5 @@
-import 'package:context_menus/context_menus.dart';
-import 'package:fluent_ui/fluent_ui.dart';
+import 'package:bitsdojo_window/bitsdojo_window.dart';
+import 'package:fluent_ui/fluent_ui.dart' hide Route;
 import 'package:lists/models/db.dart';
 import 'package:lists/models/settings.dart';
 import 'package:lists/models/updater.dart';
@@ -10,6 +10,7 @@ import 'package:lists/view/routes/home/home.dart';
 import 'package:lists/view/routes/list/list.dart';
 import 'package:lists/view/routes/lists/lists.dart';
 import 'package:lists/view/routes/upgrade/upgrade.dart';
+import 'package:lists/view/widgets/route.dart';
 import 'package:nekolib_ui/core.dart';
 
 void main() async {
@@ -25,6 +26,12 @@ void main() async {
       builder: (context, snapshot) => snapshot.connectionState == ConnectionState.waiting ? appLoader() : NcApp(builder: (context) => App()),
     ),
   );
+
+  doWhenWindowReady(() {
+    appWindow.size = Size(1200, 700);
+    appWindow.title = Updater.appName;
+    appWindow.show();
+  });
 }
 
 Future loadAll() async {
@@ -47,10 +54,10 @@ class App extends StatelessWidget {
               ? ListsRoute.routeName
               : HomeRoute.routeName,
       routes: {
-        HomeRoute.routeName: (context) => ContextMenuOverlay(child: HomeRoute()),
-        ListsRoute.routeName: (context) => ContextMenuOverlay(child: ListsRoute()),
-        ListRoute.routeName: (context) => ContextMenuOverlay(child: ListRoute()),
-        UpgradeRoute.routeName: (context) => ContextMenuOverlay(child: UpgradeRoute()),
+        HomeRoute.routeName: (context) => Route(child: HomeRoute()),
+        ListsRoute.routeName: (context) => Route(child: ListsRoute()),
+        ListRoute.routeName: (context) => Route(child: ListRoute()),
+        UpgradeRoute.routeName: (context) => Route(child: UpgradeRoute()),
       },
     );
   }

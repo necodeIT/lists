@@ -77,7 +77,7 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
           ),
           if (SystemThemeObserver.error)
             SettingsContainer(
-              color: errorColor.withOpacity(.3),
+              color: errorColor.withOpacity(kDefaultOpacity),
               title: NcCaptionText("Error reading system accent color! Using default."),
               trailing: TooltipIconButton(
                 icon: FluentIcons.ic_fluent_more_horizontal_24_filled,

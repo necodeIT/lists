@@ -61,12 +61,12 @@ class _GeneralOptionsState extends State<GeneralOptions> {
                   return !Updater.updateAvailable
                       ? SettingsContainer(
                           icon: FluentIcons.ic_fluent_checkmark_24_filled,
-                          color: successColor.withOpacity(.5),
+                          color: successColor.withOpacity(kDefaultOpacity),
                           title: NcTitleText("You are on the latest version!"),
                         )
                       : SettingsContainer(
                           icon: FluentIcons.ic_fluent_info_24_regular,
-                          color: warningColor.withOpacity(.5),
+                          color: warningColor.withOpacity(kDefaultOpacity),
                           title: NcTitleText("Update available"),
                           trailing: TooltipIconButton(
                             tooltip: "Update",
@@ -77,7 +77,7 @@ class _GeneralOptionsState extends State<GeneralOptions> {
                 } else {
                   return SettingsContainer(
                     icon: FluentIcons.ic_fluent_error_circle_24_regular,
-                    color: errorColor.withOpacity(.5),
+                    color: errorColor.withOpacity(kDefaultOpacity),
                     title: NcTitleText("Error checking for updates"),
                     trailing: TooltipIconButton(
                       icon: FluentIcons.ic_fluent_more_horizontal_24_filled,

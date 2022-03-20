@@ -4,3 +4,4 @@ part of assets;
 const img_folder = "img";
 
 const img_default_list_icon = "$assets_folder/$img_folder/default_list_icon.png";
+const img_app_icon = "$assets_folder/$img_folder/app_icon.png";

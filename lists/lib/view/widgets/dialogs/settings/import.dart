@@ -31,7 +31,7 @@ class LegacyOptions extends StatelessWidget {
             trailing: SettingsIcon(icon: FluentIcons.ic_fluent_chevron_right_24_filled),
           ),
           SettingsContainer(
-            color: warningColor.withOpacity(.3),
+            color: warningColor.withOpacity(kDefaultOpacity),
             title: NcCaptionText("Importing is not implemented yet"),
             icon: FluentIcons.ic_fluent_info_24_regular,
           ),

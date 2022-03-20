@@ -29,14 +29,14 @@ class _ListsRouteState extends State<ListsRoute> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: secondaryColor,
+      color: primaryColor,
       child: Column(
         children: [
           Container(
             padding: EdgeInsets.all(NcSpacing.smallSpacing),
             decoration: BoxDecoration(
-              color: primaryColor,
-              boxShadow: kElevationToShadow[1],
+              color: secondaryColor,
+              // boxShadow: kElevationToShadow[1],
             ),
             child: Row(
               mainAxisSize: MainAxisSize.min,
