@@ -265,7 +265,7 @@ packages:
     description:
       path: "."
       ref: master
-      resolved-ref: "15733f4b02927917467ba53ce955f5576af6d346"
+      resolved-ref: "0770a175aae0b1c109486bfae316fce6e73b2f4d"
       url: "https://github.com/necodeIT/fluent_ui.git"
     source: git
     version: "3.9.2"
@@ -684,7 +684,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.4.1"
+    version: "2.4.2"
   xdg_directories:
     dependency: transitive
     description:
