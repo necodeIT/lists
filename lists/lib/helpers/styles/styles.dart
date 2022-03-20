@@ -30,4 +30,6 @@ ThemeData theme() => ThemeData(
       scaffoldBackgroundColor: secondaryColor,
       accentColor: adaptiveAccentColor,
       scrollbarTheme: scrollbarThemeData(),
+      inactiveBackgroundColor: primaryColor,
+      inactiveColor: tertiaryColor,
     );
