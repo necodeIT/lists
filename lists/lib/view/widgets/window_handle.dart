@@ -80,8 +80,8 @@ class WindowHandle extends StatelessWidget {
                 // ),
                 NcVectorImage(
                   code: kAppIconSvg,
-                  width: 20,
-                  height: 20,
+                  width: 18,
+                  height: 18,
                 ),
                 NcSpacing.xs(),
                 Expanded(
@@ -90,6 +90,7 @@ class WindowHandle extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: NcCaptionText(
                         Updater.appName,
+                        fontSize: 12,
                       ),
                     ),
                   ),
