@@ -1,5 +1,6 @@
 import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:fluent_ui/fluent_ui.dart' hide Route;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lists/models/db.dart';
 import 'package:lists/models/settings.dart';
 import 'package:lists/models/updater.dart';
@@ -47,22 +48,24 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FluentApp(
-      debugShowCheckedModeBanner: false,
-      theme: theme(),
-      title: 'Lists',
-      builder: WindowHandle.builder,
-      initialRoute: Updater.updateAvailable
-          ? UpgradeRoute.routeName
-          : DB.collections.isNotEmpty
-              ? ListsRoute.routeName
-              : HomeRoute.routeName,
-      routes: {
-        HomeRoute.routeName: (context) => Route(child: HomeRoute()),
-        ListsRoute.routeName: (context) => Route(child: ListsRoute()),
-        ListRoute.routeName: (context) => Route(child: ListRoute()),
-        UpgradeRoute.routeName: (context) => Route(child: UpgradeRoute()),
-      },
+    return ProviderScope(
+      child: FluentApp(
+        debugShowCheckedModeBanner: false,
+        theme: theme(),
+        title: 'Lists',
+        builder: WindowHandle.builder,
+        initialRoute: Updater.updateAvailable
+            ? UpgradeRoute.routeName
+            : DB.collections.isNotEmpty
+                ? ListsRoute.routeName
+                : HomeRoute.routeName,
+        routes: {
+          HomeRoute.routeName: (context) => Route(child: HomeRoute()),
+          ListsRoute.routeName: (context) => Route(child: ListsRoute()),
+          ListRoute.routeName: (context) => Route(child: ListRoute()),
+          UpgradeRoute.routeName: (context) => Route(child: UpgradeRoute()),
+        },
+      ),
     );
   }
 }
