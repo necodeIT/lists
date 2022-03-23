@@ -19,6 +19,8 @@ class DB {
   static List<Collection> get collections => List.unmodifiable(_collections);
   static List<String> get collectionNames => _collectionsMap.keys.toList();
 
+  static Collection getCollection(String name) => _collectionsMap[name]!;
+
   static Future<Directory> get appDir async {
     var dir = await getApplicationDocumentsDirectory();
 

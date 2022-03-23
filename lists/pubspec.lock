@@ -217,7 +217,7 @@ packages:
       name: dbus
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.1"
+    version: "0.7.2"
   dio:
     dependency: "direct main"
     description:
@@ -399,7 +399,7 @@ packages:
     source: git
     version: "0.0.1"
   nekolib_utils:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: utils
       ref: flutter
@@ -684,7 +684,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.4.2"
+    version: "2.4.4"
   xdg_directories:
     dependency: transitive
     description:

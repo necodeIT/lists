@@ -14,8 +14,11 @@ import 'package:lists/view/routes/upgrade/upgrade.dart';
 import 'package:lists/view/widgets/route.dart';
 import 'package:lists/view/widgets/window_handle.dart';
 import 'package:nekolib_ui/core.dart';
+import 'package:nekolib_utils/log.dart';
 
 void main() async {
+  Logger.init(autoSave: true, appStoragePath: (await DB.appDir).path);
+
   WidgetsFlutterBinding.ensureInitialized();
   NcThemes.initPredefinedThemes();
 
@@ -31,10 +34,11 @@ void main() async {
 
   doWhenWindowReady(() {
     var size = Size(1200, 700);
-    appWindow.size = size;
-    appWindow.minSize = size;
-    appWindow.title = Updater.appName;
-    appWindow.show();
+
+    appWindow
+      ..minSize = size
+      ..title = Updater.appName
+      ..show();
   });
 }
 
