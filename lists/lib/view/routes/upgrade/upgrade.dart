@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lists/controller/controller.dart';
 import 'package:lists/models/updater.dart';
 import 'package:lists/helpers/dialogs.dart';
-import 'package:lists/helpers/styles/styles.dart';
+import 'package:lists/view/styles/styles.dart';
 import 'package:nekolib_ui/core.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -23,7 +23,7 @@ class _UpgradeRouteState extends State<UpgradeRoute> {
       title: "Error updating",
       message: "The update failed to download.\nPlease try again later or update manually.",
       onConfirm: () => launch(Updater.setupDownloadUrl),
-      confirmText: "Download",
+      confirmText: "Update manually",
     );
   }
 
@@ -36,7 +36,8 @@ class _UpgradeRouteState extends State<UpgradeRoute> {
 
       void upgrade() => updater.upgrade(_showErrorDialog);
 
-      if (args != null && args as bool) upgrade;
+      if (args != null && args as bool) upgrade();
+
       return Container(
         width: double.infinity,
         height: double.infinity,
@@ -45,20 +46,20 @@ class _UpgradeRouteState extends State<UpgradeRoute> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            if (updater.error)
+            if (updater.status.isError)
               Icon(
                 FluentIcons.ic_fluent_error_circle_24_filled,
                 size: 80,
                 color: errorColor,
               ),
-            if (updater.error) NcSpacing.medium(),
-            if (updater.error)
+            if (updater.status.isError) NcSpacing.medium(),
+            if (updater.status.isError)
               NcTitleText(
                 "The update failed to download. Please try again later or update manually.",
                 fontSize: 20,
               ),
-            if (updater.error) NcSpacing.medium(),
-            if (updater.error)
+            if (updater.status.isError) NcSpacing.medium(),
+            if (updater.status.isError)
               FilledButton(
                 style: filledButtonStyle(),
                 child: NcCaptionText(
@@ -69,13 +70,13 @@ class _UpgradeRouteState extends State<UpgradeRoute> {
                 ),
                 onPressed: () => launch(Updater.setupDownloadUrl),
               ),
-            if (!updater.downloading && !updater.error)
+            if (updater.status.isIdle)
               Icon(
                 FluentIcons.ic_fluent_arrow_circle_up_24_regular,
                 size: 80,
               ),
-            if (!updater.downloading && !updater.error) NcSpacing.medium(),
-            if (!updater.downloading && !updater.error)
+            if (updater.status.isIdle) NcSpacing.medium(),
+            if (updater.status.isIdle)
               FilledButton(
                 style: filledButtonStyle(),
                 child: NcCaptionText(
@@ -86,13 +87,13 @@ class _UpgradeRouteState extends State<UpgradeRoute> {
                 ),
                 onPressed: upgrade,
               ),
-            if (updater.downloading && !updater.error)
+            if (updater.status.isDownloading || updater.status.isDone)
               NcTitleText(
-                updater.done ? "Launching installer..." : "Downloading updates (${updater.progress}%)...",
+                updater.status.isDone ? "Launching installer..." : "Downloading updates (${updater.progress}%)...",
                 fontSize: 20,
               ),
-            if (updater.downloading && !updater.error) NcSpacing.medium(),
-            if (updater.downloading && !updater.error)
+            if (updater.status.isDownloading || updater.status.isDone) NcSpacing.medium(),
+            if (updater.status.isDownloading || updater.status.isDone)
               ProgressBar(
                 width: 400,
                 backgroundColor: tertiaryColor,

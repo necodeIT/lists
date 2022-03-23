@@ -5,7 +5,7 @@ import 'package:flutter/material.dart' show Icons;
 import 'package:lists/models/settings.dart';
 import 'package:lists/models/updater.dart';
 import 'package:lists/helpers/dialogs.dart';
-import 'package:lists/helpers/styles/styles.dart';
+import 'package:lists/view/styles/styles.dart';
 import 'package:lists/helpers/system_theme.dart';
 import 'package:lists/view/routes/upgrade/upgrade.dart';
 import 'package:lists/view/widgets/dialogs/settings/icon.dart';

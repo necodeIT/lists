@@ -5,7 +5,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:lists/controller/controller.dart';
 import 'package:lists/models/collection.dart';
 import 'package:lists/helpers/collection.dart';
-import 'package:lists/helpers/styles/styles.dart';
+import 'package:lists/view/styles/styles.dart';
 import 'package:lists/view/widgets/context_menu.dart';
 import 'package:lists/view/widgets/tooltip_icon_button.dart';
 import 'package:lists/view/widgets/vertical_divider.dart';

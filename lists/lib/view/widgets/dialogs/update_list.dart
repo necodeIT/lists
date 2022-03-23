@@ -7,7 +7,7 @@ import 'package:lists/assets/assets.dart';
 import 'package:lists/models/collection.dart';
 import 'package:lists/models/db.dart';
 import 'package:lists/helpers/dialogs.dart';
-import 'package:lists/helpers/styles/styles.dart';
+import 'package:lists/view/styles/styles.dart';
 import 'package:lists/view/widgets/context_menu.dart';
 import 'package:lists/view/widgets/context_menu_item.dart';
 import 'package:lists/view/widgets/tooltip_icon_button.dart';

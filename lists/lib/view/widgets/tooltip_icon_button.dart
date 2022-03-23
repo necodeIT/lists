@@ -1,5 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:lists/helpers/styles/styles.dart';
+import 'package:lists/view/styles/styles.dart';
 import 'package:lists/view/widgets/hover_region.dart';
 import 'package:nekolib_ui/core.dart';
 

@@ -73,11 +73,11 @@ class Updater {
   }
 
   /// Download the setup file to temp folder
-  static Future<String> upgrade(Function(int, int)? onReceiveProgress) async {
+  static Future<File> upgrade(Function(int, int)? onReceiveProgress) async {
     var dio = Dio();
     var path = "${Directory.systemTemp.path}/$appName - $latestVersionName Setup.exe";
     await dio.download(_setupDownloadUrl, path, onReceiveProgress: onReceiveProgress);
 
-    return path;
+    return File(path);
   }
 }

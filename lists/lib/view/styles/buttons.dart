@@ -1,15 +1,17 @@
 part of list_styles;
 
 buttonThemeData() => ButtonThemeData(
-      defaultButtonStyle: buttonStyle(color: primaryColor, hoverColor: secondaryColor),
+      defaultButtonStyle: buttonStyle(color: primaryColor),
       filledButtonStyle: filledButtonStyle(),
     );
 
+double get kDarkenValue => brightness.isLight ? 0.05 : 0.01;
+
 ButtonStyle filledButtonStyle() => ButtonStyle(
       padding: ButtonState.all(EdgeInsets.all(8.0)),
-      backgroundColor: ButtonState.resolveWith((states) => states.isHovering ? adaptiveAccentColor.light : adaptiveAccentColor),
+      backgroundColor: ButtonState.resolveWith((states) => states.isHovering ? adaptiveAccentColor.dark : adaptiveAccentColor),
       border: ButtonState.resolveWith(
-        (states) => BorderSide(color: states.isHovering ? adaptiveAccentColor.light : adaptiveAccentColor),
+        (states) => BorderSide(color: states.isHovering ? adaptiveAccentColor.dark : adaptiveAccentColor),
       ),
       elevation: ButtonState.all(1.5),
     );
@@ -19,16 +21,15 @@ ButtonStyle buttonStyle({Color? color, Color? hoverColor, double? elevation, Bor
       backgroundColor: ButtonState.resolveWith(
         (states) {
           if (states.isHovering) {
-            return hoverColor ?? primaryColor.withOpacity(0.7);
+            return hoverColor ?? primaryColor.darken(kDarkenValue);
           }
 
           return color ?? primaryColor;
         },
       ),
       border: ButtonState.resolveWith((states) {
-        var defaultColor = color ?? primaryColor;
-        var hover = hoverColor ?? primaryColor.withOpacity(0.7);
-        return BorderSide(color: states.isHovering ? hover : defaultColor, style: borderStyle ?? BorderStyle.solid);
+        var borderColor = states.isHovering ? hoverColor ?? primaryColor.darken(kDarkenValue) : color ?? primaryColor;
+        return BorderSide(color: borderColor, style: borderStyle ?? BorderStyle.solid);
       }),
       foregroundColor: ButtonState.all(textColor),
       elevation: ButtonState.all(elevation ?? 1.5),

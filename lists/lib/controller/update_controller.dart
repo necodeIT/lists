@@ -3,18 +3,14 @@ part of controllers;
 final updaterProvider = ChangeNotifierProvider((ref) => UpdateProvider());
 
 class UpdateProvider extends ChangeNotifier {
-  bool _error = false;
-  bool _downloading = false;
-  bool _done = false;
+  UpdateStatus _status = UpdateStatus.idle;
   int _progress = 0;
 
   bool get updateAvailable => Updater.updateAvailable;
   String get downloadUrl => Updater.setupDownloadUrl;
   String get latestVersionName => Updater.latestVersionName;
 
-  bool get error => _error;
-  bool get downloading => _downloading;
-  bool get done => _done;
+  UpdateStatus get status => _status;
   int get progress => _progress;
 
   _updateProgress(int p0, int p1) {
@@ -26,23 +22,31 @@ class UpdateProvider extends ChangeNotifier {
   }
 
   void upgrade(VoidCallback onError) async {
-    if (_downloading) return;
+    if (status.isDownloading || status.isDone) return;
 
-    _downloading = true;
+    _status = UpdateStatus.downloading;
     notifyListeners();
 
     var f = await Updater.upgrade(_updateProgress);
 
-    _error = !await File(f).exists();
-
-    _done = true;
+    _status = await f.exists() ? UpdateStatus.done : UpdateStatus.error;
+    _status = UpdateStatus.error;
     notifyListeners();
 
-    if (error) {
+    if (_status.isError) {
       onError();
     } else {
-      await Process.start(f, []);
+      await Process.start(f.path, []);
       exit(0);
     }
   }
+}
+
+enum UpdateStatus { error, downloading, done, idle }
+
+extension UpdateStatusExt on UpdateStatus {
+  bool get isDownloading => this == UpdateStatus.downloading;
+  bool get isDone => this == UpdateStatus.done;
+  bool get isError => this == UpdateStatus.error;
+  bool get isIdle => this == UpdateStatus.idle;
 }

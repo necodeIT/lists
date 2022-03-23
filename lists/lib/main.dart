@@ -6,7 +6,7 @@ import 'package:lists/models/settings.dart';
 import 'package:lists/models/updater.dart';
 import 'package:lists/helpers/app_loader.dart';
 import 'package:lists/helpers/system_theme.dart';
-import 'package:lists/helpers/styles/styles.dart';
+import 'package:lists/view/styles/styles.dart';
 import 'package:lists/view/routes/home/home.dart';
 import 'package:lists/view/routes/list/list.dart';
 import 'package:lists/view/routes/lists/lists.dart';
