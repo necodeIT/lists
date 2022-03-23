@@ -43,7 +43,7 @@ class Updater {
   /// Check for newer release on github
   static Future<bool> update() async {
     if (!await connectivity.checkConnection()) {
-      _errorMessage = "Could not check for updates automatically, you may be using an outadet version!\nPlease check your internet connection";
+      _errorMessage = "Could not check for updates automatically, you may be using an outadet version!";
       return _updateAvailable = false;
     }
 
