@@ -31,32 +31,42 @@ class SettingsDialog extends StatefulWidget {
 class SettingsDialogState extends State<SettingsDialog> {
   @override
   Widget build(BuildContext context) {
-    return ContentDialog(
-      scrollContent: true,
-      constraints: const BoxConstraints(maxWidth: 700),
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          NcTitleText("Settings"),
-          TooltipIconButton(
-            tooltip: "Close",
-            icon: Icons.close,
-            size: 25,
-            onPressed: Navigator.of(context).pop,
+    return FluentTheme(
+      data: theme().copyWith(
+        buttonTheme: ButtonThemeData(
+          filledButtonStyle: filledButtonStyle(),
+          defaultButtonStyle: buttonStyle(
+            hoverColor: secondaryColor,
           ),
-        ],
+        ),
       ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          GeneralOptions(),
-          NcSpacing.xs(),
-          AppearanceOptions(),
-          NcSpacing.xs(),
-          SyncOptions(),
-          NcSpacing.xs(),
-          LegacyOptions(),
-        ],
+      child: ContentDialog(
+        scrollContent: true,
+        constraints: const BoxConstraints(maxWidth: 700),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            NcTitleText("Settings"),
+            TooltipIconButton(
+              tooltip: "Close",
+              icon: Icons.close,
+              size: 25,
+              onPressed: Navigator.of(context).pop,
+            ),
+          ],
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            GeneralOptions(),
+            NcSpacing.xs(),
+            AppearanceOptions(),
+            NcSpacing.xs(),
+            SyncOptions(),
+            NcSpacing.xs(),
+            LegacyOptions(),
+          ],
+        ),
       ),
     );
   }
