@@ -1,4 +1,4 @@
-part of list_styles;
+part of styles;
 
 contentDialogStyle() => ContentDialogThemeData(
       decoration: BoxDecoration(

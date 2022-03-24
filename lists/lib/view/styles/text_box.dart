@@ -1,4 +1,4 @@
-part of list_styles;
+part of styles;
 
 textBoxPlaceholderStyle() => TextStyle(color: textColor);
 textBoxTextStyle() => TextStyle(color: textColor);

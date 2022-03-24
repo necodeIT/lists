@@ -9,10 +9,10 @@ import 'package:lists/view/routes/lists/lists.dart';
 import 'package:lists/view/widgets/dialogs/alert.dart';
 import 'package:lists/view/widgets/dialogs/confirm_dialog.dart';
 import 'package:lists/view/widgets/dialogs/create_new_list.dart';
-import 'package:lists/view/widgets/dialogs/new_entry.dart';
 import 'package:lists/view/widgets/dialogs/password_dialog.dart';
 import 'package:lists/view/widgets/dialogs/settings/settings_dialog.dart';
 
+/// Handles creating a new collection.
 showCreateNewListDialog(BuildContext context) {
   showDialog(
     context: context,
@@ -22,6 +22,7 @@ showCreateNewListDialog(BuildContext context) {
   );
 }
 
+/// Shows a confirm dialog.
 showConfirmDialog({required BuildContext context, required String title, String? message, required Function onConfirm, Function? onCancel, String confirmText = "Confirm", String cancelText = "Cancel"}) {
   showDialog(
     context: context,
@@ -52,8 +53,10 @@ _createNewList(BuildContext context, String name, String password, String imgPat
   Navigator.of(context).pushNamed(ListsRoute.routeName);
 }
 
+/// Shows an alert dialog.
 showAlertDialog(BuildContext context, String title, String message) => showDialog(context: context, builder: (context) => AlertDialog(title: title, message: message));
 
+/// Shows a password dialog.
 showPasswordDialog(BuildContext context, Collection collection, [Function(BuildContext, Collection, String)? onPasswordEntered]) {
   Function callback = onPasswordEntered ?? _checkPassword;
   if (!collection.isProtected) return callback(context, collection, "");
@@ -79,6 +82,7 @@ _checkPassword(BuildContext context, Collection collection, String password) asy
   });
 }
 
+/// Shows the settings.
 showSettingsDialog(BuildContext context) {
   showDialog(context: context, builder: (context) => SettingsDialog());
 }

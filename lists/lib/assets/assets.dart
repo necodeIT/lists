@@ -4,4 +4,5 @@ library assets;
 
 part 'img.dart';
 
+/// The folder name of the assets.
 const assets_folder = "assets";

@@ -1,4 +1,4 @@
-part of list_styles;
+part of styles;
 
 AccentColor get adaptiveAccentColor => Settings.adaptAccent && !SystemThemeObserver.error ? SystemThemeObserver.accentColor : _accentColors.value;
 

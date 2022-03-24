@@ -1,4 +1,4 @@
-library list_styles;
+library styles;
 
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:lists/models/settings.dart';
@@ -13,6 +13,7 @@ part 'text_box.dart';
 part 'toggle_switch.dart';
 part 'tooltip.dart';
 part 'scrollbar.dart';
+part 'checkbox.dart';
 
 ThemeData theme() => ThemeData(
       uncheckedColor: primaryColor,
@@ -33,4 +34,5 @@ ThemeData theme() => ThemeData(
       scrollbarTheme: scrollbarThemeData(),
       inactiveBackgroundColor: primaryColor,
       inactiveColor: tertiaryColor,
+      checkboxTheme: checkboxThemeData(),
     );

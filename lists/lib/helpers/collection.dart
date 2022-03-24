@@ -10,6 +10,7 @@ import 'package:lists/view/routes/lists/lists.dart';
 import 'package:lists/view/widgets/dialogs/update_entry.dart';
 import 'package:lists/view/widgets/dialogs/update_list.dart';
 
+/// Handles deleting a collection.
 deleteCollection(BuildContext context, Collection collection) {
   showConfirmDialog(
     context: context,
@@ -20,6 +21,7 @@ deleteCollection(BuildContext context, Collection collection) {
   );
 }
 
+/// Handles removing an entry from a collection.
 removeEntry(BuildContext context, String password, Collection collection, String key) {
   showConfirmDialog(
     context: context,
@@ -40,6 +42,7 @@ _removeEntry(BuildContext context, String password, Collection collection, Strin
   });
 }
 
+/// Handles editing an entry in a collection.
 editEntry(BuildContext context, String password, Collection collection, String key) {
   showDialog(
     context: context,
@@ -61,6 +64,7 @@ _updateEntry(BuildContext context, String password, Collection collection, Strin
   });
 }
 
+/// Handles editing a collection.
 updateCollection(BuildContext context, Collection collection) {
   if (!collection.isProtected) return _showUpdateDialog(context, "", collection);
 

@@ -1,4 +1,4 @@
-part of list_styles;
+part of styles;
 
 buttonThemeData() => ButtonThemeData(
       defaultButtonStyle: buttonStyle(color: primaryColor),

@@ -1,33 +1,46 @@
 part of controllers;
 
+/// The provider to display a collection.
 final collectionProvider = ChangeNotifierProvider.autoDispose((ref) => CollectionProvider());
 
+/// The provider to display a collection.
 class CollectionProvider extends ChangeNotifier {
   late Collection _collection;
   late String _password;
   late BuildContext _context;
-  bool hasCollection = false;
+  bool _hasCollection = false;
 
+  /// Sets the collection to display.
   set(String name, String password, BuildContext context) async {
-    if (hasCollection && _collection.name == name) return;
+    if (_hasCollection && _collection.name == name) return;
 
-    if (hasCollection) {
+    if (_hasCollection) {
       _collection.dispose();
     }
 
     _password = password;
     _context = context;
     _collection = DB.getCollection(name);
+    _hasCollection = true;
 
     await _collection.load(password);
     notifyListeners();
   }
 
+  /// The password of the collection.
   String get password => _password;
+
+  /// Whether the collection is loaded.
   bool get loaded => _collection.loaded;
+
+  /// The contents of the collection.
   Map<String, String> get entries => _collection.entries;
+
+  /// The name of the collection.
   String get name => _collection.name;
 
+  /// Creates a new entry.
+  /// Returns false if the creation failed.
   Future<bool> createNewEntry() async {
     bool result = false;
     await showDialog(
@@ -48,6 +61,8 @@ class CollectionProvider extends ChangeNotifier {
     return result;
   }
 
+  /// Deletes an entry.
+  /// Returns false if the deletion failed.
   Future<bool> removeEntry(String key) async {
     var result = await _collection.removeEntry(password, key);
 
@@ -58,7 +73,6 @@ class CollectionProvider extends ChangeNotifier {
 
   @override
   void dispose() {
-    print("disposed");
     _collection.dispose();
     super.dispose();
   }
