@@ -7,9 +7,12 @@ import 'package:lists/view/styles/styles.dart';
 import 'package:nekolib_ui/core.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+/// Displays the upgrade prompt and/or progress.
 class UpgradeRoute extends StatefulWidget {
+  /// Displays the upgrade prompt and/or progress.
   const UpgradeRoute({Key? key}) : super(key: key);
 
+  /// The name of the route.
   static const routeName = "/upgrade";
 
   @override

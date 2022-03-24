@@ -14,11 +14,18 @@ import 'package:lists/view/widgets/tooltip_icon_button.dart';
 import 'package:mime/mime.dart';
 import 'package:nekolib_ui/core.dart';
 
+/// Dialog to edit a collection.
 class UpdateListDialog extends StatefulWidget {
+  /// Dialog to edit a collection.
   const UpdateListDialog({Key? key, required this.onUpdate, required this.collection, required this.password}) : super(key: key);
 
+  /// Callback when the collection is updated.
   final Function(String, String, String, bool) onUpdate;
+
+  /// The password of the collection to edit.
   final String password;
+
+  /// The collection to edit.
   final Collection collection;
 
   @override

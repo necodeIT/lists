@@ -1,5 +1,6 @@
 part of styles;
 
+/// Default [ContentDialog] style.
 contentDialogStyle() => ContentDialogThemeData(
       decoration: BoxDecoration(
         color: secondaryColor,

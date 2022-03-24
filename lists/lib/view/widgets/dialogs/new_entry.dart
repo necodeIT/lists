@@ -4,10 +4,15 @@ import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/view/styles/styles.dart';
 import 'package:nekolib_ui/core.dart';
 
+/// Dialog to create a new list entry.
 class CreateNewEntryDialog extends StatefulWidget {
+  /// Dialog to create a new list entry.
   const CreateNewEntryDialog({Key? key, required this.onCreate, required this.collection}) : super(key: key);
 
+  /// Callback when the list entry is created.
   final Function(String, String) onCreate;
+
+  /// Collection to create the list entry in.
   final Collection collection;
 
   @override

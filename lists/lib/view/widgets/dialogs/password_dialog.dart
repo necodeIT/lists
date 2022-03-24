@@ -4,10 +4,15 @@ import 'package:lists/view/styles/styles.dart';
 import 'package:lists/view/widgets/tooltip_icon_button.dart';
 import 'package:nekolib_ui/core.dart';
 
+/// Dialog to enter the password to access a collection.
 class PasswordDialog extends StatefulWidget {
+  /// Dialog to enter the password to access a collection.
   const PasswordDialog({Key? key, required this.collection, required this.onConfirm}) : super(key: key);
 
+  /// Collection to access.
   final Collection collection;
+
+  /// Callback when the password is confirmed.
   final Function(String) onConfirm;
 
   @override

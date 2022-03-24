@@ -10,11 +10,15 @@ import 'package:lists/view/widgets/tooltip_icon_button.dart';
 import 'package:nekolib_ui/core.dart';
 import 'package:nekolib_ui/utils.dart';
 
+/// Displays a collection.
 class CollectionTile extends StatefulWidget {
+  /// Displays a collection.
   const CollectionTile({Key? key, required this.collection}) : super(key: key);
 
+  /// The collection to display.
   final Collection collection;
 
+  /// The size of the collection icon.
   static const double iconSize = 80;
 
   @override

@@ -1,41 +1,64 @@
 import 'dart:convert';
 import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart';
 import 'dart:io';
 
-import 'package:lists/helpers/dialogs.dart';
-
+/// Updates the app.
 class Updater {
+  /// Used to check for internet connection.
   static final connectivity = Connectivity();
+
+  /// The url of the github api.
   static const githubApiUrl = 'https://api.github.com/repos';
+
+  /// The repo owner of the app.
   static const repoOwner = "necodeIT";
+
+  /// The repo name of the app.
   static const repoName = "lists";
+
+  /// The api url of the github repo.
   static const repoUrl = "$githubApiUrl/$repoOwner/$repoName";
 
+  /// The name of the app.
   static const appName = "Lists";
+
+  /// The current version of the app.
   static const version = "0.0.2";
+
   static const _versionName = "Alpha";
+
+  /// The current version name of the app.
   static String get versionName => "$_versionName v$version";
 
   static var _latestVersion = "";
   static var _latestReleaseName = "";
   static var _updateAvailable = false;
   static var _setupDownloadUrl = "";
-  static var _errorMessage = "";
+  static String? _errorMessage;
 
+  /// The latest version available on github of the app.
   static String get latestVersion => _latestVersion;
+
+  /// The latest release name available on github of the app.
   static String get latestVersionName => _latestReleaseName;
+
+  /// Whether a new update is available.
   static bool get updateAvailable => _updateAvailable;
+
+  /// The url to download the update from.
   static String get setupDownloadUrl => _setupDownloadUrl;
 
-  static String getErrorMessage() {
+  /// Returns an error message.
+  /// Returns null if there is no error.
+  static String? getErrorMessage() {
     var copy = _errorMessage;
-    _errorMessage = "";
+    _errorMessage = null;
     return copy;
   }
 
+  /// Initializes the updater.
   static Future init() async {
     _updateAvailable = await update();
   }
@@ -64,12 +87,6 @@ class Updater {
 
       return _updateAvailable = false;
     }
-  }
-
-  static void showErrorMessage(BuildContext context) {
-    if (_errorMessage.isEmpty) return;
-
-    showAlertDialog(context, "Error", getErrorMessage());
   }
 
   /// Download the setup file to temp folder

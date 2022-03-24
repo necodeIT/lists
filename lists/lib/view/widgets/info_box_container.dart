@@ -1,8 +1,9 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:lists/view/widgets/expander_header.dart';
 import 'package:nekolib_ui/core.dart';
 
+/// Themed [InfoBar].
 class InfoBoxContainer extends StatelessWidget {
+  /// Themed [InfoBar].
   const InfoBoxContainer({
     Key? key,
     this.backgroundColor,
@@ -20,20 +21,46 @@ class InfoBoxContainer extends StatelessWidget {
     this.width,
   }) : super(key: key);
 
+  /// The background color of the info box.
   final Color? backgroundColor;
+
+  /// The border color of the info box.
   final Color? borderColor;
+
+  /// The color of the icon.
   final Color? iconColor;
+
+  /// The padding of the info box.
   final EdgeInsets padding;
+
+  /// The margin of the info box.
   final EdgeInsets? margin;
+
+  /// The height of the info box.
   final double? height;
+
+  /// The width of the info box.
   final double? width;
+
+  /// Whether to show the shadow.
   final bool shadow;
+
+  /// The title of the info box.
   final Widget? title;
+
+  /// The icon of the info box.
   final IconData? icon;
+
+  /// The trailing widget of the info box.
   final Widget? trailing;
+
+  /// The size of the icon.
   final double iconSize;
+
+  /// The tooltip of the icon.
   final String? iconToolTip;
 
+  /// Default decoration for the info box.
   static Decoration decoration({Color? backgroundColor, Color? borderColor, bool shadow = true}) => BoxDecoration(
         color: backgroundColor ?? primaryColor,
         border: Border.all(

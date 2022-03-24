@@ -1,5 +1,6 @@
 part of styles;
 
+/// Default [Tooltip] style.
 tooltipThemeData() => TooltipThemeData(
       textStyle: TextStyle(
         color: textColor,

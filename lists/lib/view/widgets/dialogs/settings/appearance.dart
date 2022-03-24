@@ -1,6 +1,8 @@
 part of 'settings_dialog.dart';
 
+/// Appearance settings.
 class AppearanceOptions extends StatefulWidget {
+  /// Appearance settings.
   const AppearanceOptions({
     Key? key,
   }) : super(key: key);

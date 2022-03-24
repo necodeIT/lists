@@ -1,9 +1,9 @@
 part of 'settings_dialog.dart';
 
-class LegacyOptions extends StatelessWidget {
-  const LegacyOptions({
-    Key? key,
-  }) : super(key: key);
+/// Import settings.
+class ImportOptions extends StatelessWidget {
+  /// Import settings.
+  const ImportOptions({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

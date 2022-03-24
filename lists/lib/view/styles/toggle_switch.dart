@@ -1,5 +1,6 @@
 part of styles;
 
+/// Default [ToggleSwitch] style.
 toggleSwitchThemeData() => ToggleSwitchThemeData(
       checkedThumbDecoration: ButtonState.all(
         BoxDecoration(

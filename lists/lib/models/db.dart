@@ -6,21 +6,37 @@ import 'package:lists/models/updater.dart';
 import 'package:lists/helpers/string.dart';
 import 'package:path_provider/path_provider.dart';
 
+/// Contains and manages all the data used by the app.
 class DB {
+  /// The file extension used for every file saved by this app.
   static const fileExtention = ".json";
+
+  /// The name of the app's cache file.
   static const cacheFileName = 'cache';
+
+  /// The name of the app's collections file.
   static const collectionsFileName = 'collections';
+
+  /// The name of the app's settings file.
   static const settingsFileName = "settings";
+
+  /// Contains every file names needed by the database.
   static const fileNames = [cacheFileName, collectionsFileName, settingsFileName];
 
   static final Map<String, Collection> _collectionsMap = {};
   static final List<Collection> _collections = [];
   static bool _cleanUp = false;
+
+  /// Every collection in the database.
   static List<Collection> get collections => List.unmodifiable(_collections);
+
+  /// Every name of the collections in the database.
   static List<String> get collectionNames => _collectionsMap.keys.toList();
 
+  /// Returns the collection with the given [name].
   static Collection getCollection(String name) => _collectionsMap[name]!;
 
+  /// The app's directory to store the data in.
   static Future<Directory> get appDir async {
     var dir = await getApplicationDocumentsDirectory();
 
@@ -32,30 +48,33 @@ class DB {
     return appDir;
   }
 
-  static Future<File> getCollectionFile(Collection collection) => _getCollectionFile(collection.name);
-
-  static Future<File> _getCollectionFile(String collection) async {
+  /// Returns a file of the given [collection].
+  static Future<File> getCollectionFile(Collection collection) async {
     var dir = await appDir;
-    var name = collection.sha256();
+    var name = collection.name.sha256();
 
     return File('${dir.path}/$name$fileExtention');
   }
 
+  /// The settings file.
   static Future<File> get settingsFile async {
     var dir = await appDir;
     return File('${dir.path}/$settingsFileName$fileExtention');
   }
 
+  /// The file where the user's collections are stored.
   static Future<File> get collectionsFile async {
     var dir = await appDir;
     return File('${dir.path}/$collectionsFileName$fileExtention');
   }
 
+  /// The cache file.
   static Future<File> get cacheFile async {
     var dir = await appDir;
     return File('${dir.path}/$cacheFileName.$fileExtention');
   }
 
+  /// Saves the database to disk.
   static Future save() async {
     var collectionsFile = await DB.collectionsFile;
     var cacheFile = await DB.cacheFile;
@@ -68,6 +87,7 @@ class DB {
     await cacheFile.writeAsString(jsonEncode(cache));
   }
 
+  /// Loads the database from disk.
   static Future load() async {
     var f = await collectionsFile;
     var cacheFile = await DB.cacheFile;
@@ -119,6 +139,8 @@ class DB {
     save();
   }
 
+  /// Marks the database as needing to be cleaned up.
+  /// If this is called, the database will be cleaned up on the next load.
   static void cleanUp() {
     if (_cleanUp) return;
 
@@ -126,6 +148,7 @@ class DB {
     save();
   }
 
+  /// Creates a new collection with the given [name].
   static bool createNewCollection(String name, String password, Uint8List icon) {
     if (_collectionsMap.containsKey(name)) return false;
 
@@ -139,6 +162,7 @@ class DB {
     return true;
   }
 
+  /// Updates the database.
   static Future<void> update({bool silent = false}) async {
     _collectionsMap.clear();
 
@@ -149,6 +173,7 @@ class DB {
     if (!silent) await save();
   }
 
+  /// Deletes the given [collection].
   static Future<void> deleteCollection(Collection collection) async {
     var f = await getCollectionFile(collection);
 

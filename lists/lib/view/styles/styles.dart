@@ -15,6 +15,7 @@ part 'tooltip.dart';
 part 'scrollbar.dart';
 part 'checkbox.dart';
 
+/// Default styles for the app.
 ThemeData theme() => ThemeData(
       uncheckedColor: primaryColor,
       dialogTheme: contentDialogStyle(),

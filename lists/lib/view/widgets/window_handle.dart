@@ -3,6 +3,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:lists/models/updater.dart';
 import 'package:nekolib_ui/core.dart';
 
+/// The app icon.
 const kAppIconSvg = '''
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="338.5" height="291" viewBox="0 0 338.5 291">
   <defs>
@@ -36,11 +37,17 @@ const kAppIconSvg = '''
 
 ''';
 
+/// Wrapper for a themed window bar.
+/// Using [bitsdojo_window](https://pub.dev/packages/bitsdojo_window).
 class WindowHandle extends StatelessWidget {
+  /// Wrapper for a themed window bar.
+  /// Using [bitsdojo_window](https://pub.dev/packages/bitsdojo_window).
   const WindowHandle({Key? key, required this.child}) : super(key: key);
 
+  /// The child widget.
   final Widget child;
 
+  /// Static builder method for more convenient use.
   static Widget builder(BuildContext context, Widget? child) => WindowHandle(child: child!);
 
   @override

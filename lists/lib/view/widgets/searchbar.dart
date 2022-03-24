@@ -1,10 +1,15 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:lists/view/styles/styles.dart';
 
+/// Search bar.
 class Searchbar extends StatelessWidget {
+  /// Search bar.
   const Searchbar({Key? key, required this.onQuery, this.placeholder = "Search..."}) : super(key: key);
 
+  /// On query callback.
   final Function(String) onQuery;
+
+  /// Placeholder text.
   final String placeholder;
 
   @override

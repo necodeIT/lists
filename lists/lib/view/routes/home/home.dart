@@ -1,13 +1,14 @@
-import 'dart:io';
-
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/view/routes/home/card.dart';
 import 'package:nekolib_ui/core.dart';
 
+/// Home screen.
 class HomeRoute extends StatefulWidget {
+  /// Home screen.
   const HomeRoute({Key? key}) : super(key: key);
 
+  /// The name of the route.
   static const String routeName = '/';
 
   @override

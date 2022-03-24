@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart' show Icons;
 import 'package:lists/models/settings.dart';
@@ -11,9 +9,7 @@ import 'package:lists/view/routes/upgrade/upgrade.dart';
 import 'package:lists/view/widgets/dialogs/settings/icon.dart';
 import 'package:lists/view/widgets/dialogs/settings/settings_container.dart';
 import 'package:lists/view/widgets/expander_header.dart';
-import 'package:lists/view/widgets/info_box_container.dart';
 import 'package:lists/view/widgets/tooltip_icon_button.dart';
-import 'package:lists/view/widgets/vertical_divider.dart';
 import 'package:nekolib_ui/core.dart';
 
 part 'appearance.dart';
@@ -21,14 +17,16 @@ part 'sync.dart';
 part 'import.dart';
 part 'general.dart';
 
+/// Dialog which allows the user to change the settings.
 class SettingsDialog extends StatefulWidget {
+  /// Dialog which allows the user to change the settings.
   const SettingsDialog({Key? key}) : super(key: key);
 
   @override
-  State<SettingsDialog> createState() => SettingsDialogState();
+  State<SettingsDialog> createState() => _SettingsDialogState();
 }
 
-class SettingsDialogState extends State<SettingsDialog> {
+class _SettingsDialogState extends State<SettingsDialog> {
   @override
   Widget build(BuildContext context) {
     return FluentTheme(
@@ -64,7 +62,7 @@ class SettingsDialogState extends State<SettingsDialog> {
             NcSpacing.xs(),
             SyncOptions(),
             NcSpacing.xs(),
-            LegacyOptions(),
+            ImportOptions(),
           ],
         ),
       ),

@@ -3,7 +3,9 @@ import 'package:lists/view/styles/styles.dart';
 import 'package:lists/view/widgets/hover_region.dart';
 import 'package:nekolib_ui/core.dart';
 
+/// Icon button with a tooltip.
 class TooltipIconButton extends StatelessWidget {
+  /// Icon button with a tooltip.
   const TooltipIconButton({
     Key? key,
     required this.tooltip,
@@ -14,6 +16,7 @@ class TooltipIconButton extends StatelessWidget {
   })  : small = false,
         super(key: key);
 
+  /// Smaller icon button with a tooltip.
   const TooltipIconButton.small({
     Key? key,
     required this.tooltip,
@@ -24,11 +27,22 @@ class TooltipIconButton extends StatelessWidget {
   })  : small = true,
         super(key: key);
 
+  /// The tooltip to display.
   final String tooltip;
+
+  /// The icon to display.
   final IconData icon;
+
+  /// On pressed callback.
   final VoidCallback? onPressed;
+
+  /// Size of the icon.
   final double? size;
+
+  /// Color of the icon.
   final Color? color;
+
+  /// Whether to use the small version.
   final bool small;
 
   @override

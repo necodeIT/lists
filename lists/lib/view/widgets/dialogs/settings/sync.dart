@@ -1,9 +1,9 @@
 part of 'settings_dialog.dart';
 
+/// Sync settings.
 class SyncOptions extends StatefulWidget {
-  const SyncOptions({
-    Key? key,
-  }) : super(key: key);
+  /// Sync settings.
+  const SyncOptions({Key? key}) : super(key: key);
 
   @override
   State<SyncOptions> createState() => _SyncOptionsState();

@@ -20,6 +20,7 @@ void main() async {
   Logger.init(autoSave: true, appStoragePath: (await DB.appDir).path);
 
   WidgetsFlutterBinding.ensureInitialized();
+  NcThemes.initPredefinedThemes();
 
   SystemThemeObserver.start();
   await Settings.load();
@@ -27,7 +28,7 @@ void main() async {
   runThemedApp(
     appBuilder: App.builder,
     loadingWidgetBuilder: appLoader,
-    onLoad: loadAll,
+    onLoad: loadAll(),
   );
 
   doWhenWindowReady(() {
@@ -40,14 +41,18 @@ void main() async {
   });
 }
 
+/// Loads all the data needed for the app.
 Future loadAll() async {
   await Updater.update();
   await DB.load();
 }
 
+/// The app.
 class App extends StatelessWidget {
+  ///
   const App({Key? key}) : super(key: key);
 
+  /// Builder for the app.
   static Widget builder(context) => App();
 
   @override

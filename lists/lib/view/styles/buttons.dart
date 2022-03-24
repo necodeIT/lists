@@ -1,12 +1,15 @@
 part of styles;
 
+/// Button styles.
 buttonThemeData() => ButtonThemeData(
       defaultButtonStyle: buttonStyle(color: primaryColor),
       filledButtonStyle: filledButtonStyle(),
     );
 
+/// The value to darken buttons by on hover.
 double get kDarkenValue => brightness.isLight ? 0.05 : 0.01;
 
+/// Default style for a [FilledButton].
 ButtonStyle filledButtonStyle() => ButtonStyle(
       padding: ButtonState.all(EdgeInsets.all(8.0)),
       backgroundColor: ButtonState.resolveWith((states) => states.isHovering ? adaptiveAccentColor.dark : adaptiveAccentColor),
@@ -16,6 +19,7 @@ ButtonStyle filledButtonStyle() => ButtonStyle(
       elevation: ButtonState.all(1.5),
     );
 
+/// Default style for a [Button].
 ButtonStyle buttonStyle({Color? color, Color? hoverColor, double? elevation, BorderStyle? borderStyle}) => ButtonStyle(
       padding: ButtonState.all(EdgeInsets.all(8.0)),
       backgroundColor: ButtonState.resolveWith(
@@ -35,15 +39,20 @@ ButtonStyle buttonStyle({Color? color, Color? hoverColor, double? elevation, Bor
       elevation: ButtonState.all(elevation ?? 1.5),
     );
 
+/// Default style for a [DropDownButton].
 BoxDecoration dropDownButtonMenuStyle() => BoxDecoration(
       borderRadius: BorderRadius.circular(8),
       color: primaryColor,
       border: Border.all(color: secondaryColor, width: 1.5),
     );
 
+/// Default background color for [Expander] content.
 Color expanderContentBackground() => tertiaryColor.withOpacity(.5);
+
+/// Default background color for [Expander] header.
 ButtonState<Color> expanderHeaderBackground() => ButtonState.all(primaryColor);
 
+/// Default [IconButton] style
 ButtonStyle iconButtonStyle() => ButtonStyle(
       iconSize: ButtonState.all(11.0),
       padding: ButtonState.all(const EdgeInsets.all(8)),

@@ -1,21 +1,21 @@
-import 'dart:io';
-import 'package:badges/badges.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:lists/assets/assets.dart';
 import 'package:lists/models/collection.dart';
-import 'package:lists/models/db.dart';
 import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/view/styles/styles.dart';
-import 'package:lists/view/widgets/tooltip_icon_button.dart';
-import 'package:mime/mime.dart';
 import 'package:nekolib_ui/core.dart';
 
+/// Dialog to edit a list entry.
 class UpdateEntryDialog extends StatefulWidget {
+  /// Dialog to edit a list entry.
   const UpdateEntryDialog({Key? key, required this.onUpdate, required this.collection, required this.entry}) : super(key: key);
 
+  /// Callback when the list entry is updated.
   final Function(String, String) onUpdate;
+
+  /// The key of the entry to edit.
   final String entry;
+
+  /// Collection to edit the list entry in.
   final Collection collection;
 
   @override

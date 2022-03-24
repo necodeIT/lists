@@ -9,9 +9,12 @@ import 'package:lists/view/widgets/searchbar.dart';
 import 'package:lists/view/widgets/tooltip_icon_button.dart';
 import 'package:nekolib_ui/core.dart';
 
+/// Displays all the entries of a collection.
 class ListRoute extends StatefulWidget {
+  /// Displays all the entries of a collection.
   const ListRoute({Key? key}) : super(key: key);
 
+  /// The name of the route.
   static const String routeName = '/list';
 
   @override

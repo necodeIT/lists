@@ -1,6 +1,8 @@
 part of "settings_dialog.dart";
 
+/// General settings.
 class GeneralOptions extends StatefulWidget {
+  /// General settings.
   const GeneralOptions({Key? key}) : super(key: key);
 
   @override
@@ -16,7 +18,7 @@ class _GeneralOptionsState extends State<GeneralOptions> {
     });
   }
 
-  _showErrorDetauls(String error) {
+  _showErrorDetails(String error) {
     showAlertDialog(context, "Error", error);
   }
 
@@ -57,7 +59,7 @@ class _GeneralOptionsState extends State<GeneralOptions> {
                       ),
                     ),
                   );
-                } else if (error.isEmpty) {
+                } else if (error == null) {
                   return !Updater.updateAvailable
                       ? SettingsContainer(
                           icon: FluentIcons.ic_fluent_checkmark_24_filled,
@@ -82,7 +84,7 @@ class _GeneralOptionsState extends State<GeneralOptions> {
                     trailing: TooltipIconButton(
                       icon: FluentIcons.ic_fluent_more_horizontal_24_filled,
                       tooltip: "Show error details",
-                      onPressed: () => _showErrorDetauls(error),
+                      onPressed: () => _showErrorDetails(error),
                     ),
                   );
                 }

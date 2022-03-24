@@ -4,20 +4,24 @@ import 'package:lists/models/settings.dart';
 import 'package:nekolib_ui/core.dart';
 import 'package:system_theme/system_theme.dart';
 
+/// Observes the system theme and adapts the theme to it.
 class SystemThemeObserver {
   static bool _lastValue = false;
   static bool _started = false;
   static AccentColor _accentColor = Colors.blue;
 
+  /// The current system accent color.
   static AccentColor get accentColor => _accentColor;
 
   static bool _error = false;
 
+  /// Whether the observer has encountered an error.
   static bool get error => _error && Settings.adaptAccent;
 
   static DateTime _lastError = DateTime.now().subtract(Duration(seconds: 1));
   static Duration _errorCooldown = Duration(seconds: 1);
 
+  /// Adapts the theme to the current system theme.
   static Future adaptSystemTheme({bool force = false}) async {
     if (!Settings.useSystemTheme) return;
     var darkMode = await SystemTheme.darkMode;
@@ -49,6 +53,7 @@ class SystemThemeObserver {
     }
   }
 
+  /// Starts the observer.
   static void start() {
     if (_started) return;
     _started = true;

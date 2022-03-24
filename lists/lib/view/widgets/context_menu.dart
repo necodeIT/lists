@@ -1,9 +1,12 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:nekolib_ui/core.dart';
 
+/// Context menu flyout.
 class ContextMenu extends StatelessWidget {
+  /// Context menu flyout.
   const ContextMenu({Key? key, required this.child}) : super(key: key);
 
+  /// The child of the context menu.
   final Widget child;
 
   @override

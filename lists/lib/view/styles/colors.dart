@@ -1,7 +1,9 @@
 part of styles;
 
+/// Accent color for the application.
 AccentColor get adaptiveAccentColor => Settings.adaptAccent && !SystemThemeObserver.error ? SystemThemeObserver.accentColor : _accentColors.value;
 
+/// Color for main surfaces of the application.
 Color get surfaceColor => _surfaceColors.value;
 
 ThemeableProperty _accentColors = ThemeableProperty<AccentColor>(

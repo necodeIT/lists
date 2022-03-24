@@ -1,5 +1,6 @@
 part of styles;
 
+/// Default [Checkbox] style.
 CheckboxThemeData checkboxThemeData() => CheckboxThemeData(
       icon: FluentIcons.ic_fluent_checkmark_24_filled,
       checkedIconColor: ButtonState.all(buttonTextColor),

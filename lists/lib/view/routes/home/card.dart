@@ -1,13 +1,19 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:lists/view/widgets/info_box_container.dart';
 import 'package:nekolib_ui/core.dart';
 import 'package:nekolib_ui/utils.dart';
 
+/// Card used for the home screen.
 class HomeCard extends StatelessWidget {
+  /// Card used for the home screen.
   const HomeCard({Key? key, required this.onTap, required this.title, required this.icon}) : super(key: key);
 
+  /// On tap callback.
   final Function() onTap;
+
+  /// Title of the card.
   final String title;
+
+  /// Icon of the card.
   final IconData icon;
 
   @override

@@ -2,20 +2,24 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:context_menus/context_menus.dart';
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:lists/controller/controller.dart';
-import 'package:lists/models/collection.dart';
-import 'package:lists/helpers/collection.dart';
 import 'package:lists/view/styles/styles.dart';
 import 'package:lists/view/widgets/context_menu.dart';
 import 'package:lists/view/widgets/tooltip_icon_button.dart';
 import 'package:lists/view/widgets/vertical_divider.dart';
 import 'package:nekolib_ui/core.dart';
 
+/// Entry tile.
 class EntryTile extends StatefulWidget {
+  /// Entry tile.
   const EntryTile({Key? key, required this.entry, required this.password, required this.value}) : super(key: key);
 
+  /// The key of the entry.
   final String entry;
+
+  /// The name of the entry.
   final String value;
+
+  /// The password of the collection.
   final String password;
 
   @override

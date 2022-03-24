@@ -8,15 +8,16 @@ import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/view/styles/styles.dart';
 import 'package:lists/view/widgets/context_menu.dart';
 import 'package:lists/view/widgets/context_menu_item.dart';
-import 'package:lists/view/widgets/hover_region.dart';
 import 'package:lists/view/widgets/tooltip_icon_button.dart';
 import 'package:mime/mime.dart';
 import 'package:nekolib_ui/core.dart';
-import 'package:nekolib_ui/utils.dart';
 
+/// Dialog to create a new list.
 class CreateNewListDialog extends StatefulWidget {
+  /// Dialog to create a new list.
   const CreateNewListDialog({Key? key, required this.onCreate}) : super(key: key);
 
+  /// Callback when the list is created.
   final Function(String, String, String) onCreate;
 
   @override
