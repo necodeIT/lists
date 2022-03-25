@@ -67,10 +67,11 @@ class _CollectionTileState extends State<CollectionTile> {
         child: SizedBox(
           height: 260,
           width: 200,
-          child: ScaleOnHover(
-            duration: FluentTheme.of(context).fasterAnimationDuration,
+          child: OffsetOnHover(
+            duration: FluentTheme.of(context).mediumAnimationDuration,
             curve: FluentTheme.of(context).animationCurve,
-            scale: 1.025,
+            // scale: 1.025,
+            offset: Offset(0, -5),
             child: Card(
               child: Column(
                 children: [

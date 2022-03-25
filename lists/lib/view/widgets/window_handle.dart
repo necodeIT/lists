@@ -2,6 +2,7 @@ import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:lists/models/updater.dart';
 import 'package:nekolib_ui/core.dart';
+import 'package:nekolib_utils/log.dart';
 
 /// The app icon.
 const kAppIconSvg = '''
@@ -55,13 +56,13 @@ class WindowHandle extends StatelessWidget {
     var defaultColors = WindowButtonColors(
       iconNormal: textColor,
       normal: Colors.transparent,
-      iconMouseOver: buttonTextColor,
-      mouseOver: neutralColor,
-      iconMouseDown: buttonTextColor,
-      mouseDown: neutralColor,
+      iconMouseOver: textColor,
+      mouseOver: tertiaryColor.withOpacity(.3),
+      iconMouseDown: textColor,
+      mouseDown: tertiaryColor.withOpacity(.5),
     );
     var closeColors = WindowButtonColors(
-      mouseOver: errorColor,
+      mouseOver: errorColor.withOpacity(.7),
       iconNormal: textColor,
       normal: Colors.transparent,
       iconMouseOver: buttonTextColor,
@@ -104,7 +105,10 @@ class WindowHandle extends StatelessWidget {
                 ),
                 MinimizeWindowButton(colors: defaultColors),
                 MaximizeWindowButton(colors: defaultColors),
-                CloseWindowButton(colors: closeColors),
+                CloseWindowButton(
+                  colors: closeColors,
+                  onPressed: () => log("Closed", LogTypes.tracking),
+                ),
               ],
             ),
           ),

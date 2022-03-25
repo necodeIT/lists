@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:http/http.dart';
 import 'dart:io';
 
-/// Updates the app.
+/// A class that handles the update process.
 class Updater {
   /// Used to check for internet connection.
   static final connectivity = Connectivity();
@@ -63,7 +63,7 @@ class Updater {
     _updateAvailable = await update();
   }
 
-  /// Check for newer release on github
+  /// Checks for newer releases on github
   static Future<bool> update() async {
     if (!await connectivity.checkConnection()) {
       _errorMessage = "Could not check for updates automatically, you may be using an outadet version!";
@@ -89,7 +89,7 @@ class Updater {
     }
   }
 
-  /// Download the setup file to temp folder
+  /// Downloads the setup file to temp folder
   static Future<File> upgrade(Function(int, int)? onReceiveProgress) async {
     var dio = Dio();
     var path = "${Directory.systemTemp.path}/$appName - $latestVersionName Setup.exe";
