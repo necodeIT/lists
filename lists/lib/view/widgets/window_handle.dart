@@ -105,10 +105,7 @@ class WindowHandle extends StatelessWidget {
                 ),
                 MinimizeWindowButton(colors: defaultColors),
                 MaximizeWindowButton(colors: defaultColors),
-                CloseWindowButton(
-                  colors: closeColors,
-                  onPressed: () => log("Closed", LogTypes.tracking),
-                ),
+                CloseWindowButton(colors: closeColors),
               ],
             ),
           ),
