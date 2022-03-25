@@ -11,8 +11,18 @@ class CollectionProvider extends ChangeNotifier {
   bool _hasCollection = false;
 
   /// Sets the collection to display.
-  set(String name, String password, BuildContext context) async {
-    if (_hasCollection && _collection.name == name) return;
+  set(String name, String password, BuildContext context) {
+    log("has collection: $_hasCollection, name: $name, password: ${password.isNotEmpty}, prev: ${_hasCollection ? _collection.name : "null"}", LogTypes.debug);
+
+    if (_hasCollection && _collection.name == name) {
+      log("collection already loaded", LogTypes.tracking);
+      return;
+    }
+
+    if (_hasCollection && !loaded) {
+      log("collection already loading", LogTypes.tracking);
+      return;
+    }
 
     if (_hasCollection) {
       _collection.dispose();
@@ -23,8 +33,7 @@ class CollectionProvider extends ChangeNotifier {
     _collection = DB.getCollection(name);
     _hasCollection = true;
 
-    await _collection.load(password);
-    notifyListeners();
+    _collection.load(password).then((value) => notifyListeners());
   }
 
   /// The password of the collection.
@@ -71,9 +80,9 @@ class CollectionProvider extends ChangeNotifier {
     return result;
   }
 
-  @override
-  void dispose() {
+  /// Resets the provider and disposes the collection.
+  void reset() {
     _collection.dispose();
-    super.dispose();
+    _hasCollection = false;
   }
 }

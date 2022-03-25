@@ -16,6 +16,9 @@ import 'package:lists/view/widgets/window_handle.dart';
 import 'package:nekolib_ui/core.dart';
 import 'package:nekolib_utils/log.dart';
 
+/// Used to dispose collection when the user navigates away from [ListRoute].
+final RouteObserver<ModalRoute<void>> routeObserver = RouteObserver<ModalRoute<void>>();
+
 void main() async {
   Logger.init(autoSave: true, appStoragePath: (await DB.appDir).path);
 
@@ -59,6 +62,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderScope(
       child: FluentApp(
+        navigatorObservers: [routeObserver],
         debugShowCheckedModeBanner: false,
         theme: theme(),
         title: 'Lists',

@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:aes_crypt/aes_crypt.dart';
 import 'package:lists/models/db.dart';
 import 'package:lists/helpers/string.dart';
+import 'package:nekolib_utils/log.dart';
 
 /// A collection.
 /// A collection is a map of entries.
@@ -71,6 +72,8 @@ class Collection {
 
   /// Tries to load the collection with the given [password].
   Future<bool> load(String password) async {
+    log("[$name]: loading", LogTypes.tracking);
+
     if (_loaded) return true;
     if (!await checkPassword(password)) return false;
 
@@ -89,6 +92,7 @@ class Collection {
   /// Clears the collection.
   void dispose() {
     if (!_loaded) return;
+    log("[$name]: disposed", LogTypes.tracking);
 
     _entries.clear();
     _loaded = false;

@@ -62,7 +62,7 @@ class WindowHandle extends StatelessWidget {
       mouseDown: tertiaryColor.withOpacity(.5),
     );
     var closeColors = WindowButtonColors(
-      mouseOver: errorColor.withOpacity(.7),
+      mouseOver: errorColor,
       iconNormal: textColor,
       normal: Colors.transparent,
       iconMouseOver: buttonTextColor,

@@ -34,6 +34,7 @@ class _PasswordDialogState extends State<PasswordDialog> {
     return ContentDialog(
       title: NcTitleText("Enter password for ${widget.collection.name}"),
       content: TextBox(
+        style: textBoxTextStyle(),
         placeholder: "Enter password",
         autofocus: true,
         onSubmitted: (_) => widget.onConfirm(_controller.text),
