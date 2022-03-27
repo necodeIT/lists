@@ -50,9 +50,9 @@ Future loadAll() async {
   await DB.load();
 }
 
-/// The app.
+/// The main app widget.
 class App extends StatelessWidget {
-  ///
+  /// The main app widget.
   const App({Key? key}) : super(key: key);
 
   /// Builder for the app.
