@@ -1,4 +1,3 @@
-import 'package:bitsdojo_window/bitsdojo_window.dart';
 import 'package:fluent_ui/fluent_ui.dart' hide Route;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lists/models/db.dart';
@@ -12,7 +11,6 @@ import 'package:lists/view/routes/list/list.dart';
 import 'package:lists/view/routes/lists/lists.dart';
 import 'package:lists/view/routes/upgrade/upgrade.dart';
 import 'package:lists/view/widgets/route.dart';
-import 'package:lists/view/widgets/window_handle.dart';
 import 'package:nekolib_ui/core.dart';
 import 'package:nekolib_utils/log.dart';
 
