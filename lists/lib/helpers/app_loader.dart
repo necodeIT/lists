@@ -10,21 +10,19 @@ Widget appLoader(context) => FluentApp(
         scaffoldBackgroundColor: secondaryColor,
         accentColor: adaptiveAccentColor,
       ),
-      home: WindowHandle(
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          color: secondaryColor,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ProgressRing(
-                backgroundColor: Colors.transparent,
-              ),
-              NcSpacing.xl(),
-              NcCaptionText("Loading data...", fontSize: 20),
-            ],
-          ),
+      home: Container(
+        width: double.infinity,
+        height: double.infinity,
+        color: secondaryColor,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ProgressRing(
+              backgroundColor: Colors.transparent,
+            ),
+            NcSpacing.xl(),
+            NcCaptionText("Loading data...", fontSize: 20),
+          ],
         ),
       ),
     );
