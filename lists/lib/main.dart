@@ -28,7 +28,7 @@ void main() async {
   runThemedApp(
     appBuilder: App.builder,
     loadingWidgetBuilder: appLoader,
-    onLoad: loadAll(),
+    onLoad: loadAll,
     title: Updater.appName,
     appIcon: kAppIconSvg,
     minSize: Size(1200, 700),
