@@ -217,14 +217,14 @@ packages:
       name: dbus
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.2"
+    version: "0.7.3"
   dio:
     dependency: "direct main"
     description:
       name: dio
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.4"
+    version: "4.0.6"
   enum_to_string:
     dependency: transitive
     description:
@@ -394,7 +394,7 @@ packages:
     description:
       path: ui
       ref: flutter
-      resolved-ref: "032595df7965b5f9ade7df548a353cefe93a0aba"
+      resolved-ref: "3c354664f1b0607a6e75ed7600223bc795df4404"
       url: "https://github.com/necodeIT/nekolib.git"
     source: git
     version: "0.0.1"
@@ -403,7 +403,7 @@ packages:
     description:
       path: utils
       ref: flutter
-      resolved-ref: "032595df7965b5f9ade7df548a353cefe93a0aba"
+      resolved-ref: "3c354664f1b0607a6e75ed7600223bc795df4404"
       url: "https://github.com/necodeIT/nekolib.git"
     source: git
     version: "0.0.1"
@@ -684,7 +684,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.5.0"
+    version: "2.5.1"
   xdg_directories:
     dependency: transitive
     description:

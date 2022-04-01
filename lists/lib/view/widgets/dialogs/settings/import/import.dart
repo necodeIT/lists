@@ -1,9 +1,11 @@
-part of 'settings_dialog.dart';
+part of '../settings_dialog.dart';
 
 /// Import settings.
 class ImportOptions extends StatelessWidget {
   /// Import settings.
-  const ImportOptions({Key? key}) : super(key: key);
+  const ImportOptions({Key? key, required this.switchView}) : super(key: key);
+
+  final Function(Widget, String) switchView;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,14 @@ class ImportOptions extends StatelessWidget {
           // ),
           SettingsContainer(
             title: NcTitleText("Import list from file"),
-            onTap: () {},
+            onTap: () => switchView(
+              Column(
+                children: [
+                  for (var collection in DB.collections) SettingsListTile(collection: collection),
+                ],
+              ),
+              "Import list from file",
+            ),
             trailing: SettingsIcon(icon: FluentIcons.ic_fluent_chevron_right_24_filled),
           ),
           SettingsContainer(

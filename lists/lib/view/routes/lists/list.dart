@@ -68,10 +68,10 @@ class _CollectionTileState extends State<CollectionTile> {
           height: 260,
           width: 200,
           child: OffsetOnHover(
-            duration: FluentTheme.of(context).mediumAnimationDuration,
+            duration: FluentTheme.of(context).fastAnimationDuration,
             curve: FluentTheme.of(context).animationCurve,
             // scale: 1.025,
-            offset: Offset(0, -5),
+            offset: Offset(0, -3),
             child: Card(
               child: Column(
                 children: [
