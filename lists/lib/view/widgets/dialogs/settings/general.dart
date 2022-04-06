@@ -48,9 +48,9 @@ class _GeneralOptionsState extends State<GeneralOptions> {
               builder: (context, snapshot) {
                 var error = Updater.getErrorMessage();
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return SettingsContainer(
+                  return InfoBar(
                     title: NcTitleText("Checking for updates..."),
-                    trailing: SizedBox(
+                    action: SizedBox(
                       width: 15,
                       height: 15,
                       child: ProgressRing(
@@ -61,31 +61,28 @@ class _GeneralOptionsState extends State<GeneralOptions> {
                   );
                 } else if (error == null) {
                   return !Updater.updateAvailable
-                      ? SettingsContainer(
-                          icon: FluentIcons.ic_fluent_checkmark_24_filled,
-                          color: successColor.withOpacity(kDefaultOpacity),
+                      ? InfoBar(
                           title: NcTitleText("You are on the latest version!"),
+                          severity: InfoBarSeverity.success,
                         )
-                      : SettingsContainer(
-                          icon: FluentIcons.ic_fluent_info_24_regular,
-                          color: warningColor.withOpacity(kDefaultOpacity),
+                      : InfoBar(
                           title: NcTitleText("Update available"),
-                          trailing: TooltipIconButton(
+                          action: TooltipIconButton(
                             tooltip: "Update",
                             icon: FluentIcons.ic_fluent_arrow_download_24_filled,
                             onPressed: () => Navigator.of(context).pushNamed(UpgradeRoute.routeName, arguments: true),
                           ),
                         );
                 } else {
-                  return SettingsContainer(
-                    icon: FluentIcons.ic_fluent_error_circle_24_regular,
-                    color: errorColor.withOpacity(kDefaultOpacity),
+                  return InfoBar(
                     title: NcTitleText("Error checking for updates"),
-                    trailing: TooltipIconButton(
+                    content: NcBodyText("Please check your internet connection and try again later."),
+                    action: TooltipIconButton.small(
                       icon: FluentIcons.ic_fluent_more_horizontal_24_filled,
                       tooltip: "Show error details",
                       onPressed: () => _showErrorDetails(error),
                     ),
+                    severity: InfoBarSeverity.error,
                   );
                 }
               },

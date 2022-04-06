@@ -3,6 +3,7 @@ library styles;
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:lists/models/settings.dart';
 import 'package:lists/helpers/system_theme.dart';
+import 'package:lists/view/widgets/dialogs/settings/settings_container.dart';
 import 'package:nekolib_ui/core.dart';
 import 'package:nekolib_ui/utils.dart';
 
@@ -14,6 +15,7 @@ part 'toggle_switch.dart';
 part 'tooltip.dart';
 part 'scrollbar.dart';
 part 'checkbox.dart';
+part 'infobar.dart';
 
 /// Default styles for the app.
 ThemeData theme() => ThemeData(
@@ -36,4 +38,5 @@ ThemeData theme() => ThemeData(
       inactiveBackgroundColor: primaryColor,
       inactiveColor: tertiaryColor,
       checkboxTheme: checkboxThemeData(),
+      infoBarTheme: infoBarThemeData(),
     );

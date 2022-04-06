@@ -78,19 +78,22 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
             ),
           ),
           if (SystemThemeObserver.error)
-            SettingsContainer(
-              color: errorColor.withOpacity(kDefaultOpacity),
-              title: NcCaptionText("Error reading system accent color! Using default."),
-              trailing: TooltipIconButton(
-                icon: FluentIcons.ic_fluent_more_horizontal_24_filled,
-                tooltip: "Details...",
+            InfoBar(
+              severity: InfoBarSeverity.error,
+              title: NcCaptionText("Error reading system accent color!"),
+              content: NcBodyText(
+                "There was an error while reading the accent color you have set for your System. Lists will continue to try reading the system accent color and will use default accent color while trying.",
+                overflow: TextOverflow.visible,
+              ),
+              isLong: true,
+              action: Button(
+                child: NcCaptionText("Show details"),
                 onPressed: () => showAlertDialog(
                   context,
                   "Accent Color Error",
                   "This error randomly occurs when the system accent color is not readable by the app.\n\nI don't know why this happens but the default accent color of the currently active theme is used instead.\n\nIf you know why this happens, please report it on the GitHub repo and/or submit a pull request.\n\nPS: Please help me it's driving me crazy!",
                 ),
               ),
-              icon: FluentIcons.ic_fluent_error_circle_24_regular,
             ),
         ],
       ),

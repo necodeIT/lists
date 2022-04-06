@@ -5,6 +5,7 @@ class ImportOptions extends StatelessWidget {
   /// Import settings.
   const ImportOptions({Key? key, required this.switchView}) : super(key: key);
 
+  /// Callback in order switch to another view inside the settings dialog.
   final Function(Widget, String) switchView;
 
   @override
@@ -39,10 +40,9 @@ class ImportOptions extends StatelessWidget {
             onTap: () {},
             trailing: SettingsIcon(icon: FluentIcons.ic_fluent_chevron_right_24_filled),
           ),
-          SettingsContainer(
-            color: warningColor.withOpacity(kDefaultOpacity),
+          InfoBar(
             title: NcCaptionText("Importing is not implemented yet"),
-            icon: FluentIcons.ic_fluent_info_24_regular,
+            severity: InfoBarSeverity.info,
           ),
         ],
       ),

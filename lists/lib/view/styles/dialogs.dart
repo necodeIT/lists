@@ -6,13 +6,7 @@ contentDialogStyle() => ContentDialogThemeData(
         color: secondaryColor,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: tertiaryColor, width: 1),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 8,
-            offset: Offset(0, 4),
-          ),
-        ],
+        boxShadow: kElevationToShadow[2],
       ),
       actionsDecoration: BoxDecoration(
         color: secondaryColor,

@@ -46,10 +46,14 @@ class _SyncOptionsState extends State<SyncOptions> {
               ],
             ),
           ),
-          SettingsContainer(
-            color: warningColor.withOpacity(kDefaultOpacity),
+          // SettingsContainer(
+          //   color: warningColor.withOpacity(kDefaultOpacity),
+          //   title: NcCaptionText("Sync is not implemented yet"),
+          //   icon: FluentIcons.ic_fluent_info_24_regular,
+          // ),
+          InfoBar(
             title: NcCaptionText("Sync is not implemented yet"),
-            icon: FluentIcons.ic_fluent_info_24_regular,
+            severity: InfoBarSeverity.info,
           ),
         ],
       ),

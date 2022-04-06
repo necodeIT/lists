@@ -34,7 +34,7 @@ class SystemThemeObserver {
         await SystemTheme.accentInstance.load();
 
         accent = SystemTheme.accentInstance.accent.toAccentColor();
-      } on Exception {
+      } catch (_) {
         _lastError = DateTime.now();
         _errorCooldown = Duration(seconds: _errorCooldown.inSeconds * 2);
 
