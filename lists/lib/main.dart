@@ -54,6 +54,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderScope(
       child: FluentApp(
+        locale: Locale('en'),
         navigatorObservers: [routeObserver],
         debugShowCheckedModeBanner: false,
         theme: theme(),
