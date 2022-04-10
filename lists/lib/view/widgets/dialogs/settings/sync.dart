@@ -23,18 +23,18 @@ class _SyncOptionsState extends State<SyncOptions> {
       headerBackgroundColor: expanderHeaderBackground(),
       contentBackgroundColor: expanderContentBackground(),
       initiallyExpanded: false,
-      header: ExpanderHeader(icon: FluentIcons.ic_fluent_arrow_sync_24_filled, text: S.of(context).sync),
+      header: ExpanderHeader(icon: FluentIcons.ic_fluent_arrow_sync_24_filled, text: t.sync),
       content: Column(
         children: [
           SettingsContainer(
             icon: FluentIcons.ic_fluent_info_24_regular,
-            iconTooltip: S.of(context).syncDescription,
-            title: NcTitleText(S.of(context).enableSync),
+            iconTooltip: t.syncDescription,
+            title: NcTitleText(t.enableSync),
             onTap: () => _setSync(!Settings.sync),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                NcBodyText(Settings.sync ? S.of(context).on : S.of(context).off),
+                NcBodyText(Settings.sync ? t.on : t.off),
                 Transform.scale(
                   alignment: Alignment.centerRight,
                   scale: .9,
@@ -52,7 +52,7 @@ class _SyncOptionsState extends State<SyncOptions> {
           //   icon: FluentIcons.ic_fluent_info_24_regular,
           // ),
           InfoBar(
-            title: NcCaptionText(S.of(context).syncIsNotImplementedYet),
+            title: NcCaptionText(t.syncIsNotImplementedYet),
             severity: InfoBarSeverity.info,
           ),
         ],

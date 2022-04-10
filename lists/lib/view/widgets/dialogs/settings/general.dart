@@ -19,7 +19,7 @@ class _GeneralOptionsState extends State<GeneralOptions> {
   }
 
   _showErrorDetails(String error) {
-    showAlertDialog(context, S.of(context).error, error);
+    showAlertDialog(context, t.error, error);
   }
 
   @override
@@ -28,7 +28,7 @@ class _GeneralOptionsState extends State<GeneralOptions> {
       contentPadding: 0,
       headerBackgroundColor: expanderHeaderBackground(),
       contentBackgroundColor: expanderContentBackground(),
-      header: ExpanderHeader(icon: FluentIcons.ic_fluent_settings_24_regular, text: S.of(context).general),
+      header: ExpanderHeader(icon: FluentIcons.ic_fluent_settings_24_regular, text: t.general),
       content: Column(
         children: [
           Consumer(builder: (context, ref, child) {
@@ -44,13 +44,13 @@ class _GeneralOptionsState extends State<GeneralOptions> {
                 menuColor: primaryColor,
               ),
               child: SettingsContainer(
-                title: NcTitleText(S.of(context).language),
+                title: NcTitleText(t.language),
                 icon: FluentIcons.ic_fluent_local_language_24_filled,
                 trailing: Combobox<Locale>(
                   value: locale.locale,
                   onChanged: locale.load,
                   items: [
-                    for (var language in S.delegate.supportedLocales)
+                    for (var language in AppLocalizations.supportedLocales)
                       ComboboxItem(
                         value: language,
                         child: SizedBox(
@@ -65,12 +65,12 @@ class _GeneralOptionsState extends State<GeneralOptions> {
           }),
           SettingsContainer(
             icon: FluentIcons.ic_fluent_number_symbol_24_filled,
-            title: NcTitleText(S.of(context).version),
+            title: NcTitleText(t.version),
             trailing: NcBodyText(Updater.versionName),
           ),
           SettingsContainer(
             icon: FluentIcons.ic_fluent_arrow_clockwise_24_filled,
-            title: NcTitleText(S.of(context).checkForUpdates),
+            title: NcTitleText(t.checkForUpdates),
             onTap: _checkUpdates,
             trailing: SettingsIcon(icon: FluentIcons.ic_fluent_chevron_right_24_filled),
           ),
@@ -81,7 +81,7 @@ class _GeneralOptionsState extends State<GeneralOptions> {
                 var error = Updater.getErrorMessage();
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return InfoBar(
-                    title: NcTitleText(S.of(context).checkingForUpdates),
+                    title: NcTitleText(t.checkingForUpdates),
                     action: SizedBox(
                       width: 15,
                       height: 15,
@@ -94,24 +94,24 @@ class _GeneralOptionsState extends State<GeneralOptions> {
                 } else if (error == null) {
                   return !Updater.updateAvailable
                       ? InfoBar(
-                          title: NcTitleText(S.of(context).youAreOnTheLatestVersion),
+                          title: NcTitleText(t.youAreOnTheLatestVersion),
                           severity: InfoBarSeverity.success,
                         )
                       : InfoBar(
-                          title: NcTitleText(S.of(context).updateAvailable),
+                          title: NcTitleText(t.updateAvailable),
                           action: TooltipIconButton(
-                            tooltip: S.of(context).updateAvailableUpdate,
+                            tooltip: t.updateAvailableUpdate,
                             icon: FluentIcons.ic_fluent_arrow_download_24_filled,
                             onPressed: () => Navigator.of(context).pushNamed(UpgradeRoute.routeName, arguments: true),
                           ),
                         );
                 } else {
                   return InfoBar(
-                    title: NcTitleText(S.of(context).errorCheckingForUpdates),
-                    content: NcBodyText(S.of(context).errorCheckingForUpdatesDescription),
+                    title: NcTitleText(t.errorCheckingForUpdates),
+                    content: NcBodyText(t.errorCheckingForUpdatesDescription),
                     action: TooltipIconButton.small(
                       icon: FluentIcons.ic_fluent_more_horizontal_24_filled,
-                      tooltip: S.of(context).showDetails,
+                      tooltip: t.showDetails,
                       onPressed: () => _showErrorDetails(error),
                     ),
                     severity: InfoBarSeverity.error,

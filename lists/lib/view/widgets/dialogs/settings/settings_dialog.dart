@@ -3,7 +3,7 @@ import 'package:flutter/material.dart' show Icons;
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lists/controller/controller.dart';
-import 'package:lists/generated/l10n.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:lists/models/db.dart';
 import 'package:lists/models/settings.dart';
 import 'package:lists/models/updater.dart';
@@ -14,9 +14,9 @@ import 'package:lists/view/routes/upgrade/upgrade.dart';
 import 'package:lists/view/widgets/dialogs/settings/icon.dart';
 import 'package:lists/view/widgets/dialogs/settings/settings_container.dart';
 import 'package:lists/view/widgets/expander_header.dart';
+import 'package:lists/view/widgets/localized_widget.dart';
 import 'package:lists/view/widgets/tooltip_icon_button.dart';
 import 'package:nekolib_ui/core.dart';
-import 'package:nekolib_ui/utils.dart';
 
 import 'import/list_tile.dart';
 
@@ -35,27 +35,27 @@ class SettingsDialog extends StatefulWidget {
 }
 
 class _SettingsDialogState extends State<SettingsDialog> with TickerProviderStateMixin {
-  AnimationController? _controller;
+  // AnimationController? _controller;
 
-  Widget? child;
-  String? title;
+  // Widget? child;
+  // String? title;
 
-  void switchView(Widget? child, String? title) {
-    setState(() {
-      this.child = child;
-      this.title = title;
-    });
+  // void switchView(Widget? child, String? title) {
+  //   setState(() {
+  //     this.child = child;
+  //     this.title = title;
+  //   });
 
-    _controller?.reset();
-    _controller!.forward();
-  }
+  //   _controller?.reset();
+  //   _controller!.forward();
+  // }
 
   @override
   Widget build(BuildContext context) {
-    if (_controller == null) {
-      _controller = AnimationController(vsync: this, duration: FluentTheme.of(context).fastAnimationDuration);
-      _controller!.forward();
-    }
+    // if (_controller == null) {
+    //   _controller = AnimationController(vsync: this, duration: FluentTheme.of(context).fastAnimationDuration);
+    //   _controller!.forward();
+    // }
 
     return FluentTheme(
       data: theme().copyWith(
@@ -74,18 +74,19 @@ class _SettingsDialogState extends State<SettingsDialog> with TickerProviderStat
           children: [
             Row(
               children: [
-                if (child != null)
-                  TooltipIconButton.small(
-                    tooltip: "Go back to settings",
-                    icon: FluentIcons.ic_fluent_arrow_left_24_filled,
-                    onPressed: () => switchView(null, null),
-                  ),
-                if (child != null) NcSpacing.small(),
-                NcTitleText(title ?? S.of(context).settings),
+                // if (child != null)
+                //   TooltipIconButton.small(
+                //     tooltip: "Go back to settings",
+                //     icon: FluentIcons.ic_fluent_arrow_left_24_filled,
+                //     onPressed: () => switchView(null, null),
+                //   ),
+                // if (child != null) NcSpacing.small(),
+                // NcTitleText(title ?? AppLocalizations.of(context)!.settings),
+                NcTitleText(t.settings),
               ],
             ),
             TooltipIconButton(
-              tooltip: S.of(context).close,
+              tooltip: AppLocalizations.of(context)!.close,
               icon: Icons.close,
               size: 25,
               onPressed: Navigator.of(context).pop,
@@ -95,24 +96,36 @@ class _SettingsDialogState extends State<SettingsDialog> with TickerProviderStat
         content: AnimatedSize(
           curve: FluentTheme.of(context).animationCurve,
           duration: FluentTheme.of(context).fastAnimationDuration,
-          child: HorizontalSlidePageTransition(
-            animation: _controller!,
-            child: ConditionalWidget(
-              condition: child != null,
-              trueWidget: (context) => child!,
-              falseWidget: (context) => Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  GeneralOptions(),
-                  NcSpacing.xs(),
-                  AppearanceOptions(),
-                  NcSpacing.xs(),
-                  SyncOptions(),
-                  NcSpacing.xs(),
-                  ImportOptions(switchView: switchView),
-                ],
-              ),
-            ),
+          // child: HorizontalSlidePageTransition(
+          //   animation: _controller!,
+          //   child: ConditionalWidget(
+          //     condition: child != null,
+          //     trueWidget: (context) => child!,
+          //     falseWidget: (context) => Column(
+          //       mainAxisSize: MainAxisSize.min,
+          //       children: [
+          //         GeneralOptions(),
+          //         NcSpacing.xs(),
+          //         AppearanceOptions(),
+          //         NcSpacing.xs(),
+          //         SyncOptions(),
+          //         NcSpacing.xs(),
+          //         ImportOptions(switchView: switchView),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              GeneralOptions(),
+              NcSpacing.xs(),
+              AppearanceOptions(),
+              NcSpacing.xs(),
+              SyncOptions(),
+              NcSpacing.xs(),
+              ImportOptions(),
+            ],
           ),
         ),
       ),

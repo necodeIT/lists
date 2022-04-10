@@ -1,7 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart' hide Route;
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:lists/generated/l10n.dart';
+import 'package:lists/controller/controller.dart';
 import 'package:lists/models/db.dart';
 import 'package:lists/models/settings.dart';
 import 'package:lists/models/updater.dart';
@@ -15,6 +15,7 @@ import 'package:lists/view/routes/upgrade/upgrade.dart';
 import 'package:lists/view/widgets/route.dart';
 import 'package:nekolib_ui/core.dart';
 import 'package:nekolib_utils/log.dart';
+import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 /// Used to dispose collection when the user navigates away from [ListRoute].
 final RouteObserver<ModalRoute<void>> routeObserver = RouteObserver<ModalRoute<void>>();
@@ -55,28 +56,32 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
-      child: FluentApp(
-        localizationsDelegates: const [
-          S.delegate,
-          LocaleNamesLocalizationsDelegate(),
-        ],
-        supportedLocales: S.delegate.supportedLocales,
-        navigatorObservers: [routeObserver],
-        debugShowCheckedModeBanner: false,
-        theme: theme(),
-        title: 'Lists',
-        initialRoute: Updater.updateAvailable
-            ? UpgradeRoute.routeName
-            : DB.collections.isNotEmpty
-                ? ListsRoute.routeName
-                : HomeRoute.routeName,
-        routes: {
-          HomeRoute.routeName: (context) => Route(builder: (_) => HomeRoute()),
-          ListsRoute.routeName: (context) => Route(builder: (_) => ListsRoute()),
-          ListRoute.routeName: (context) => Route(builder: (_) => ListRoute()),
-          UpgradeRoute.routeName: (context) => Route(builder: (_) => UpgradeRoute()),
-        },
-      ),
+      child: Consumer(builder: (context, ref, _) {
+        final lang = ref.watch(localeProvider);
+        return FluentApp(
+          localizationsDelegates: const [
+            LocaleNamesLocalizationsDelegate(),
+            ...AppLocalizations.localizationsDelegates,
+          ],
+          locale: lang.locale,
+          supportedLocales: AppLocalizations.supportedLocales,
+          navigatorObservers: [routeObserver],
+          debugShowCheckedModeBanner: false,
+          theme: theme(),
+          title: 'Lists',
+          initialRoute: Updater.updateAvailable
+              ? UpgradeRoute.routeName
+              : DB.collections.isNotEmpty
+                  ? ListsRoute.routeName
+                  : HomeRoute.routeName,
+          routes: {
+            HomeRoute.routeName: (context) => Route(builder: (_) => HomeRoute()),
+            ListsRoute.routeName: (context) => Route(builder: (_) => ListsRoute()),
+            ListRoute.routeName: (context) => Route(builder: (_) => ListRoute()),
+            UpgradeRoute.routeName: (context) => Route(builder: (_) => UpgradeRoute()),
+          },
+        );
+      }),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:fluent_ui/generated/l10n.dart';
+import 'package:intl/intl.dart';
 import 'package:lists/models/db.dart';
 import 'package:lists/helpers/system_theme.dart';
 import 'package:nekolib_ui/core.dart';
@@ -47,6 +48,7 @@ class Settings {
 
     _language = value;
     S.load(value);
+    Intl.defaultLocale = value.toString();
 
     save();
   }

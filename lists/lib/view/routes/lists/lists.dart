@@ -1,5 +1,4 @@
 import 'package:fluent_ui/fluent_ui.dart';
-import 'package:lists/generated/l10n.dart';
 import 'package:lists/models/db.dart';
 import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/view/routes/lists/list.dart';
@@ -7,6 +6,7 @@ import 'package:lists/view/widgets/searchbar.dart';
 import 'package:lists/view/widgets/tooltip_icon_button.dart';
 import 'package:nekolib_ui/core.dart';
 import 'package:lists/helpers/string.dart';
+import 'package:lists/view/widgets/localized_widget.dart';
 
 /// Displays all the user's collections.
 class ListsRoute extends StatefulWidget {
@@ -45,17 +45,17 @@ class _ListsRouteState extends State<ListsRoute> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Searchbar(
-                  placeholder: S.of(context).searchLists,
+                  placeholder: t.searchLists,
                   onQuery: _updateQuery,
                 ),
                 NcSpacing.small(),
                 TooltipIconButton(
-                  tooltip: S.of(context).createNewList,
+                  tooltip: t.createNewList,
                   icon: FluentIcons.ic_fluent_add_24_filled,
                   onPressed: () => showCreateNewListDialog(context),
                 ),
                 TooltipIconButton(
-                  tooltip: S.of(context).openSettigns,
+                  tooltip: t.openSettigns,
                   icon: FluentIcons.ic_fluent_settings_24_regular,
                   onPressed: () => showSettingsDialog(context),
                 ),

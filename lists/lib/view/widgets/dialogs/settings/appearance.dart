@@ -31,11 +31,11 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
       contentPadding: 0,
       headerBackgroundColor: expanderHeaderBackground(),
       contentBackgroundColor: expanderContentBackground(),
-      header: ExpanderHeader(icon: FluentIcons.ic_fluent_color_24_regular, text: S.of(context).appearance),
+      header: ExpanderHeader(icon: FluentIcons.ic_fluent_color_24_regular, text: t.appearance),
       content: Column(
         children: [
           SettingsContainer(
-            title: NcTitleText(S.of(context).selectTheme),
+            title: NcTitleText(t.selectTheme),
             trailing: FluentTheme(
               data: ThemeData(
                 brightness: brightness,
@@ -69,9 +69,9 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
           ),
           SettingsContainer(
             icon: Settings.useSystemTheme ? null : FluentIcons.ic_fluent_error_circle_24_regular,
-            iconTooltip: S.of(context).adaptiveAccentIsOnlyAvailableWhenUsingSystemTheme,
+            iconTooltip: t.adaptiveAccentIsOnlyAvailableWhenUsingSystemTheme,
             onTap: Settings.useSystemTheme ? () => _setAdaptAccent(!Settings.adaptAccent) : null,
-            title: NcTitleText(S.of(context).adaptiveAccentUnstable),
+            title: NcTitleText(t.adaptiveAccentUnstable),
             trailing: Checkbox(
               checked: Settings.adaptAccent,
               onChanged: Settings.useSystemTheme ? _setAdaptAccent : null,
@@ -80,9 +80,9 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
           if (SystemThemeObserver.error)
             InfoBar(
               severity: InfoBarSeverity.error,
-              title: NcCaptionText(S.of(context).errorReadingSystemAccentColor),
+              title: NcCaptionText(t.errorReadingSystemAccentColor),
               content: NcBodyText(
-                S.of(context).errorReadingSystemAccentColorDescription,
+                t.errorReadingSystemAccentColorDescription,
                 overflow: TextOverflow.visible,
               ),
               isLong: true,

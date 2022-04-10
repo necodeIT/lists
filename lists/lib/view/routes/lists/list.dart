@@ -1,7 +1,7 @@
 import 'package:context_menus/context_menus.dart';
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:lists/assets/assets.dart';
-import 'package:lists/generated/l10n.dart';
+import 'package:lists/view/widgets/localized_widget.dart';
 import 'package:lists/models/collection.dart';
 import 'package:lists/helpers/collection.dart';
 import 'package:lists/helpers/dialogs.dart';
@@ -114,7 +114,7 @@ class _CollectionTileState extends State<CollectionTile> {
                       if (widget.collection.isProtected) NcSpacing.small(),
                       if (widget.collection.isProtected)
                         Tooltip(
-                          message: S.of(context).thisListIsPasswordProtected,
+                          message: t.thisListIsPasswordProtected,
                           child: Icon(
                             FluentIcons.ic_fluent_shield_24_regular,
                             color: textColor,
