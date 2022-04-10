@@ -5,10 +5,10 @@ import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 /// Provides localized strings for the app.
 abstract class LocalizedWidget extends StatelessWidget {
-  AppLocalizations? _t;
+  static AppLocalizations? _t;
 
   /// Provides localized strings for the app.
-  LocalizedWidget({Key? key}) : super(key: key);
+  const LocalizedWidget({Key? key}) : super(key: key);
 
   /// Provides localized strings for the app.
   AppLocalizations get t => _t!;

@@ -10,8 +10,10 @@ class SettingsListTile extends StatefulWidget {
   /// Selectable list tile.
   const SettingsListTile({Key? key, required this.collection}) : super(key: key);
 
+  /// The collection to display.
   final Collection collection;
 
+  /// The size of the collection icon.
   static const iconSize = 30.0;
 
   @override

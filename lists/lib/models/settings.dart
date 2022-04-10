@@ -100,7 +100,7 @@ class Settings {
     setTheme(data["theme"]);
     _adaptAccent = data["adaptAccent"];
     _sync = data["sync"];
-    print(data["language"]);
+
     setLanguage(Locale(data["language"]), true);
   }
 }

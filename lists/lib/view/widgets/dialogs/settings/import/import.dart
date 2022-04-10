@@ -4,7 +4,7 @@ part of '../settings_dialog.dart';
 class ImportOptions extends LocalizedWidget {
   /// Import settings.
   // const ImportOptions({Key? key, required this.switchView}) : super(key: key);
-  ImportOptions({Key? key}) : super(key: key);
+  const ImportOptions({Key? key}) : super(key: key);
 
   /// Callback in order switch to another view inside the settings dialog.
   // final Function(Widget, String) switchView;
