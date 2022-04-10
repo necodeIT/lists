@@ -1,5 +1,9 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart' show Icons;
+import 'package:flutter_localized_locales/flutter_localized_locales.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lists/controller/controller.dart';
+import 'package:lists/generated/l10n.dart';
 import 'package:lists/models/db.dart';
 import 'package:lists/models/settings.dart';
 import 'package:lists/models/updater.dart';
@@ -10,7 +14,6 @@ import 'package:lists/view/routes/upgrade/upgrade.dart';
 import 'package:lists/view/widgets/dialogs/settings/icon.dart';
 import 'package:lists/view/widgets/dialogs/settings/settings_container.dart';
 import 'package:lists/view/widgets/expander_header.dart';
-import 'package:lists/view/widgets/searchbar.dart';
 import 'package:lists/view/widgets/tooltip_icon_button.dart';
 import 'package:nekolib_ui/core.dart';
 import 'package:nekolib_ui/utils.dart';
@@ -78,11 +81,11 @@ class _SettingsDialogState extends State<SettingsDialog> with TickerProviderStat
                     onPressed: () => switchView(null, null),
                   ),
                 if (child != null) NcSpacing.small(),
-                NcTitleText(title ?? "Settings"),
+                NcTitleText(title ?? S.of(context).settings),
               ],
             ),
             TooltipIconButton(
-              tooltip: "Close",
+              tooltip: S.of(context).close,
               icon: Icons.close,
               size: 25,
               onPressed: Navigator.of(context).pop,

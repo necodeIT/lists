@@ -1,4 +1,5 @@
 import 'package:fluent_ui/fluent_ui.dart';
+import 'package:lists/generated/l10n.dart';
 import 'package:lists/models/db.dart';
 import 'package:lists/helpers/dialogs.dart';
 import 'package:lists/view/routes/lists/list.dart';
@@ -44,17 +45,17 @@ class _ListsRouteState extends State<ListsRoute> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Searchbar(
-                  placeholder: "Search lists...",
+                  placeholder: S.of(context).searchLists,
                   onQuery: _updateQuery,
                 ),
                 NcSpacing.small(),
                 TooltipIconButton(
-                  tooltip: "Create new list",
+                  tooltip: S.of(context).createNewList,
                   icon: FluentIcons.ic_fluent_add_24_filled,
                   onPressed: () => showCreateNewListDialog(context),
                 ),
                 TooltipIconButton(
-                  tooltip: "Open settigns",
+                  tooltip: S.of(context).openSettigns,
                   icon: FluentIcons.ic_fluent_settings_24_regular,
                   onPressed: () => showSettingsDialog(context),
                 ),

@@ -31,11 +31,11 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
       contentPadding: 0,
       headerBackgroundColor: expanderHeaderBackground(),
       contentBackgroundColor: expanderContentBackground(),
-      header: ExpanderHeader(icon: FluentIcons.ic_fluent_color_24_regular, text: "Appearance"),
+      header: ExpanderHeader(icon: FluentIcons.ic_fluent_color_24_regular, text: S.of(context).appearance),
       content: Column(
         children: [
           SettingsContainer(
-            title: NcTitleText("Select theme"),
+            title: NcTitleText(S.of(context).selectTheme),
             trailing: FluentTheme(
               data: ThemeData(
                 brightness: brightness,
@@ -69,9 +69,9 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
           ),
           SettingsContainer(
             icon: Settings.useSystemTheme ? null : FluentIcons.ic_fluent_error_circle_24_regular,
-            iconTooltip: "Adaptive accent is only available when using system theme",
+            iconTooltip: S.of(context).adaptiveAccentIsOnlyAvailableWhenUsingSystemTheme,
             onTap: Settings.useSystemTheme ? () => _setAdaptAccent(!Settings.adaptAccent) : null,
-            title: NcTitleText("Adaptive accent (unstable)"),
+            title: NcTitleText(S.of(context).adaptiveAccentUnstable),
             trailing: Checkbox(
               checked: Settings.adaptAccent,
               onChanged: Settings.useSystemTheme ? _setAdaptAccent : null,
@@ -80,20 +80,12 @@ class _AppearanceOptionsState extends State<AppearanceOptions> {
           if (SystemThemeObserver.error)
             InfoBar(
               severity: InfoBarSeverity.error,
-              title: NcCaptionText("Error reading system accent color!"),
+              title: NcCaptionText(S.of(context).errorReadingSystemAccentColor),
               content: NcBodyText(
-                "There was an error while reading the accent color you have set for your System. Lists will continue to try reading the system accent color and will use default accent color while trying.",
+                S.of(context).errorReadingSystemAccentColorDescription,
                 overflow: TextOverflow.visible,
               ),
               isLong: true,
-              action: Button(
-                child: NcCaptionText("Show details"),
-                onPressed: () => showAlertDialog(
-                  context,
-                  "Accent Color Error",
-                  "This error randomly occurs when the system accent color is not readable by the app.\n\nI don't know why this happens but the default accent color of the currently active theme is used instead.\n\nIf you know why this happens, please report it on the GitHub repo and/or submit a pull request.\n\nPS: Please help me it's driving me crazy!",
-                ),
-              ),
             ),
         ],
       ),

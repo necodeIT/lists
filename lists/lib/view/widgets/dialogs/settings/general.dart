@@ -19,7 +19,7 @@ class _GeneralOptionsState extends State<GeneralOptions> {
   }
 
   _showErrorDetails(String error) {
-    showAlertDialog(context, "Error", error);
+    showAlertDialog(context, S.of(context).error, error);
   }
 
   @override
@@ -28,17 +28,49 @@ class _GeneralOptionsState extends State<GeneralOptions> {
       contentPadding: 0,
       headerBackgroundColor: expanderHeaderBackground(),
       contentBackgroundColor: expanderContentBackground(),
-      header: ExpanderHeader(icon: FluentIcons.ic_fluent_settings_24_regular, text: "General"),
+      header: ExpanderHeader(icon: FluentIcons.ic_fluent_settings_24_regular, text: S.of(context).general),
       content: Column(
         children: [
+          Consumer(builder: (context, ref, child) {
+            var locale = ref.watch(localeProvider);
+
+            return FluentTheme(
+              data: ThemeData(
+                brightness: brightness,
+                accentColor: adaptiveAccentColor,
+                buttonTheme: ButtonThemeData(
+                  defaultButtonStyle: buttonStyle(color: Colors.transparent, hoverColor: secondaryColor),
+                ),
+                menuColor: primaryColor,
+              ),
+              child: SettingsContainer(
+                title: NcTitleText(S.of(context).language),
+                icon: FluentIcons.ic_fluent_local_language_24_filled,
+                trailing: Combobox<Locale>(
+                  value: locale.locale,
+                  onChanged: locale.load,
+                  items: [
+                    for (var language in S.delegate.supportedLocales)
+                      ComboboxItem(
+                        value: language,
+                        child: SizedBox(
+                          width: 60,
+                          child: NcBodyText(LocaleNamesLocalizationsDelegate.nativeLocaleNames[language.languageCode] ?? ""),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
+            );
+          }),
           SettingsContainer(
             icon: FluentIcons.ic_fluent_number_symbol_24_filled,
-            title: NcTitleText("Version"),
+            title: NcTitleText(S.of(context).version),
             trailing: NcBodyText(Updater.versionName),
           ),
           SettingsContainer(
             icon: FluentIcons.ic_fluent_arrow_clockwise_24_filled,
-            title: NcTitleText("Check for updates"),
+            title: NcTitleText(S.of(context).checkForUpdates),
             onTap: _checkUpdates,
             trailing: SettingsIcon(icon: FluentIcons.ic_fluent_chevron_right_24_filled),
           ),
@@ -49,7 +81,7 @@ class _GeneralOptionsState extends State<GeneralOptions> {
                 var error = Updater.getErrorMessage();
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return InfoBar(
-                    title: NcTitleText("Checking for updates..."),
+                    title: NcTitleText(S.of(context).checkingForUpdates),
                     action: SizedBox(
                       width: 15,
                       height: 15,
@@ -62,24 +94,24 @@ class _GeneralOptionsState extends State<GeneralOptions> {
                 } else if (error == null) {
                   return !Updater.updateAvailable
                       ? InfoBar(
-                          title: NcTitleText("You are on the latest version!"),
+                          title: NcTitleText(S.of(context).youAreOnTheLatestVersion),
                           severity: InfoBarSeverity.success,
                         )
                       : InfoBar(
-                          title: NcTitleText("Update available"),
+                          title: NcTitleText(S.of(context).updateAvailable),
                           action: TooltipIconButton(
-                            tooltip: "Update",
+                            tooltip: S.of(context).updateAvailableUpdate,
                             icon: FluentIcons.ic_fluent_arrow_download_24_filled,
                             onPressed: () => Navigator.of(context).pushNamed(UpgradeRoute.routeName, arguments: true),
                           ),
                         );
                 } else {
                   return InfoBar(
-                    title: NcTitleText("Error checking for updates"),
-                    content: NcBodyText("Please check your internet connection and try again later."),
+                    title: NcTitleText(S.of(context).errorCheckingForUpdates),
+                    content: NcBodyText(S.of(context).errorCheckingForUpdatesDescription),
                     action: TooltipIconButton.small(
                       icon: FluentIcons.ic_fluent_more_horizontal_24_filled,
-                      tooltip: "Show error details",
+                      tooltip: S.of(context).showDetails,
                       onPressed: () => _showErrorDetails(error),
                     ),
                     severity: InfoBarSeverity.error,

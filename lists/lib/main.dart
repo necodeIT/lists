@@ -1,5 +1,7 @@
 import 'package:fluent_ui/fluent_ui.dart' hide Route;
+import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:lists/generated/l10n.dart';
 import 'package:lists/models/db.dart';
 import 'package:lists/models/settings.dart';
 import 'package:lists/models/updater.dart';
@@ -54,7 +56,11 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderScope(
       child: FluentApp(
-        locale: Locale('en'),
+        localizationsDelegates: const [
+          S.delegate,
+          LocaleNamesLocalizationsDelegate(),
+        ],
+        supportedLocales: S.delegate.supportedLocales,
         navigatorObservers: [routeObserver],
         debugShowCheckedModeBanner: false,
         theme: theme(),
@@ -65,10 +71,10 @@ class App extends StatelessWidget {
                 ? ListsRoute.routeName
                 : HomeRoute.routeName,
         routes: {
-          HomeRoute.routeName: (context) => Route(child: HomeRoute()),
-          ListsRoute.routeName: (context) => Route(child: ListsRoute()),
-          ListRoute.routeName: (context) => Route(child: ListRoute()),
-          UpgradeRoute.routeName: (context) => Route(child: UpgradeRoute()),
+          HomeRoute.routeName: (context) => Route(builder: (_) => HomeRoute()),
+          ListsRoute.routeName: (context) => Route(builder: (_) => ListsRoute()),
+          ListRoute.routeName: (context) => Route(builder: (_) => ListRoute()),
+          UpgradeRoute.routeName: (context) => Route(builder: (_) => UpgradeRoute()),
         },
       ),
     );

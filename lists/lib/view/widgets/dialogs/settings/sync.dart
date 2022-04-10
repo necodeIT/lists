@@ -23,18 +23,18 @@ class _SyncOptionsState extends State<SyncOptions> {
       headerBackgroundColor: expanderHeaderBackground(),
       contentBackgroundColor: expanderContentBackground(),
       initiallyExpanded: false,
-      header: ExpanderHeader(icon: FluentIcons.ic_fluent_arrow_sync_24_filled, text: "Sync"),
+      header: ExpanderHeader(icon: FluentIcons.ic_fluent_arrow_sync_24_filled, text: S.of(context).sync),
       content: Column(
         children: [
           SettingsContainer(
             icon: FluentIcons.ic_fluent_info_24_regular,
-            iconTooltip: "Sync enables you to sync your lists across other devices.",
-            title: NcTitleText("Enable sync"),
+            iconTooltip: S.of(context).syncDescription,
+            title: NcTitleText(S.of(context).enableSync),
             onTap: () => _setSync(!Settings.sync),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                NcBodyText(Settings.sync ? "On" : "Off"),
+                NcBodyText(Settings.sync ? S.of(context).on : S.of(context).off),
                 Transform.scale(
                   alignment: Alignment.centerRight,
                   scale: .9,
@@ -52,7 +52,7 @@ class _SyncOptionsState extends State<SyncOptions> {
           //   icon: FluentIcons.ic_fluent_info_24_regular,
           // ),
           InfoBar(
-            title: NcCaptionText("Sync is not implemented yet"),
+            title: NcCaptionText(S.of(context).syncIsNotImplementedYet),
             severity: InfoBarSeverity.info,
           ),
         ],

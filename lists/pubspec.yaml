@@ -45,8 +45,12 @@ dependencies:
       ref: master
   flutter:
     sdk: flutter
+  flutter_localized_locales: 
+    git:
+      url: https://github.com/guidezpl/flutter-localized-locales.git
   flutter_riverpod: ^1.0.3
   http: ^0.13.4
+  intl: ^0.17.0
   mime: ^1.0.1
   nekolib_ui:
     git:
@@ -66,7 +70,7 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
-  
+
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter.
@@ -103,3 +107,5 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_intl:
+  enabled: true

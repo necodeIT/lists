@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:fluent_ui/fluent_ui.dart';
+import 'package:fluent_ui/generated/l10n.dart';
 import 'package:lists/models/db.dart';
 import 'package:lists/helpers/system_theme.dart';
 import 'package:nekolib_ui/core.dart';
@@ -8,6 +10,7 @@ class Settings {
   /// The name of the system theme.
   static const systemTheme = "System";
   static String _theme = systemTheme;
+  static Locale _language = Locale("en");
   static bool _adaptAccent = true;
   static bool _sync = false;
 
@@ -23,6 +26,9 @@ class Settings {
   /// Whether the app should sync with the cloud.
   static bool get sync => _sync;
 
+  /// The current language.
+  static Locale get language => _language;
+
   /// Sets the value of [adaptAccent]
   static void setAdaptAccent(bool value) {
     if (!useSystemTheme) return;
@@ -31,6 +37,16 @@ class Settings {
     _adaptAccent = value;
 
     NcThemes.setTheme(NcThemes.current, force: true);
+
+    save();
+  }
+
+  /// Sets the value of [language]
+  static void setLanguage(Locale value, [bool force = false]) {
+    if (value == _language) return;
+
+    _language = value;
+    S.load(value);
 
     save();
   }
@@ -65,6 +81,7 @@ class Settings {
       "theme": _theme,
       "adaptAccent": _adaptAccent,
       "sync": _sync,
+      "language": _language.toString(),
     };
 
     await f.writeAsString(jsonEncode(data));
@@ -81,5 +98,7 @@ class Settings {
     setTheme(data["theme"]);
     _adaptAccent = data["adaptAccent"];
     _sync = data["sync"];
+    print(data["language"]);
+    setLanguage(Locale(data["language"]), true);
   }
 }
