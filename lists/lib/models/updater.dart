@@ -12,10 +12,10 @@ class Updater extends GitHubUpdater {
   String get currentVersion => "0.0.2";
 
   @override
-  String get linuxFileName => throw UnimplementedError();
+  String get linuxFileName => throw UnimplementedError("Linux is not supported");
 
   @override
-  String get macFileName => throw UnimplementedError();
+  String get macFileName => throw UnimplementedError("MacOs is not supported");
 
   @override
   String get repo => "lists";
