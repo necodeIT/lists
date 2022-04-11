@@ -19,7 +19,7 @@
   "importErrorTitle": "Fehler beim Importieren der Listen von älteren Versionen!",
   "importListFromFile": "Liste aus Datei importieren",
   "importListsFromOlderVersions": "Listen von älteren Versionen importieren",
-  "importing": "Extrahiere daten...",
+  "importing": "Listen werden importiert...",
   "importingIsNotImplementedYet": "Importieren ist noch nicht implementiert.",
   "language": "Sprache",
   "loadingData": "Lade Daten...",

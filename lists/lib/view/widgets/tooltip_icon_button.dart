@@ -52,6 +52,33 @@ class TooltipIconButton extends StatelessWidget {
       color: color ?? textColor,
       size: size,
     );
+
+    //  return Tooltip(
+    //     message: tooltip,
+    //     child: ConditionalWidget(
+    //       condition: small,
+    //       trueWidget: (context) => HoverRegion(
+    //         padding: EdgeInsets.all(4),
+    //         onTap: onPressed,
+    //         child: child,
+    //       ),
+    //       falseWidget: (context) => Padding(
+    //         padding: EdgeInsets.all(4),
+    //         child: HoverBuilder(
+    //           builder: (context, hover) => ConditionalWidget(
+    //             condition: hover,
+    //             trueWidget: (context) => Button(
+    //               style: iconButtonStyle(),
+    //               child: child,
+    //               onPressed: onPressed,
+    //             ),
+    //             falseWidget: (context) => child,
+    //           ),
+    //         ),
+    //       ),
+    //     ),
+    //   );
+
     return Tooltip(
       message: tooltip,
       child: small
