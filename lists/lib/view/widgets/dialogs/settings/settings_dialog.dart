@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
@@ -17,6 +19,7 @@ import 'package:lists/view/widgets/expander_header.dart';
 import 'package:lists/view/widgets/localized_widget.dart';
 import 'package:lists/view/widgets/tooltip_icon_button.dart';
 import 'package:nekolib_ui/core.dart';
+import 'package:nekolib_ui/utils.dart';
 import 'package:nekolib_utils/updater.dart';
 
 part 'appearance.dart';
