@@ -27,7 +27,7 @@ class _AccountOptionsState extends State<AccountOptions> {
       content: Column(
         children: [
           SettingsContainer(
-            title: NcCaptionText("No account linked"),
+            title: NcCaptionText(t.noAccountLinked),
             icon: FontAwesome.github,
             // TODO: login onTap
             trailing: SettingsIcon(
@@ -35,8 +35,8 @@ class _AccountOptionsState extends State<AccountOptions> {
             ),
           ),
           SettingsContainer(
-            icon: FluentIcons.ic_fluent_info_24_regular,
-            iconTooltip: t.syncDescription,
+            icon: FluentIcons.ic_fluent_arrow_sync_24_filled,
+            // iconTooltip: t.syncDescription,
             title: NcTitleText(t.enableSync),
             onTap: () => _setSync(!Settings.sync),
             trailing: Row(
@@ -56,8 +56,13 @@ class _AccountOptionsState extends State<AccountOptions> {
           ),
           InfoBar(
             title: NcCaptionText(t.syncIsNotImplementedYet),
-            severity: InfoBarSeverity.info,
+            severity: InfoBarSeverity.warning,
           ),
+          if (!Settings.sync)
+            InfoBar(
+              title: NcCaptionText(t.syncDescription),
+              severity: InfoBarSeverity.info,
+            ),
         ],
       ),
     );

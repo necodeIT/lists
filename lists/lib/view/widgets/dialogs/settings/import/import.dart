@@ -45,7 +45,7 @@ class ImportOptions extends LocalizedWidget {
           ),
           InfoBar(
             title: NcCaptionText(t.importingIsNotImplementedYet),
-            severity: InfoBarSeverity.info,
+            severity: InfoBarSeverity.warning,
           ),
         ],
       ),
