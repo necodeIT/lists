@@ -4,8 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lists/controller/controller.dart';
 import 'package:lists/models/db.dart';
 import 'package:lists/models/settings.dart';
-import 'package:lists/models/updater.dart';
 import 'package:lists/helpers/system_theme.dart';
+import 'package:lists/models/updater.dart';
 import 'package:lists/view/styles/styles.dart';
 import 'package:lists/view/routes/home/home.dart';
 import 'package:lists/view/routes/list/list.dart';
@@ -33,7 +33,7 @@ void main() async {
     appBuilder: App.builder,
     loadingWidgetBuilder: AppLoader.builder,
     onLoad: loadAll,
-    title: Updater.appName,
+    title: kUpdater.appName,
     appIcon: kAppIconSvg,
     minSize: Size(1200, 700),
   );
@@ -41,7 +41,7 @@ void main() async {
 
 /// Loads all the data needed for the app.
 Future loadAll() async {
-  await Updater.update();
+  await kUpdater.update();
   await DB.load();
 }
 
@@ -69,7 +69,7 @@ class App extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: theme(),
           title: 'Lists',
-          initialRoute: Updater.updateAvailable
+          initialRoute: kUpdater.updateAvailable
               ? UpgradeRoute.routeName
               : DB.collections.isNotEmpty
                   ? ListsRoute.routeName

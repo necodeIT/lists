@@ -1,8 +1,8 @@
 import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lists/controller/controller.dart';
-import 'package:lists/models/updater.dart';
 import 'package:lists/helpers/dialogs.dart';
+import 'package:lists/models/updater.dart';
 import 'package:lists/view/styles/styles.dart';
 import 'package:nekolib_ui/core.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -25,7 +25,7 @@ class _UpgradeRouteState extends State<UpgradeRoute> {
       context: context,
       title: "Error updating",
       message: "The update failed to download.\nPlease try again later or update manually.",
-      onConfirm: () => launch(Updater.setupDownloadUrl),
+      onConfirm: () => launch(kUpdater.setupDownloadUrl),
       confirmText: "Update manually",
     );
   }
@@ -71,7 +71,7 @@ class _UpgradeRouteState extends State<UpgradeRoute> {
                   textAlign: TextAlign.center,
                   fontSize: 15,
                 ),
-                onPressed: () => launch(Updater.setupDownloadUrl),
+                onPressed: () => launch(updater.downloadUrl),
               ),
             if (updater.status.isIdle)
               Icon(

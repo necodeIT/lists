@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:lists/models/collection.dart';
-import 'package:lists/models/updater.dart';
 import 'package:lists/helpers/string.dart';
+import 'package:lists/models/updater.dart';
 import 'package:path_provider/path_provider.dart';
 
 /// Contains and manages all the data used by the app.
@@ -40,7 +40,7 @@ class DB {
   static Future<Directory> get appDir async {
     var dir = await getApplicationDocumentsDirectory();
 
-    var path = '${dir.path}/${Updater.appName}';
+    var path = '${dir.path}/${kUpdater.appName}';
     var appDir = Directory(path);
 
     await appDir.create();

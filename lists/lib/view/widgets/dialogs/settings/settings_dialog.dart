@@ -5,8 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lists/controller/controller.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:lists/models/settings.dart';
-import 'package:lists/models/updater.dart';
 import 'package:lists/helpers/dialogs.dart';
+import 'package:lists/models/updater.dart';
 import 'package:lists/view/styles/styles.dart';
 import 'package:lists/helpers/system_theme.dart';
 import 'package:lists/view/routes/upgrade/upgrade.dart';
@@ -16,6 +16,7 @@ import 'package:lists/view/widgets/expander_header.dart';
 import 'package:lists/view/widgets/localized_widget.dart';
 import 'package:lists/view/widgets/tooltip_icon_button.dart';
 import 'package:nekolib_ui/core.dart';
+import 'package:nekolib_utils/updater.dart';
 
 part 'appearance.dart';
 part 'sync.dart';

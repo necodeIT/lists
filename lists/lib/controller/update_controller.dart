@@ -9,13 +9,16 @@ class UpdateProvider extends ChangeNotifier {
   int _progress = 0;
 
   /// Whether a new update is available.
-  bool get updateAvailable => Updater.updateAvailable;
+  bool get updateAvailable => kUpdater.updateAvailable;
 
   /// The url to download the update from.
-  String get downloadUrl => Updater.setupDownloadUrl;
+  String get downloadUrl => kUpdater.setupDownloadUrl;
 
   /// The version of the update.
-  String get latestVersionName => Updater.latestVersionName;
+  String get latestVersionName => kUpdater.latestVersionName;
+
+  /// The name of the current version
+  String get versionName => "Alpha v${kUpdater.currentVersion}";
 
   /// The status of the update.
   UpdateStatus get status => _status;
@@ -33,15 +36,15 @@ class UpdateProvider extends ChangeNotifier {
 
   /// Updates the app.
   void upgrade(VoidCallback onError) async {
-    if (status.isDownloading || status.isDone) return;
+    if (status.isDownloading || status.isDone || status.isError) return;
 
     _status = UpdateStatus.downloading;
     notifyListeners();
 
-    var f = await Updater.upgrade(_updateProgress);
+    var f = await kUpdater.upgrade(_updateProgress);
 
     _status = await f.exists() ? UpdateStatus.done : UpdateStatus.error;
-    _status = UpdateStatus.error;
+
     notifyListeners();
 
     if (_status.isError) {
@@ -79,6 +82,6 @@ extension UpdateStatusExt on UpdateStatus {
   /// Whether the update resulted in an error.
   bool get isError => this == UpdateStatus.error;
 
-  /// Whether the updater is idle.
+  /// Whether the kUpdater is idle.
   bool get isIdle => this == UpdateStatus.idle;
 }
