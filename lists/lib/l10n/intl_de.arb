@@ -1,4 +1,5 @@
 {
+  "account": "Konto",
   "adaptiveAccentIsOnlyAvailableWhenUsingSystemTheme": "Adaptive Akzentfarbe ist nur verfügbar, wenn das System-Thema verwendet wird.",
   "adaptiveAccentUnstable": "Adaptive Akzentfarbe (Beta)",
   "appearance": "Aussehen",
@@ -26,7 +27,6 @@
   "selectTheme": "Thema auswählen",
   "settings": "Einstellungen",
   "showDetails": "Details anzeigen",
-  "sync": "Sync",
   "syncDescription": "Synchronisieren Sie Ihre Listen mit einem anderen Geräten.",
   "syncIsNotImplementedYet": "Sync ist noch nicht implementiert.",
   "thisListIsPasswordProtected": "Diese Liste ist Passwort geschützt.",

@@ -47,10 +47,11 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  flutter_localized_locales: 
+  flutter_localized_locales:
     git:
       url: https://github.com/guidezpl/flutter-localized-locales.git
   flutter_riverpod: ^1.0.3
+  flutter_vector_icons: ^1.0.0
   http: ^0.13.4
   intl: ^0.17.0
   mime: ^1.0.1

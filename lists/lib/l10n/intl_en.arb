@@ -1,4 +1,5 @@
 {
+  "account": "Account",
   "adaptiveAccentIsOnlyAvailableWhenUsingSystemTheme": "Adaptive accent is only available when using system theme",
   "adaptiveAccentUnstable": "Adaptive accent (unstable)",
   "appearance": "Appearance",
@@ -26,7 +27,6 @@
   "selectTheme": "Select theme",
   "settings": "Settings",
   "showDetails": "Show details",
-  "sync": "Sync",
   "syncDescription": "Sync enables you to sync your lists across other devices.",
   "syncIsNotImplementedYet": "Sync is not implemented yet",
   "thisListIsPasswordProtected": "This list is password protected",

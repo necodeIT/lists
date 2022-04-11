@@ -1,15 +1,15 @@
 part of 'settings_dialog.dart';
 
 /// Sync settings.
-class SyncOptions extends StatefulWidget {
+class AccountOptions extends StatefulWidget {
   /// Sync settings.
-  const SyncOptions({Key? key}) : super(key: key);
+  const AccountOptions({Key? key}) : super(key: key);
 
   @override
-  State<SyncOptions> createState() => _SyncOptionsState();
+  State<AccountOptions> createState() => _AccountOptionsState();
 }
 
-class _SyncOptionsState extends State<SyncOptions> {
+class _AccountOptionsState extends State<AccountOptions> {
   _setSync(bool? value) {
     setState(() {
       Settings.setSync(value ?? false);
@@ -23,9 +23,17 @@ class _SyncOptionsState extends State<SyncOptions> {
       headerBackgroundColor: expanderHeaderBackground(),
       contentBackgroundColor: expanderContentBackground(),
       initiallyExpanded: false,
-      header: ExpanderHeader(icon: FluentIcons.ic_fluent_arrow_sync_24_filled, text: t.sync),
+      header: ExpanderHeader(icon: FluentIcons.ic_fluent_person_24_regular, text: t.account),
       content: Column(
         children: [
+          SettingsContainer(
+            title: NcCaptionText("No account linked"),
+            icon: FontAwesome.github,
+            // TODO: login onTap
+            trailing: SettingsIcon(
+              icon: FluentIcons.ic_fluent_chevron_right_24_filled,
+            ),
+          ),
           SettingsContainer(
             icon: FluentIcons.ic_fluent_info_24_regular,
             iconTooltip: t.syncDescription,
@@ -46,11 +54,6 @@ class _SyncOptionsState extends State<SyncOptions> {
               ],
             ),
           ),
-          // SettingsContainer(
-          //   color: warningColor.withOpacity(kDefaultOpacity),
-          //   title: NcCaptionText("Sync is not implemented yet"),
-          //   icon: FluentIcons.ic_fluent_info_24_regular,
-          // ),
           InfoBar(
             title: NcCaptionText(t.syncIsNotImplementedYet),
             severity: InfoBarSeverity.info,

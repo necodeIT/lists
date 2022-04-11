@@ -2,6 +2,7 @@ import 'package:fluent_ui/fluent_ui.dart';
 import 'package:flutter/material.dart' show Icons;
 import 'package:flutter_localized_locales/flutter_localized_locales.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:lists/controller/controller.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 import 'package:lists/models/settings.dart';
@@ -19,7 +20,7 @@ import 'package:nekolib_ui/core.dart';
 import 'package:nekolib_utils/updater.dart';
 
 part 'appearance.dart';
-part 'sync.dart';
+part 'account.dart';
 part 'import/import.dart';
 part 'general.dart';
 
@@ -120,7 +121,7 @@ class _SettingsDialogState extends State<SettingsDialog> with TickerProviderStat
               NcSpacing.xs(),
               AppearanceOptions(),
               NcSpacing.xs(),
-              SyncOptions(),
+              AccountOptions(),
               NcSpacing.xs(),
               ImportOptions(),
             ],
