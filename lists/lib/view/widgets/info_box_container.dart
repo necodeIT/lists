@@ -73,7 +73,7 @@ class InfoBoxContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     var icon = Icon(
       this.icon,
-      color: iconColor,
+      color: iconColor ?? textColor,
       size: iconSize,
     );
 

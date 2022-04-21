@@ -101,6 +101,6 @@ class Settings {
     _adaptAccent = data["adaptAccent"];
     _sync = data["sync"];
 
-    setLanguage(Locale(data["language"]), true);
+    setLanguage(Locale(data["language"] ?? 'en'), true);
   }
 }
