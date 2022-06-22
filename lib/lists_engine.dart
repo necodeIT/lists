@@ -20,7 +20,7 @@ part 'models/decryption_result.dart';
 part 'providers/provider_index.dart';
 
 part 'disk/disk.dart';
-part 'disk/indexer_disk.dart';
+part 'disk/index_disk.dart';
 part 'disk/collection_disk.dart';
 
 /// Indexes [CollectionMetaData] and [Collection]s.
