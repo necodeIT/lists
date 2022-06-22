@@ -29,7 +29,7 @@ class IndexDisk {
   }
 
   /// Loads the [Index] from the disk.
-  static Future<void> loadUser() async {
+  static Future<void> loadIndex() async {
     var file = await indexFile;
 
     try {
