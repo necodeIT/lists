@@ -35,13 +35,15 @@ class IndexDisk {
     try {
       var json = await file.readAsString();
 
-      _data = jsonDecode(json, reviver: (key, value) {
+      var parsed = jsonDecode(json, reviver: (key, value) {
         if (key == null) return value;
         if (value == null) return value;
         if (value is! Map) return value;
 
         return CollectionMetaData.fromJson(Json.from(value));
       });
+
+      _data = Index.from(parsed);
     } catch (e) {
       print(e);
       _data = null;

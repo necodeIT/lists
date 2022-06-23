@@ -18,13 +18,14 @@ void main() async {
     await IndexDisk.saveIndex(index);
   });
 
-  // TODO: load index thingy
-  // test("Load index", () async {
-  //   await IndexDisk.loadIndex();
+  test("Load index", () async {
+    await IndexDisk.loadIndex();
 
-  //   expect(IndexDisk.data, isNotNull);
-  //   expect(IndexDisk.data, index);
-  // });
+    expect(IndexDisk.data, isNotNull);
+    expect(IndexDisk.data, index);
+    expect(IndexDisk.data![protectedMetaData.name], protectedMetaData);
+    expect(IndexDisk.data![unprotectedMetaData.name], unprotectedMetaData);
+  });
 
   test("Save unprotected collection", () async {
     await CollectionDisk.saveCollection(unprotectedLink, kUnprotectedPassword);
