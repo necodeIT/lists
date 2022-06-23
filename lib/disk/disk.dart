@@ -3,7 +3,7 @@ part of lists_engine;
 /// Contains information for data storage.
 class Disk {
   /// The name of the folder where the user data is stored.
-  static const appFolderName = "Lists";
+  static const appFolderName = kDebugMode ? "LISTS_DEBUG" : "Lists";
 
   /// The folder where the user data is stored.
   static Future<Directory> get appDir async {

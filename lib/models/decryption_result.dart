@@ -4,17 +4,20 @@ part of lists_engine;
 class DecryptionResult {
   /// The reuslt of the decryption.
   ///
-  /// May be the same before the decryption was attempted if failed.
-  ///
-  /// Will contain the decrypted data if successful.
-  final IndexLink result;
+  /// Will contain the decrypted data if successful or be null if failed.
+  final IndexLink? result;
 
   /// Whether the decryption was successful.
   final bool succeeded;
 
-  /// Whether an error occured during the decryption.
+  /// Whether a error occured during the decryption.
   bool get failed => !succeeded;
 
-  /// Wraps an decryption attempt.
-  DecryptionResult(this.result, this.succeeded);
+  /// Wraps a decryption attempt with [succeeded] set to false.
+  DecryptionResult.failed()
+      : succeeded = false,
+        result = null;
+
+  /// Wraps a decryption attempt with [succeeded] set to true.
+  DecryptionResult.succeeded(this.result) : succeeded = true;
 }

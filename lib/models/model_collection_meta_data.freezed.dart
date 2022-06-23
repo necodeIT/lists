@@ -23,9 +23,6 @@ mixin _$CollectionMetaData {
   /// The name of the collection.
   String get name => throw _privateConstructorUsedError;
 
-  /// The sha256 hash of the collection name.
-  String get hash => throw _privateConstructorUsedError;
-
   /// Whether the collection is passwrod protected.
   bool get protected => throw _privateConstructorUsedError;
 
@@ -46,7 +43,7 @@ abstract class $CollectionMetaDataCopyWith<$Res> {
   factory $CollectionMetaDataCopyWith(
           CollectionMetaData value, $Res Function(CollectionMetaData) then) =
       _$CollectionMetaDataCopyWithImpl<$Res>;
-  $Res call({String name, String hash, bool protected, int size, String? img});
+  $Res call({String name, bool protected, int size, String? img});
 }
 
 /// @nodoc
@@ -61,7 +58,6 @@ class _$CollectionMetaDataCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = freezed,
-    Object? hash = freezed,
     Object? protected = freezed,
     Object? size = freezed,
     Object? img = freezed,
@@ -70,10 +66,6 @@ class _$CollectionMetaDataCopyWithImpl<$Res>
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      hash: hash == freezed
-          ? _value.hash
-          : hash // ignore: cast_nullable_to_non_nullable
               as String,
       protected: protected == freezed
           ? _value.protected
@@ -98,7 +90,7 @@ abstract class _$$_CollectionMetaDataCopyWith<$Res>
           $Res Function(_$_CollectionMetaData) then) =
       __$$_CollectionMetaDataCopyWithImpl<$Res>;
   @override
-  $Res call({String name, String hash, bool protected, int size, String? img});
+  $Res call({String name, bool protected, int size, String? img});
 }
 
 /// @nodoc
@@ -115,7 +107,6 @@ class __$$_CollectionMetaDataCopyWithImpl<$Res>
   @override
   $Res call({
     Object? name = freezed,
-    Object? hash = freezed,
     Object? protected = freezed,
     Object? size = freezed,
     Object? img = freezed,
@@ -124,10 +115,6 @@ class __$$_CollectionMetaDataCopyWithImpl<$Res>
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      hash: hash == freezed
-          ? _value.hash
-          : hash // ignore: cast_nullable_to_non_nullable
               as String,
       protected: protected == freezed
           ? _value.protected
@@ -150,7 +137,6 @@ class __$$_CollectionMetaDataCopyWithImpl<$Res>
 class _$_CollectionMetaData extends _CollectionMetaData {
   const _$_CollectionMetaData(
       {required this.name,
-      required this.hash,
       required this.protected,
       required this.size,
       this.img})
@@ -162,10 +148,6 @@ class _$_CollectionMetaData extends _CollectionMetaData {
   /// The name of the collection.
   @override
   final String name;
-
-  /// The sha256 hash of the collection name.
-  @override
-  final String hash;
 
   /// Whether the collection is passwrod protected.
   @override
@@ -181,7 +163,7 @@ class _$_CollectionMetaData extends _CollectionMetaData {
 
   @override
   String toString() {
-    return 'CollectionMetaData(name: $name, hash: $hash, protected: $protected, size: $size, img: $img)';
+    return 'CollectionMetaData(name: $name, protected: $protected, size: $size, img: $img)';
   }
 
   @override
@@ -190,7 +172,6 @@ class _$_CollectionMetaData extends _CollectionMetaData {
         (other.runtimeType == runtimeType &&
             other is _$_CollectionMetaData &&
             const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.hash, hash) &&
             const DeepCollectionEquality().equals(other.protected, protected) &&
             const DeepCollectionEquality().equals(other.size, size) &&
             const DeepCollectionEquality().equals(other.img, img));
@@ -201,7 +182,6 @@ class _$_CollectionMetaData extends _CollectionMetaData {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(hash),
       const DeepCollectionEquality().hash(protected),
       const DeepCollectionEquality().hash(size),
       const DeepCollectionEquality().hash(img));
@@ -221,7 +201,6 @@ class _$_CollectionMetaData extends _CollectionMetaData {
 abstract class _CollectionMetaData extends CollectionMetaData {
   const factory _CollectionMetaData(
       {required final String name,
-      required final String hash,
       required final bool protected,
       required final int size,
       final String? img}) = _$_CollectionMetaData;
@@ -234,10 +213,6 @@ abstract class _CollectionMetaData extends CollectionMetaData {
 
   /// The name of the collection.
   String get name => throw _privateConstructorUsedError;
-  @override
-
-  /// The sha256 hash of the collection name.
-  String get hash => throw _privateConstructorUsedError;
   @override
 
   /// Whether the collection is passwrod protected.

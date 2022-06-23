@@ -2,40 +2,59 @@ part of lists_engine;
 
 /// Responsible for saving and loading [Collection]s.
 class CollectionDisk {
-  static const emptyPassword = "";
-  static Encrypter _encrypter(String password) => Encrypter(AES(Key.fromUtf8(password)));
+  static String _pw(CollectionMetaData data, String password) => data.protected ? password : kUnprotectedPassword;
+
+  static AesCrypt _crypt(String password) {
+    var crypt = AesCrypt();
+
+    crypt.setPassword(password);
+
+    return crypt;
+  }
 
   /// Saves a [Collection] to the disk.
-  static Future<void> saveCollection(IndexLink data, String pasword) async {
-    var pw = data.metaData.protected ? pasword : emptyPassword;
+  static Future<void> saveCollection(IndexLink data, String password) async {
+    var pw = _pw(data.metaData, password);
+
     var f = await data.metaData.file;
 
     var json = jsonEncode(data.collection);
 
-    var encrypted = _encrypter(pw).encrypt(json);
+    var crypt = _crypt(pw);
 
-    await f.writeAsString(encrypted.base64);
+    if (await f.exists()) await f.delete();
+
+    await crypt.encryptTextToFile(
+      json,
+      f.path,
+    );
   }
 
   /// Loads a [Collection] from the disk.
-  static Future<DecryptionResult> loadCollection(IndexLink data, String pasword) async {
-    var pw = data.metaData.protected ? pasword : emptyPassword;
-    var file = await data.metaData.file;
+  static Future<DecryptionResult> loadCollection(CollectionMetaData data, String password) async {
+    var pw = _pw(data, password);
 
     try {
-      var base64 = await file.readAsString();
+      var crypt = _crypt(pw);
 
-      var content = _encrypter(pw).decrypt(Encrypted.fromBase64(base64));
+      var content = await crypt.decryptTextFromFile(await data.path);
 
       var json = jsonDecode(content);
 
       var collection = Collection.fromJson(json);
 
-      var catgirl = data.copyWith(collection: collection);
+      var catgirl = IndexLink(collection: collection, metaData: data);
 
-      return DecryptionResult(catgirl, true);
+      return DecryptionResult.succeeded(catgirl);
     } catch (e) {
-      return DecryptionResult(data, false);
+      return DecryptionResult.failed();
     }
+  }
+
+  /// Deletes the linked [Collection] from the disk.
+  static Future<void> deleteCollection(CollectionMetaData data) async {
+    var f = await data.file;
+
+    if (await f.exists()) await f.delete();
   }
 }

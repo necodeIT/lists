@@ -7,7 +7,7 @@ part 'model_link.freezed.dart';
 @freezed
 class IndexLink with _$IndexLink {
   /// Links [CollectionMetaData] with a [Collection].
-  @Assert('collection.name == metaData.name', 'Incompatible collection and meta data')
+  // @Assert('collection.name == metaData.name', 'Incompatible collection and meta data')
   const factory IndexLink({
     required Collection collection,
     required CollectionMetaData metaData,

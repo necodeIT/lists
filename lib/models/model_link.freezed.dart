@@ -119,9 +119,7 @@ class __$$_IndexLinkCopyWithImpl<$Res> extends _$IndexLinkCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_IndexLink implements _IndexLink {
-  const _$_IndexLink({required this.collection, required this.metaData})
-      : assert(collection.name == metaData.name,
-            'Incompatible collection and meta data');
+  const _$_IndexLink({required this.collection, required this.metaData});
 
   @override
   final Collection collection;
