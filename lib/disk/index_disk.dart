@@ -23,7 +23,7 @@ class IndexDisk {
   static Future<void> saveIndex(Index index) async {
     var file = await indexFile;
 
-    var json = jsonEncode(index);
+    var json = jsonEncode(index.values.toList());
 
     await file.writeAsString(json);
   }
@@ -36,16 +36,14 @@ class IndexDisk {
       var json = await file.readAsString();
 
       var parsed = jsonDecode(json, reviver: (key, value) {
-        if (key == null) return value;
-        if (value == null) return value;
+        if (key is! int) return value;
         if (value is! Map) return value;
 
         return CollectionMetaData.fromJson(Json.from(value));
       });
 
-      _data = Index.from(parsed);
+      _data = Index.fromIterable(parsed, key: (e) => e.name);
     } catch (e) {
-      print(e);
       _data = null;
     }
   }
