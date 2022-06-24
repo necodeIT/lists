@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
 
-part of 'model_link.dart';
+part of 'link_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -16,7 +16,10 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$IndexLink {
+  /// The [Collection] linked to the [metaData].
   Collection get collection => throw _privateConstructorUsedError;
+
+  /// The [CollectionMetaData] linked to the [collection].
   CollectionMetaData get metaData => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -121,8 +124,11 @@ class __$$_IndexLinkCopyWithImpl<$Res> extends _$IndexLinkCopyWithImpl<$Res>
 class _$_IndexLink implements _IndexLink {
   const _$_IndexLink({required this.collection, required this.metaData});
 
+  /// The [Collection] linked to the [metaData].
   @override
   final Collection collection;
+
+  /// The [CollectionMetaData] linked to the [collection].
   @override
   final CollectionMetaData metaData;
 
@@ -159,8 +165,12 @@ abstract class _IndexLink implements IndexLink {
       required final CollectionMetaData metaData}) = _$_IndexLink;
 
   @override
+
+  /// The [Collection] linked to the [metaData].
   Collection get collection => throw _privateConstructorUsedError;
   @override
+
+  /// The [CollectionMetaData] linked to the [collection].
   CollectionMetaData get metaData => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)

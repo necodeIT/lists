@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'model_collection.freezed.dart';
-part 'model_collection.g.dart';
+part 'collection_model.freezed.dart';
+part 'collection_model.g.dart';
 
 /// A collection created by a user containing key value pairs.
 @freezed

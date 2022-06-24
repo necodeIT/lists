@@ -1,5 +1,5 @@
 name: lists_engine
-description: A new Flutter package project.
+description: Compile engine and models/provider lib for lists app.
 version: 0.0.1
 homepage: null
 publish_to: none

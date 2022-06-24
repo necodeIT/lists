@@ -14,6 +14,8 @@ void main() async {
 
   var index = {protectedMetaData.name: protectedMetaData, unprotectedMetaData.name: unprotectedMetaData};
 
+  var settings = Settings(theme: kSystemTheme, language: "en", adaptiveAccent: true, sync: true);
+
   test("Save index", () async {
     await IndexDisk.saveIndex(index);
   });
@@ -58,5 +60,16 @@ void main() async {
 
     expect(result.failed, isTrue);
     expect(result.result, isNull);
+  });
+
+  test("Save settings", () async {
+    await SettingsDisk.saveSettings(settings);
+  });
+
+  test("Load settings", () async {
+    await SettingsDisk.loadSettings();
+
+    expect(SettingsDisk.data, isNotNull);
+    expect(SettingsDisk.data, settings);
   });
 }

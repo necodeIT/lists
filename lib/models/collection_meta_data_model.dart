@@ -5,8 +5,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:lists_engine/lists_engine.dart';
 import 'package:crypto/crypto.dart';
 
-part 'model_collection_meta_data.freezed.dart';
-part 'model_collection_meta_data.g.dart';
+part 'collection_meta_data_model.freezed.dart';
+part 'collection_meta_data_model.g.dart';
 
 /// Contains meta data saved to an index file about a [Collection].
 @freezed
